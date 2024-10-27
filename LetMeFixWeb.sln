@@ -3,9 +3,58 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C2D79357-BB6D-4D88-B737-FF6A0058B73B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2BDFFDF8-C1F5-4A5A-86B3-73E4EC734A1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{7A14B17F-3346-4861-87DA-5CA01EBB72BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.Application", "Core\LetMeFix.Application\LetMeFix.Application.csproj", "{B91BEF91-493F-4022-8206-98CBEB461199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.Domain", "Core\LetMeFix.Domain\LetMeFix.Domain.csproj", "{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.Infrastructure", "LetMeFix.Infrastructure\LetMeFix.Infrastructure.csproj", "{6C719271-B535-4163-BB25-22587C518B9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.Persistence", "Infrastructure\LetMeFix.Persistence\LetMeFix.Persistence.csproj", "{993236AB-E7B2-4969-8804-AC5657634F76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.WebUI", "Presentation\LetMeFix.WebUI\LetMeFix.WebUI.csproj", "{F6F36548-B8A5-4402-AC76-91BE3359680C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B91BEF91-493F-4022-8206-98CBEB461199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91BEF91-493F-4022-8206-98CBEB461199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91BEF91-493F-4022-8206-98CBEB461199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91BEF91-493F-4022-8206-98CBEB461199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C719271-B535-4163-BB25-22587C518B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C719271-B535-4163-BB25-22587C518B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C719271-B535-4163-BB25-22587C518B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C719271-B535-4163-BB25-22587C518B9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993236AB-E7B2-4969-8804-AC5657634F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993236AB-E7B2-4969-8804-AC5657634F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993236AB-E7B2-4969-8804-AC5657634F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993236AB-E7B2-4969-8804-AC5657634F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6F36548-B8A5-4402-AC76-91BE3359680C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F36548-B8A5-4402-AC76-91BE3359680C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F36548-B8A5-4402-AC76-91BE3359680C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6F36548-B8A5-4402-AC76-91BE3359680C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B91BEF91-493F-4022-8206-98CBEB461199} = {C2D79357-BB6D-4D88-B737-FF6A0058B73B}
+		{AA3E5422-D983-4E4F-8597-445FBD5CB4DB} = {C2D79357-BB6D-4D88-B737-FF6A0058B73B}
+		{6C719271-B535-4163-BB25-22587C518B9B} = {2BDFFDF8-C1F5-4A5A-86B3-73E4EC734A1B}
+		{993236AB-E7B2-4969-8804-AC5657634F76} = {2BDFFDF8-C1F5-4A5A-86B3-73E4EC734A1B}
+		{F6F36548-B8A5-4402-AC76-91BE3359680C} = {7A14B17F-3346-4861-87DA-5CA01EBB72BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF2DACB2-BD6E-4DB8-A90A-D118979E652A}
