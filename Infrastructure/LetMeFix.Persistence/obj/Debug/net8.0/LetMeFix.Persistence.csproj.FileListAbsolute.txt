@@ -1,0 +1,12 @@
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.deps.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.pdb
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.AssemblyInfoInputs.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.AssemblyInfo.cs
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.sourcelink.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\refint\LetMeFix.Persistence.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.pdb
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\ref\LetMeFix.Persistence.dll

@@ -1,0 +1,12 @@
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\bin\Debug\net8.0\LetMeFix.Application.deps.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\bin\Debug\net8.0\LetMeFix.Application.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\bin\Debug\net8.0\LetMeFix.Application.pdb
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.AssemblyInfoInputs.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.AssemblyInfo.cs
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.csproj.CoreCompileInputs.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.sourcelink.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\refint\LetMeFix.Application.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\LetMeFix.Application.pdb
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Application\obj\Debug\net8.0\ref\LetMeFix.Application.dll
