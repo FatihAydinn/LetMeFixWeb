@@ -1,8 +1,8 @@
-using LetMeFix.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WebUI.Models;
 
-namespace LetMeFix.WebUI.Controllers
+namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {

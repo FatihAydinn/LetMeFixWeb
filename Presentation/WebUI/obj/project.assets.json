@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.WebUI\\LetMeFix.WebUI.csproj",
-      "projectName": "LetMeFix.WebUI",
-      "projectPath": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.WebUI\\LetMeFix.WebUI.csproj",
+      "projectUniqueName": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\WebUI\\WebUI.csproj",
+      "projectName": "WebUI",
+      "projectPath": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\WebUI\\WebUI.csproj",
       "packagesPath": "C:\\Users\\afati\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.WebUI\\obj\\",
+      "outputPath": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\WebUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\afati\\AppData\\Roaming\\NuGet\\NuGet.Config",

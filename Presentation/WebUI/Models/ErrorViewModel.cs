@@ -1,4 +1,4 @@
-namespace LetMeFix.WebUI.Models
+namespace WebUI.Models
 {
     public class ErrorViewModel
     {
