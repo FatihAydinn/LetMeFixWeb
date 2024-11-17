@@ -1,0 +1,12 @@
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\bin\Debug\net8.0\LetMeFix.Infrastructure.deps.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\bin\Debug\net8.0\LetMeFix.Infrastructure.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\bin\Debug\net8.0\LetMeFix.Infrastructure.pdb
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.AssemblyInfo.cs
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.sourcelink.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\refint\LetMeFix.Infrastructure.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\LetMeFix.Infrastructure.pdb
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\obj\Debug\net8.0\ref\LetMeFix.Infrastructure.dll

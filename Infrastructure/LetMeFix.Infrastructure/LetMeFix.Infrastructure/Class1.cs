@@ -1,4 +1,4 @@
-﻿namespace LetMeFix.Domain
+﻿namespace LetMeFix.Infrastructure
 {
     public class Class1
     {
