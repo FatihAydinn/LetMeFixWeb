@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "k4NQLFPJfsw=",
+  "dgSpecHash": "wiRYWRnOhvI=",
   "success": true,
   "projectFilePath": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Persistence\\LetMeFix.Persistence.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\afati\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LetMeFix.Domain\LetMeFix.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

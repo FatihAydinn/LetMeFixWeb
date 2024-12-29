@@ -1,0 +1,6 @@
+@LetMeFix.API_HostAddress = http://localhost:5286
+
+GET {{LetMeFix.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

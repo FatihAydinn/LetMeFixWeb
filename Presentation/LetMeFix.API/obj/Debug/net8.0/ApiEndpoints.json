@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "LetMeFix.API.Controllers.TicketsController",
+    "Method": "GetTickets",
+    "RelativePath": "api/Tickets",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

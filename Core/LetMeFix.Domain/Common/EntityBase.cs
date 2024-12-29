@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Common
 {
-    public abstract class EntityBase : IEntityBase
+    public class EntityBase : IEntityBase
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
