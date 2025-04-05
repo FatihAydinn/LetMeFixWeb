@@ -21,6 +21,6 @@ namespace LetMeFix.Domain.Entities
         public required string Name { get; set; }
         public required int Priorty { get; set; }
 
-        public Ticket Ticket { get; set; }
+        //public Ticket Ticket { get; set; }
     }
 }

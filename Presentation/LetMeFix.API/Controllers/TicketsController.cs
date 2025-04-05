@@ -1,4 +1,5 @@
 ﻿using LetMeFix.Application.Abstraction;
+using LetMeFix.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,17 +9,24 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class TicketsController : ControllerBase
     {
-        private readonly ITicketService _ticketService;
-        public TicketsController(ITicketService ticketService)
+        private readonly ITicketRepository _ticketService;
+        public TicketsController(ITicketRepository ticketService)
         {
             _ticketService = ticketService;
         }
 
         [HttpGet]
-        public IActionResult GetTickets()
+        public async Task<IActionResult> GetTickets()
         {
-            var tickets = _ticketService.GetAllTickets();
+            var tickets = await _ticketService.GetAllAsync();
             return Ok(tickets);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostTickets([FromBody] Ticket ticket) {
+            await _ticketService.AddAsync(ticket);
+            return Ok();
+            //return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, ticket);
         }
     }
 }

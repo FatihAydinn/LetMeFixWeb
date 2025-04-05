@@ -13,7 +13,7 @@ namespace LetMeFix.Persistence
     {
         public static void AddPersistanceServices(this IServiceCollection services)
         {
-            services.AddSingleton<ITicketService, TicketService>();
+            services.AddSingleton<ITicketRepository, TicketService>();
         }
     }
 }

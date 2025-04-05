@@ -8,5 +8,21 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.TicketsController",
+    "Method": "PostTickets",
+    "RelativePath": "api/Tickets",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticket",
+        "Type": "LetMeFix.Domain.Entities.Ticket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

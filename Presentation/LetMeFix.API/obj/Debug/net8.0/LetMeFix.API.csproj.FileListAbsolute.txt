@@ -38,3 +38,9 @@ C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\net8.0\LetMeFix.API.pdb
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\net8.0\LetMeFix.API.genruntimeconfig.cache
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\net8.0\ref\LetMeFix.API.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\DnsClient.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\SharpCompress.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\Snappier.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\ZstdSharp.dll
