@@ -15,18 +15,38 @@ namespace LetMeFix.API.Controllers
             _ticketService = ticketService;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetTickets()
         {
             var tickets = await _ticketService.GetAllAsync();
             return Ok(tickets);
         }
 
-        [HttpPost]
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetTicketsById(int id)
+        {
+            var ticket = await _ticketService.GetByIdAsync(id);
+            return Ok(ticket);
+        }
+
+        [HttpPost("AddTicket")]
         public async Task<IActionResult> PostTickets([FromBody] Ticket ticket) {
             await _ticketService.AddAsync(ticket);
             return Ok();
             //return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, ticket);
+        }
+
+        [HttpPost("UpdateTicket")]
+        public async Task<IActionResult> UpdateTicket(Ticket ticket)
+        {
+            await _ticketService.UpdateAsync(ticket);
+            return Ok();
+        }
+
+        [HttpDelete("DeleteTicket")]
+        public async Task DeleteTicket(int id)
+        {
+            await _ticketService.DeleteAsync(id);
         }
     }
 }

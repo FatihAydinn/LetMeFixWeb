@@ -11,13 +11,6 @@ namespace LetMeFix.Persistence.Concretes
 {
     public class TicketService : ITicketRepository
     {
-        //public List<Ticket> GetAllTickets() => new()
-        //{
-        //    new Ticket() {Id = 1, Title = "Math lesson", Description = "Math lessons for my child", Price = 100, Date = DateTime.Now, Status = "Open"},
-        //    new Ticket() {Id = 2, Title = "English lesson", Description = "English lessons for my child", Price = 200, Date = DateTime.Today, Status = "Processing"},
-        //    new Ticket() {Id = 3, Title = "French lesson", Description = "French lessons for my child", Price = 300, Status = "Completed"},
-        //};
-
         private readonly IMongoCollection<Ticket> _collection;
 
         public TicketService(IMongoDatabase database)
@@ -30,9 +23,9 @@ namespace LetMeFix.Persistence.Concretes
             await _collection.InsertOneAsync(ticket);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await _collection.DeleteOneAsync(t=>t.Id == id);
         }
 
         public async Task<List<Ticket>> GetAllAsync()
@@ -40,14 +33,14 @@ namespace LetMeFix.Persistence.Concretes
             return await _collection.Find(x => true).ToListAsync();
         }
 
-        public Task<Ticket> GetByIdAsync(int id)
+        public async Task<Ticket> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task UpdateAsync(Ticket ticket)
+        public async Task UpdateAsync(Ticket ticket)
         {
-            throw new NotImplementedException();
+            await _collection.ReplaceOneAsync(t => t.Id == ticket.Id, ticket);
         }
     }
 }

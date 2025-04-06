@@ -1,8 +1,46 @@
 [
   {
     "ContainingType": "LetMeFix.API.Controllers.TicketsController",
+    "Method": "PostTickets",
+    "RelativePath": "api/Tickets/AddTicket",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticket",
+        "Type": "LetMeFix.Domain.Entities.Ticket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.TicketsController",
+    "Method": "DeleteTicket",
+    "RelativePath": "api/Tickets/DeleteTicket",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.TicketsController",
     "Method": "GetTickets",
-    "RelativePath": "api/Tickets",
+    "RelativePath": "api/Tickets/GetAll",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -11,8 +49,24 @@
   },
   {
     "ContainingType": "LetMeFix.API.Controllers.TicketsController",
-    "Method": "PostTickets",
-    "RelativePath": "api/Tickets",
+    "Method": "GetTicketsById",
+    "RelativePath": "api/Tickets/GetById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.TicketsController",
+    "Method": "UpdateTicket",
+    "RelativePath": "api/Tickets/UpdateTicket",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
