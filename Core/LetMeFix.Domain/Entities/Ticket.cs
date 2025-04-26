@@ -16,7 +16,9 @@ namespace LetMeFix.Domain.Entities
         public DateTime? Date { get; set; }
         public string Status { get; set; }
 
-        public ICollection<Category> Categories { get; set; } //one-to many relation
-        //public string ImagePath { get; set; } 
+        public Category Categories { get; set; } //one-to many relation
+        //public ICollection<Category> Categories { get; set; } //one-to many relation
+
+        //publiInfrastructurec string ImagePath { get; set; } 
     }
 }

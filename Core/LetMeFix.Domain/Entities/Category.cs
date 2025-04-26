@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Category : EntityBase
+    public class Category /*: EntityBase*/
     {
         public Category() { }
         public Category(int parentId, string name, int priorty)
@@ -17,9 +17,10 @@ namespace LetMeFix.Domain.Entities
             Name = name;
             Priorty = priorty;
         }
-        public required int ParentId { get; set; }
-        public required string Name { get; set; }
-        public required int Priorty { get; set; }
+        public int Id { get; set; }
+        public int ParentId { get; set; }
+        public string Name { get; set; }
+        public int Priorty { get; set; }
 
         //public Ticket Ticket { get; set; }
     }
