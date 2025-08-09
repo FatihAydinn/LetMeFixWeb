@@ -23,7 +23,7 @@ namespace LetMeFix.Persistence.Concretes
             await _collection.InsertOneAsync(ticket);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
         {
             await _collection.DeleteOneAsync(t=>t.Id == id);
         }
@@ -33,7 +33,7 @@ namespace LetMeFix.Persistence.Concretes
             return await _collection.Find(x => true).ToListAsync();
         }
 
-        public async Task<Ticket> GetByIdAsync(int id)
+        public async Task<Ticket> GetByIdAsync(string id)
         {
             return await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
         }

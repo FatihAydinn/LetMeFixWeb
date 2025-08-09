@@ -10,3 +10,4 @@ C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Domain\obj\Debug\net8.
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Domain\obj\Debug\net8.0\refint\LetMeFix.Domain.dll
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Domain\obj\Debug\net8.0\LetMeFix.Domain.pdb
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Domain\obj\Debug\net8.0\ref\LetMeFix.Domain.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Core\LetMeFix.Domain\obj\Debug\net8.0\LetMeFix.Domain.csproj.AssemblyReference.cache

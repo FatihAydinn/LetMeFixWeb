@@ -23,7 +23,7 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("GetById")]
-        public async Task<IActionResult> GetTicketsById(int id)
+        public async Task<IActionResult> GetTicketsById(string id)
         {
             var ticket = await _ticketService.GetByIdAsync(id);
             return Ok(ticket);
@@ -44,7 +44,7 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpDelete("DeleteTicket")]
-        public async Task DeleteTicket(int id)
+        public async Task DeleteTicket(string id)
         {
             await _ticketService.DeleteAsync(id);
         }

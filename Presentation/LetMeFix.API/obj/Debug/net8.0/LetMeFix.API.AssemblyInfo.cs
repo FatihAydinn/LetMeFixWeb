@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LetMeFix.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7ae4560f88149cf27e73af8eb539220a1f0edde")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec1c2115429a21e0cac2f0167b5206a10758bfcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("LetMeFix.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LetMeFix.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

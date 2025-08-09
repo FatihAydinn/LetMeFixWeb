@@ -10,9 +10,9 @@ namespace LetMeFix.Application.Abstraction
     public interface ITicketRepository
     {
         Task<List<Ticket>> GetAllAsync();
-        Task<Ticket> GetByIdAsync(int id);
+        Task<Ticket> GetByIdAsync(string id);
         Task AddAsync(Ticket ticket);
         Task UpdateAsync(Ticket ticket);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(string id);
     }
 }
