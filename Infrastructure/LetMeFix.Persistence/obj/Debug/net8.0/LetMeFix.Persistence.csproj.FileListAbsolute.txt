@@ -1,4 +1,5 @@
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.deps.json
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.runtimeconfig.json
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.dll
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.pdb
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Application.dll
@@ -15,6 +16,5 @@ C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.dll
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\refint\LetMeFix.Persistence.dll
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.pdb
-C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\ref\LetMeFix.Persistence.dll
-C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\bin\Debug\net8.0\LetMeFix.Persistence.runtimeconfig.json
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\LetMeFix.Persistence.genruntimeconfig.cache
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Infrastructure\LetMeFix.Persistence\obj\Debug\net8.0\ref\LetMeFix.Persistence.dll

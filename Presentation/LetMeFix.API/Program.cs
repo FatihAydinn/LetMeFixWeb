@@ -1,4 +1,6 @@
+using LetMeFix.Domain.Entities;
 using LetMeFix.Persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -15,6 +17,17 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<UserDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString")));
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 8;
+})
+.AddEntityFrameworkStores<UserDbContext>()
+.AddDefaultTokenProviders();
 
 builder.Services.Configure<MongoDBSettings>(
     builder.Configuration.GetSection("MongoDBSettings"));
@@ -36,6 +49,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

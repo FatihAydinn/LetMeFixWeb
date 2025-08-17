@@ -111,6 +111,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "MongoDB.Bson": {
               "target": "Package",
               "version": "[3.3.0, )"
@@ -182,10 +186,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "EntityFramework": {
-              "target": "Package",
-              "version": "[6.5.1, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -211,10 +211,6 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[3.3.0, )"
-            },
-            "Z.EntityFramework.Plus.EFCore": {
-              "target": "Package",
-              "version": "[8.103.9.3, )"
             }
           },
           "imports": [
@@ -286,10 +282,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "EntityFramework": {
-              "target": "Package",
-              "version": "[6.5.1, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -311,10 +303,6 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
-            },
-            "Z.EntityFramework.Plus.EFCore": {
-              "target": "Package",
-              "version": "[8.103.9.3, )"
             }
           },
           "imports": [

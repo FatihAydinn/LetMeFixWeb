@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "LetMeFix.API.Controllers.IdentityController",
+    "Method": "Register",
+    "RelativePath": "api/Identity/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "LetMeFix.Domain.DTOs.UserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "LetMeFix.API.Controllers.TicketsController",
     "Method": "PostTickets",
     "RelativePath": "api/Tickets/AddTicket",
