@@ -46,7 +46,15 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+                string val = "";
+                if (model.Email.Contains("@"))
+                {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    val = user.UserName;
+                }
+                else val = model.UserName;
+
+                var result = await _signInManager.PasswordSignInAsync(val, model.Password, false, false);
 
                 if (result.Succeeded)
                 {
