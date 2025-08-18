@@ -40,5 +40,27 @@ namespace LetMeFix.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO model)
+        {
+            try
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return Ok("Login success!");
+                }
+                else
+                {
+                    return BadRequest("Username or password incorrect!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

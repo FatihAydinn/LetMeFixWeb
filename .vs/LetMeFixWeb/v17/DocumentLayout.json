@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{4BE725A5-0507-4892-A813-3EEA2A89F62C}|Presentation\\LetMeFix.API\\LetMeFix.API.csproj|solutionrelative:presentation\\letmefix.api\\controllers\\identitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}|Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj|c:\\users\\afati\\documents\\github\\letmefixweb\\core\\letmefix.domain\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}|Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj|solutionrelative:core\\letmefix.domain\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}|Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj|c:\\users\\afati\\documents\\github\\letmefixweb\\core\\letmefix.domain\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AA3E5422-D983-4E4F-8597-445FBD5CB4DB}|Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj|solutionrelative:core\\letmefix.domain\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -117,25 +121,34 @@
               "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\DTOs\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\DTOs\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\DTOs\\LoginDTO.cs",
+              "RelativeToolTip": "Core\\LetMeFix.Domain\\DTOs\\LoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:39:53.697Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "RegisterDTO.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\DTOs\\RegisterDTO.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\DTOs\\RegisterDTO.cs",
               "ToolTip": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\DTOs\\RegisterDTO.cs",
               "RelativeToolTip": "Core\\LetMeFix.Domain\\DTOs\\RegisterDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-17T16:08:51.288Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "UserDbContext.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Persistence\\UserDbContext.cs",
               "RelativeDocumentMoniker": "Infrastructure\\LetMeFix.Persistence\\UserDbContext.cs",
@@ -143,12 +156,11 @@
               "RelativeToolTip": "Infrastructure\\LetMeFix.Persistence\\UserDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T20:31:16.633Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-15T20:31:16.633Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.API\\Program.cs",
               "RelativeDocumentMoniker": "Presentation\\LetMeFix.API\\Program.cs",
@@ -156,8 +168,7 @@
               "RelativeToolTip": "Presentation\\LetMeFix.API\\Program.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T18:32:14.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T18:32:14.223Z"
             },
             {
               "$type": "Document",
@@ -167,14 +178,14 @@
               "RelativeDocumentMoniker": "Presentation\\LetMeFix.API\\Controllers\\IdentityController.cs",
               "ToolTip": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.API\\Controllers\\IdentityController.cs",
               "RelativeToolTip": "Presentation\\LetMeFix.API\\Controllers\\IdentityController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA9wBYAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwC8AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-16T10:10:55.587Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "LetMeFix.API.csproj",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.API\\LetMeFix.API.csproj",
               "RelativeDocumentMoniker": "Presentation\\LetMeFix.API\\LetMeFix.API.csproj",
@@ -182,25 +193,23 @@
               "RelativeToolTip": "Presentation\\LetMeFix.API\\LetMeFix.API.csproj",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-09T19:41:38.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T19:41:38.713Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LetMeFix.Infrastructure",
+              "DocumentIndex": 6,
+              "Title": "LetMeFix.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure.csproj",
               "ToolTip": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure.csproj",
               "RelativeToolTip": "Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure\\LetMeFix.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-17T14:05:15.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-17T14:05:15.407Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "LetMeFix.Persistence.csproj",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Persistence\\LetMeFix.Persistence.csproj",
               "RelativeDocumentMoniker": "Infrastructure\\LetMeFix.Persistence\\LetMeFix.Persistence.csproj",
@@ -208,12 +217,11 @@
               "RelativeToolTip": "Infrastructure\\LetMeFix.Persistence\\LetMeFix.Persistence.csproj",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-09T19:45:09.928Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T19:45:09.928Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AppUser.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\Entities\\AppUser.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\Entities\\AppUser.cs",
@@ -221,38 +229,35 @@
               "RelativeToolTip": "Core\\LetMeFix.Domain\\Entities\\AppUser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-16T10:30:53.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-16T10:30:53.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LetMeFix.Domain",
+              "DocumentIndex": 7,
+              "Title": "LetMeFix.Domain.csproj",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj",
               "ToolTip": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj",
               "RelativeToolTip": "Core\\LetMeFix.Domain\\LetMeFix.Domain.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-17T13:56:44.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-17T13:56:44.932Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LetMeFix.Application",
+              "DocumentIndex": 10,
+              "Title": "LetMeFix.Application.csproj",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Application\\LetMeFix.Application.csproj",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Application\\LetMeFix.Application.csproj",
               "ToolTip": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Application\\LetMeFix.Application.csproj",
               "RelativeToolTip": "Core\\LetMeFix.Application\\LetMeFix.Application.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-17T14:05:11.464Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-17T14:05:11.464Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "TicketsController.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.API\\Controllers\\TicketsController.cs",
               "RelativeDocumentMoniker": "Presentation\\LetMeFix.API\\Controllers\\TicketsController.cs",
@@ -260,12 +265,11 @@
               "RelativeToolTip": "Presentation\\LetMeFix.API\\Controllers\\TicketsController.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAuwCEAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T21:30:44.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T21:30:44.4Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Presentation\\LetMeFix.API\\appsettings.json",
               "RelativeDocumentMoniker": "Presentation\\LetMeFix.API\\appsettings.json",
@@ -273,12 +277,11 @@
               "RelativeToolTip": "Presentation\\LetMeFix.API\\appsettings.json",
               "ViewState": "AgIAAAUAAAAAAAAAAAAuwAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-09T20:01:56.1Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T20:01:56.1Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "MongoDBSettings.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Persistence\\MongoDBSettings.cs",
               "RelativeDocumentMoniker": "Infrastructure\\LetMeFix.Persistence\\MongoDBSettings.cs",
@@ -286,12 +289,11 @@
               "RelativeToolTip": "Infrastructure\\LetMeFix.Persistence\\MongoDBSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T19:57:18.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T19:57:18.522Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ServiceRegistration.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Persistence\\ServiceRegistration.cs",
               "RelativeDocumentMoniker": "Infrastructure\\LetMeFix.Persistence\\ServiceRegistration.cs",
@@ -299,12 +301,11 @@
               "RelativeToolTip": "Infrastructure\\LetMeFix.Persistence\\ServiceRegistration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAwA8AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T19:57:41.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T19:57:41.367Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "ITicketRepository.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Application\\Abstraction\\ITicketRepository.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Application\\Abstraction\\ITicketRepository.cs",
@@ -312,12 +313,11 @@
               "RelativeToolTip": "Core\\LetMeFix.Application\\Abstraction\\ITicketRepository.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAlwA0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T21:21:55.163Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T21:21:55.163Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "TicketService.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Infrastructure\\LetMeFix.Persistence\\Concretes\\TicketService.cs",
               "RelativeDocumentMoniker": "Infrastructure\\LetMeFix.Persistence\\Concretes\\TicketService.cs",
@@ -325,12 +325,11 @@
               "RelativeToolTip": "Infrastructure\\LetMeFix.Persistence\\Concretes\\TicketService.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAAwA0AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T21:22:20.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T21:22:20.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "EntityBase.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\Common\\EntityBase.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\Common\\EntityBase.cs",
@@ -338,12 +337,11 @@
               "RelativeToolTip": "Core\\LetMeFix.Domain\\Common\\EntityBase.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T16:28:57.687Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T16:28:57.687Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Ticket.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\Entities\\Ticket.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\Entities\\Ticket.cs",
@@ -351,12 +349,11 @@
               "RelativeToolTip": "Core\\LetMeFix.Domain\\Entities\\Ticket.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T18:45:01.304Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T18:45:01.304Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\Entities\\Category.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\Entities\\Category.cs",
@@ -364,12 +361,11 @@
               "RelativeToolTip": "Core\\LetMeFix.Domain\\Entities\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-09T18:45:03.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-09T18:45:03.714Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "TicketDTO.cs",
               "DocumentMoniker": "C:\\Users\\afati\\Documents\\GitHub\\LetMeFixWeb\\Core\\LetMeFix.Domain\\DTOs\\TicketDTO.cs",
               "RelativeDocumentMoniker": "Core\\LetMeFix.Domain\\DTOs\\TicketDTO.cs",
@@ -377,8 +373,7 @@
               "RelativeToolTip": "Core\\LetMeFix.Domain\\DTOs\\TicketDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T16:27:27.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T16:27:27.063Z"
             }
           ]
         }

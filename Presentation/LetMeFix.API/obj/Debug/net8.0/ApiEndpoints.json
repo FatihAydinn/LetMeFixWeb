@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "LetMeFix.API.Controllers.IdentityController",
+    "Method": "Login",
+    "RelativePath": "api/Identity/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "LetMeFix.Domain.DTOs.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.IdentityController",
     "Method": "Register",
     "RelativePath": "api/Identity/register",
     "HttpMethod": "POST",
@@ -9,7 +25,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "LetMeFix.Domain.DTOs.UserDTO",
+        "Type": "LetMeFix.Domain.DTOs.RegisterDTO",
         "IsRequired": true
       }
     ],
