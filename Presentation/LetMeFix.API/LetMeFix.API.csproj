@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <!--<PackageReference Include="EntityFramework" Version="6.5.1" />-->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
@@ -17,10 +18,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <!--<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="8.103.9.3" />-->
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\LetMeFix.Application\LetMeFix.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\LetMeFix.Persistence\LetMeFix.Persistence.csproj" />
   </ItemGroup>
 
