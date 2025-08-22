@@ -149,3 +149,6 @@ C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\net8.0\LetMeFix.API.pdb
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\net8.0\LetMeFix.API.genruntimeconfig.cache
 C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\obj\Debug\net8.0\ref\LetMeFix.API.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\LetMeFix.Infrastructure.dll
+C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API\bin\Debug\net8.0\LetMeFix.Infrastructure.pdb

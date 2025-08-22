@@ -17,6 +17,42 @@
   },
   {
     "ContainingType": "LetMeFix.API.Controllers.IdentityController",
+    "Method": "Logout",
+    "RelativePath": "api/Identity/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.IdentityController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Identity/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.IdentityController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Identity/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "LetMeFix.Domain.DTOs.RefreshTokenDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LetMeFix.API.Controllers.IdentityController",
     "Method": "Register",
     "RelativePath": "api/Identity/register",
     "HttpMethod": "POST",
