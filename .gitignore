@@ -6,3 +6,25 @@
 
 # Visual Studio
 .vs/
+
+node_modules/
+packages/
+
+bin/
+obj/
+dist/
+build/
+target/
+
+*.log
+npm-debug.log*
+
+.env
+.env.local
+
+.idea/
+*.suo
+*.user
+
+.DS_Store
+Thumbs.db
