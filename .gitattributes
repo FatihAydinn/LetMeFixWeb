@@ -1,1 +1,27 @@
 * text=auto
+
+*.cs      text diff=csharp
+*.sln     text
+*.csproj  text
+*.json    text
+*.xml     text
+*.md      text
+*.config  text
+*.cshtml  text
+*.css     text
+*.js      text
+
+*.cmd     eol=crlf
+*.bat     eol=crlf
+*.ps1     eol=crlf
+
+*.dll     binary
+*.exe     binary
+*.png     binary
+*.jpg     binary
+*.gif     binary
+*.ico     binary
+*.nupkg   binary
+*.snk     binary
+*.pdb     binary
+

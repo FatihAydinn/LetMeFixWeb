@@ -16,7 +16,7 @@ namespace LetMeFix.IdentityIntegrationTests
 {
     public class AuthWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
     {
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
+        protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
         {
             builder.ConfigureServices(services =>
             {
@@ -26,14 +26,7 @@ namespace LetMeFix.IdentityIntegrationTests
                     services.Remove(descriptor);
 
                 services.AddDbContext<UserDbContext>(options =>
-                {
-                    options.UseInMemoryDatabase("TestDb");
-                });
-
-                var sp = services.BuildServiceProvider();
-                using var scope = sp.CreateScope();
-                var db = scope.ServiceProvider.GetRequiredService<UserDbContext>();
-                db.Database.EnsureCreated();
+                    options.UseInMemoryDatabase("TestDb"));
             });
         }
     }
