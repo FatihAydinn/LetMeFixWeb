@@ -28,28 +28,24 @@ namespace LetMeFix.Infrastructure.Services
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            // Claims (JWT Payload'daki bilgiler)
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Name, user.UserName ?? ""),
                 new Claim(ClaimTypes.Email, user.Email ?? ""),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Token ID
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
             };
 
-            // Kullanıcının rollerini ekle
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            // Kullanıcının claim'lerini ekle
             var userClaims = await _userManager.GetClaimsAsync(user);
             claims.AddRange(userClaims);
 
-            // Token oluştur
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
@@ -58,7 +54,6 @@ namespace LetMeFix.Infrastructure.Services
                 signingCredentials: credentials
             );
 
-            // Token'ı string olarak dön
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

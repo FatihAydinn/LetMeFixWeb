@@ -1,6 +1,7 @@
 ﻿using LetMeFix.Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +10,65 @@ namespace LetMeFix.Domain.Entities
 {
     public class Ticket : EntityBase
     {
+        public string UserId { get; set; }
         public string Title { get; set; } //!?
         public string Description { get; set; }
         public int CategoryId { get; set; }
-        public long Price { get; set; }
-        public DateTime? Date { get; set; }
-        public string Status { get; set; }
+        public decimal Price { get; set; }
 
         public Category Categories { get; set; } //one-to many relation
         //public ICollection<Category> Categories { get; set; } //one-to many relation
 
         //publiInfrastructurec string ImagePath { get; set; } 
+
+        public ServiceType ServiceType { get; set; }
+
+
+        public string City { get; set; }
+        public string District { get; set; }
+        public string? Neighborhood { get; set; }
+        public string Address { get; set; }
+
+        public DateTime? Deadline { get; set; }
+        //!+
+
+        public int? EstimatedDuration { get; set; }
+        public string? TimeType { get; set; }
+
+        public TicketStatus Status { get; set; }
+
+        public Review? Review { get; set; }
+
+        //Bid?
+    }
+
+    public enum ServiceType
+    {
+        ServiceProvider = 1,
+        ServiceRecipient = 2
+    }
+
+    public enum TicketStatus
+    {
+        Active = 1,
+        InProgress = 2,
+        Completed = 3,
+        Cancelled = 4,
+        Expired = 5,
+        Waiting = 6
+    }
+
+    public class Review
+    {
+        public int Id { get; set; }
+        public string TicketId { get; set; }
+        public string UserId { get; set; }
+        public string ReviewText { get; set; }
+
+        [Range (1,5)]
+        public int Rating { get; set; }
+
+        public DateTime CreateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
