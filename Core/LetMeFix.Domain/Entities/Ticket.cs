@@ -13,8 +13,8 @@ namespace LetMeFix.Domain.Entities
         public string UserId { get; set; }
         public string Title { get; set; } //!?
         public string Description { get; set; }
-        public int CategoryId { get; set; }
         public decimal Price { get; set; }
+        public int CategoryId { get; set; }
 
         public Category Categories { get; set; } //one-to many relation
         //public ICollection<Category> Categories { get; set; } //one-to many relation
@@ -23,24 +23,29 @@ namespace LetMeFix.Domain.Entities
 
         public ServiceType ServiceType { get; set; }
 
-
-        public string City { get; set; }
-        public string District { get; set; }
+        public bool IsRemoteJob { get; set; }
+        public string? Country { get; set; }
+        public string? City { get; set; }
+        public string? District { get; set; }
         public string? Neighborhood { get; set; }
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public DateTime? Deadline { get; set; }
         //!+
 
         public int? EstimatedDuration { get; set; }
         public string? TimeType { get; set; }
 
+        public bool GetNotifications { get; set; }
+
         public TicketStatus Status { get; set; }
-
         public Review? Review { get; set; }
-
+        public PaymentType PaymentType { get; set; }
         //Bid?
     }
+        //public Socials Socials { get; set; }
 
     public enum ServiceType
     {
@@ -70,5 +75,23 @@ namespace LetMeFix.Domain.Entities
 
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
+    }
+
+    public class Socials
+    {
+        public string Instagram { get; set; }
+        public string Facebook { get; set; }
+        public string LinkedIn { get; set; }
+        public string GitHub { get; set; }
+        public string WebSite { get; set; }
+    }
+
+    public enum PaymentType
+    {
+        Cash = 1,
+        CreditCard = 2,
+        Crypto = 3,
+        Checks = 4,
+        BankTransfer = 5
     }
 }
