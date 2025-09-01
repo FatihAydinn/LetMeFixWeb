@@ -10,17 +10,20 @@ namespace LetMeFix.Domain.Entities
 {
     public class Category /*: EntityBase*/
     {
-        public Category() { }
-        public Category(int parentId, string name, int priorty)
+        public Category()
         {
-            ParentId = parentId;
-            Name = name;
-            Priorty = priorty;
+            SubCategories = new HashSet<Category>();
+            Tickets = new HashSet<Ticket>();
         }
         public int Id { get; set; }
-        public int ParentId { get; set; }
         public string Name { get; set; }
+        public int? ParentId { get; set; }
         public int Priorty { get; set; }
+        public bool IsActive { get; set; }
+
+        public Category Parent { get; set; }
+        public ICollection<Category> SubCategories { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
 
         //public Ticket Ticket { get; set; }
     }
