@@ -46,7 +46,7 @@ The project is being developed for **personal growth and portfolio building**.
 The application features a secure JWT-based authentication system with the following endpoints via AuthController:
 
 - **Register**: Create new user accounts with validated credentials.
- **Login**: Authenticate using email or username, returning access and refresh tokens.
+- **Login**: Authenticate using email or username, returning access and refresh tokens.
 - **RefreshToken**: Obtain a new access token using a valid refresh token.
 - **Logout**: Revoke tokens on the server and clear tokens from cookies for secure sign-out.
 
