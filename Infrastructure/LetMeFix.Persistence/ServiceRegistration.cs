@@ -1,4 +1,5 @@
 ﻿using LetMeFix.Application.Abstraction;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Persistence.Concretes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,7 +14,8 @@ namespace LetMeFix.Persistence
     {
         public static void AddPersistanceServices(this IServiceCollection services)
         {
-            services.AddSingleton<ITicketRepository, TicketService>();
+            services.AddSingleton<IGenericRepository<Ticket>, TicketService>();
+            services.AddSingleton<IGenericRepository<Category>, CategoryService>();
         }
     }
 }

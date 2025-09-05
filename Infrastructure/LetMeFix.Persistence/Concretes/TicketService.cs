@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Concretes
 {
-    public class TicketService : ITicketRepository
+    public class TicketService : IGenericRepository<Ticket>
     {
         private readonly IMongoCollection<Ticket> _collection;
 

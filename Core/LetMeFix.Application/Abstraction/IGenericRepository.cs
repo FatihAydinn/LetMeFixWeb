@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Abstraction
 {
-    public interface ITicketRepository
+    public interface IGenericRepository <T> where T : class
     {
-        Task<List<Ticket>> GetAllAsync();
-        Task<Ticket> GetByIdAsync(string id);
-        Task AddAsync(Ticket ticket);
-        Task UpdateAsync(Ticket ticket);
+        Task<List<T>> GetAllAsync();
+        Task<T> GetByIdAsync(string id);
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
         Task DeleteAsync(string id);
     }
 }
