@@ -15,9 +15,9 @@ namespace LetMeFix.Domain.Entities
             SubCategories = new HashSet<Category>();
             Tickets = new HashSet<Ticket>();
         }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
-        public int? ParentId { get; set; }
+        public string? ParentId { get; set; }
         public int Priorty { get; set; }
         public bool IsActive { get; set; }
 

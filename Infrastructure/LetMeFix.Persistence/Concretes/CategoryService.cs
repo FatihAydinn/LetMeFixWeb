@@ -35,7 +35,7 @@ namespace LetMeFix.Persistence.Concretes
 
         public async Task<Category> GetByIdAsync(string id)
         {
-            return await _category.Find(x => x.Id.ToString() == id).FirstOrDefaultAsync();
+            return await _category.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(Category entity)
