@@ -1,5 +1,7 @@
 ﻿using LetMeFix.Domain.Common;
 using LetMeFix.Domain.Entities;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,10 @@ namespace LetMeFix.Domain.Entities
             SubCategories = new HashSet<Category>();
             Tickets = new HashSet<Ticket>();
         }
-        public string Id { get; set; }
+
+        [BsonId]
+        [BsonRepresentation(BsonType.String)]
+        public string? Id { get; set; }
         public string Name { get; set; }
         public string? ParentId { get; set; }
         public int Priorty { get; set; }

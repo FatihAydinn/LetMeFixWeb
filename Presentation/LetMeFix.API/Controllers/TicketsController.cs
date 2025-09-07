@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LetMeFix.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TicketsController : ControllerBase
@@ -33,6 +33,7 @@ namespace LetMeFix.API.Controllers
 
         [HttpPost("AddTicket")]
         public async Task<IActionResult> PostTickets([FromBody] Ticket ticket) {
+            ticket.Id = Guid.NewGuid().ToString();
             await _genericService.AddAsync(ticket);
             return Ok();
             //return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, ticket);

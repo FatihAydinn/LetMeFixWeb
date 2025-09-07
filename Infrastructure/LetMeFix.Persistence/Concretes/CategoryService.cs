@@ -25,7 +25,7 @@ namespace LetMeFix.Persistence.Concretes
 
         public async Task DeleteAsync(string id)
         {
-            await _category.DeleteOneAsync(id);
+            await _category.DeleteOneAsync(x => x.Id == id);
         }
 
         public async Task<List<Category>> GetAllAsync()

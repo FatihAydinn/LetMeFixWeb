@@ -1,4 +1,5 @@
 ﻿using LetMeFix.Domain.Common;
+using LetMeFix.Domain.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,20 +9,22 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Ticket : EntityBase
+    public class Ticket /*: EntityBase*/
     {
+        public string? Id { get; set; }
         public string UserId { get; set; }
         public string Title { get; set; } //!?
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
 
-        public Category Categories { get; set; } //one-to many relation
+        public CategoryDTO Categories { get; set; } //one-to many relation
+        //public Category Categories { get; set; } //one-to many relation
         //public ICollection<Category> Categories { get; set; } //one-to many relation
 
         //publiInfrastructurec string ImagePath { get; set; } 
 
-        public ServiceType ServiceType { get; set; }
+        //public ServiceType ServiceType { get; set; }
 
         public bool IsRemoteJob { get; set; }
         public string? Country { get; set; }

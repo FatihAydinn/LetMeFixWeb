@@ -30,6 +30,20 @@ namespace LetMeFix.API.Controllers
             }
         }
 
+        [HttpGet("getById")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            try
+            {
+                var content = await _categoryService.GetByIdAsync(id);
+                return Ok(content);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("createCategory")]
         public async Task<IActionResult> CreateCategory([FromBody] CategoryDTO category)
         {
@@ -37,7 +51,7 @@ namespace LetMeFix.API.Controllers
             {
                 var content = new Category
                 {
-                    Id = category.Id,
+                    Id = Guid.NewGuid().ToString(),
                     Name = category.Name,
                     ParentId = category.ParentId,
                     Priorty = category.Priorty,
@@ -51,6 +65,34 @@ namespace LetMeFix.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPost("updateCategory")]
+        public async Task<IActionResult> UpdateCategory([FromBody] CategoryDTO category)
+        {
+            try
+            {
+                var content = new Category
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    ParentId = category.ParentId,
+                    Priorty = category.Priorty,
+                    IsActive = category.IsActive,
+                };
+                await _categoryService.UpdateAsync(content);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("deleteCategory")]
+        public async Task DeleteCategory(string id)
+        {
+            await _categoryService.DeleteAsync(id);
         }
     }
 }
