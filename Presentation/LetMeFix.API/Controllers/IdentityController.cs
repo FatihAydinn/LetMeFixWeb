@@ -1,5 +1,5 @@
-﻿using LetMeFix.Application.Abstraction;
-using LetMeFix.Domain.DTOs;
+﻿using LetMeFix.Domain.Interfaces;
+using LetMeFix.Application.DTOs;
 using LetMeFix.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

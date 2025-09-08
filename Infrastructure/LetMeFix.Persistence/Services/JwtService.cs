@@ -1,5 +1,4 @@
-﻿using LetMeFix.Application.Abstraction;
-using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using LetMeFix.Domain.Interfaces;
 
 namespace LetMeFix.Infrastructure.Services
 {

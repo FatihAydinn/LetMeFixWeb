@@ -1,5 +1,4 @@
 ﻿using LetMeFix.Domain.Common;
-using LetMeFix.Domain.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +17,7 @@ namespace LetMeFix.Domain.Entities
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
 
-        public CategoryDTO Categories { get; set; } //one-to many relation
+        public CategoryInfo Categories { get; set; } //one-to many relation
         //public Category Categories { get; set; } //one-to many relation
         //public ICollection<Category> Categories { get; set; } //one-to many relation
 
@@ -96,5 +95,14 @@ namespace LetMeFix.Domain.Entities
         Crypto = 3,
         Checks = 4,
         BankTransfer = 5
+    }
+
+    public class CategoryInfo
+    {
+        public string? Id { get; set; }
+        public string Name { get; set; }
+        public string ParentId { get; set; }
+        public int Priorty { get; set; }
+        public bool IsActive { get; set; }
     }
 }

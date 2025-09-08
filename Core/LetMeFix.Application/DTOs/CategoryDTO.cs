@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LetMeFix.Domain.DTOs
+namespace LetMeFix.Application.DTOs
 {
     public class CategoryDTO /*: EntityBase*/
     {

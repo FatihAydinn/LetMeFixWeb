@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\LetMeFix.Application\LetMeFix.Application.csproj" />
+    <ProjectReference Include="..\..\Core\LetMeFix.Domain\LetMeFix.Domain.csproj" />
   </ItemGroup>
 
 </Project>

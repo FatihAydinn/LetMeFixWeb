@@ -1,4 +1,4 @@
-﻿using LetMeFix.Application.Abstraction;
+﻿using LetMeFix.Domain.Interfaces;
 using LetMeFix.Domain.Entities;
 using MongoDB.Driver;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LetMeFix.Persistence.Concretes
+namespace LetMeFix.Infrastructure.Services
 {
     public class CategoryService : IGenericRepository<Category>
     {

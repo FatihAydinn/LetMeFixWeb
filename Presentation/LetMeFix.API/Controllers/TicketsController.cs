@@ -1,4 +1,4 @@
-﻿using LetMeFix.Application.Abstraction;
+﻿using LetMeFix.Domain.Interfaces;
 using LetMeFix.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LetMeFix.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TicketsController : ControllerBase

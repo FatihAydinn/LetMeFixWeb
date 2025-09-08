@@ -1,4 +1,4 @@
-using LetMeFix.Application.Abstraction;
+using LetMeFix.Domain.Interfaces;
 using LetMeFix.Infrastructure.Services;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Persistence;

@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "Presentation\WebUI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LetMeFix.Infrastructure", "Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure\LetMeFix.Infrastructure.csproj", "{7B84500C-194F-4E78-9381-4F918956245A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.API", "Presentation\LetMeFix.API\LetMeFix.API.csproj", "{4BE725A5-0507-4892-A813-3EEA2A89F62C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LetMeFix.API", "Presentation\LetMeFix.API\LetMeFix.API.csproj", "{4BE725A5-0507-4892-A813-3EEA2A89F62C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7DD76533-635A-44CC-A2E8-730F6E14E68B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetMeFix.IdentityIntegrationTests", "Tests\LetMeFix.IdentityIntegrationTests\LetMeFix.IdentityIntegrationTests.csproj", "{A2E7DE91-30FE-4709-8032-0398A18B3747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LetMeFix.IdentityIntegrationTests", "Tests\LetMeFix.IdentityIntegrationTests\LetMeFix.IdentityIntegrationTests.csproj", "{A2E7DE91-30FE-4709-8032-0398A18B3747}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
-﻿using LetMeFix.Application.Abstraction;
+﻿using LetMeFix.Domain.Interfaces;
 using LetMeFix.Domain.Entities;
-using LetMeFix.Domain.DTOs;
+using LetMeFix.Application.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LetMeFix.Application.Abstraction
+namespace LetMeFix.Domain.Interfaces
 {
-    public interface IGenericRepository <T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(string id);

@@ -1,6 +1,6 @@
-﻿using LetMeFix.Application.Abstraction;
+﻿using LetMeFix.Domain.Interfaces;
 using LetMeFix.Domain.Entities;
-using LetMeFix.Persistence.Concretes;
+using LetMeFix.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

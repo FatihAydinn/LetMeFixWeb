@@ -1,4 +1,4 @@
-﻿using LetMeFix.Application.Abstraction;
+﻿using LetMeFix.Infrastructure.Services;
 using LetMeFix.Domain.Entities;
 using MongoDB.Driver;
 using System;
@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LetMeFix.Domain.Interfaces;
 
-namespace LetMeFix.Persistence.Concretes
+namespace LetMeFix.Infrastructure.Services
 {
     public class TicketService : IGenericRepository<Ticket>
     {
@@ -25,7 +26,7 @@ namespace LetMeFix.Persistence.Concretes
 
         public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(t=>t.Id == id);
+            await _collection.DeleteOneAsync(t => t.Id == id);
         }
 
         public async Task<List<Ticket>> GetAllAsync()
