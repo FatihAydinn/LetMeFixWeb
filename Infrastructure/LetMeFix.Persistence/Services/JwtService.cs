@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using LetMeFix.Domain.Interfaces;
+using System.Security.Cryptography;
 
 namespace LetMeFix.Infrastructure.Services
 {
@@ -55,6 +56,14 @@ namespace LetMeFix.Infrastructure.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        string IJwtService.GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
     }
 }

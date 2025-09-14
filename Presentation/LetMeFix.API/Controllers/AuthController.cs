@@ -11,12 +11,12 @@ namespace LetMeFix.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IdentityController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IJwtService _jwtService;
-        public IdentityController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService)
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -59,14 +59,27 @@ namespace LetMeFix.API.Controllers
                 var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 var token = await _jwtService.GenerateTokenAsync(user);
 
+                //refresh token
+                var refreshToken = _jwtService.GenerateRefreshToken();
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+                await _userManager.UpdateAsync(user);
+
                 if (result.Succeeded)
                 {
                     return Ok(new
                     {
-                        token = token,
+                        token,
+                        refreshToken,
                         expiration = DateTime.UtcNow.AddMinutes(60),
                         user = new { user.Id, user.Email, user.UserName }
                     });
+                    //return Ok(new
+                    //{
+                    //    token = token,
+                    //    expiration = DateTime.UtcNow.AddMinutes(60),
+                    //    user = new { user.Id, user.Email, user.UserName }
+                    //});
                 }
                 else
                 {
@@ -104,7 +117,23 @@ namespace LetMeFix.API.Controllers
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto model)
         {
-            return Ok("Refresh token endpoint");
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null || user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+                return Unauthorized("Invalid refresh token");
+
+            var newToken = await _jwtService.GenerateTokenAsync(user);
+            var newRefreshToken = _jwtService.GenerateRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+            await _userManager.UpdateAsync(user);
+
+            return Ok(new
+            {
+                token = newToken,
+                refreshToken = newRefreshToken,
+                expiration = DateTime.UtcNow.AddMinutes(60)
+            });
         }
 
         [HttpPost("logout")]

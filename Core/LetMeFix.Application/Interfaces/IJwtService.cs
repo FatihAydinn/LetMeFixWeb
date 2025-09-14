@@ -10,5 +10,6 @@ namespace LetMeFix.Domain.Interfaces
     public interface IJwtService
     {
         Task<string> GenerateTokenAsync(AppUser user);
+        string GenerateRefreshToken();
     }
 }
