@@ -139,7 +139,21 @@ namespace LetMeFix.API.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            return Ok(new { message = "Logout successful" });
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrEmpty(userId)) return BadRequest("Invalid User");
+
+                var result = await _jwtService.RevokeRefreshToken(userId);
+                if (!result) return BadRequest("Logout failed!");
+
+                return Ok(new { message = "Logout successfull!" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

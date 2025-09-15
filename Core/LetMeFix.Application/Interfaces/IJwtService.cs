@@ -11,5 +11,6 @@ namespace LetMeFix.Domain.Interfaces
     {
         Task<string> GenerateTokenAsync(AppUser user);
         string GenerateRefreshToken();
+        Task<bool> RevokeRefreshToken(string userId);
     }
 }

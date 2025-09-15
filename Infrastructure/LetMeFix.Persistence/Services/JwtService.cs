@@ -65,5 +65,17 @@ namespace LetMeFix.Infrastructure.Services
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
+
+        public async Task<bool> RevokeRefreshToken(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return false;
+
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(-1);
+            await _userManager.UpdateAsync(user);
+
+            return true;
+        }
     }
 }
