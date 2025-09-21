@@ -42,6 +42,18 @@ The project is being developed for **personal growth and portfolio building**.
 
 ---
 
+## 🔐 Authentication & Token Management
+The application features a secure JWT-based authentication system with the following endpoints via AuthController:
+
+- **Register**: Create new user accounts with validated credentials.
+ **Login**: Authenticate using email or username, returning access and refresh tokens.
+- **RefreshToken**: Obtain a new access token using a valid refresh token.
+- **Logout**: Revoke tokens on the server and clear tokens from cookies for secure sign-out.
+
+Token management includes secure HTTP-only cookies and revocation mechanisms to prevent unauthorized access.
+
+---
+
 ## 🧪 Testing
 - Integration tests implemented to ensure stability of endpoints and services.
 
@@ -61,6 +73,7 @@ LetMeFixWeb/
 
 ## ⚙️ Getting Started
 ### Prerequisites
-- [.NET 8 SDK]
-- [SQL Server]
-- [MongoDB]
+- .NET 8 SDK
+- SQL Server
+- MongoDB
+- Identity with JWT
