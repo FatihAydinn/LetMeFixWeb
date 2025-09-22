@@ -8,6 +8,7 @@ namespace LetMeFix.Domain.Entities
 {
     public class UserInformations
     {
+        public string? AboutMe { get; set; }
         public string UserId { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -16,6 +17,11 @@ namespace LetMeFix.Domain.Entities
         public string? ProfilePic { get; set; }
         public string Gender { get; set; }
         public DateTime BirthDate { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        public bool IsActive { get; set; }
+        public List<string> Roles { get; set; }
+        public bool NotificationSettings { get; set; }
+        public List<string> Skills { get; set; }
 
         //address section
         public string Country { get; set; }
@@ -24,10 +30,16 @@ namespace LetMeFix.Domain.Entities
         public string? Neighborhood { get; set; }
         public string? Address { get; set; }
 
-        public string? AboutMe { get; set; }
+        public decimal AvrageRate { get; set; }
+        public List<string> Reviews { get; set; }
+        public int CompletedJobs { get; set; }
+        public List<string> PreferredLanguages { get; set; }
         public string Profession { get; set; }
         public string? Resume { get; set; }
         public string? LinkedIn { get; set; }
+        public string? Twitter { get; set; }
+        public string? Github { get; set; }
+        public string? Website { get; set; }
         public string? Instragram { get; set; }
         public bool ShowInformation { get; set; } = true;
     }
