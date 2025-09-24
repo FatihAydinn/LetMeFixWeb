@@ -13,7 +13,7 @@ namespace LetMeFix.Domain.Entities
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Mobile { get; set; }
+        public string? MobileNumber { get; set; }
         public string? ProfilePic { get; set; }
         public string Gender { get; set; }
         public DateTime BirthDate { get; set; }
@@ -41,6 +41,6 @@ namespace LetMeFix.Domain.Entities
         public string? Github { get; set; }
         public string? Website { get; set; }
         public string? Instragram { get; set; }
-        public bool ShowInformation { get; set; } = true;
+        public bool ShowInformationPublic { get; set; }
     }
 }

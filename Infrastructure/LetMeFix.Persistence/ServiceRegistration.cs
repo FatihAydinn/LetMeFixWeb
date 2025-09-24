@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LetMeFix.Persistence.Services;
 
 namespace LetMeFix.Persistence
 {
@@ -16,6 +17,7 @@ namespace LetMeFix.Persistence
         {
             services.AddSingleton<IGenericRepository<Ticket>, TicketService>();
             services.AddSingleton<IGenericRepository<Category>, CategoryService>();
+            services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
         }
     }
 }
