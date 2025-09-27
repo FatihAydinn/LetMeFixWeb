@@ -22,6 +22,7 @@ namespace LetMeFix.Domain.Entities
         public List<string> Roles { get; set; }
         public bool NotificationSettings { get; set; }
         public List<string> Skills { get; set; }
+        public string AppLanguage { get; set; }
 
         //address section
         public string Country { get; set; }
@@ -32,7 +33,8 @@ namespace LetMeFix.Domain.Entities
 
         public decimal AvrageRate { get; set; }
         public List<string> Reviews { get; set; }
-        public int CompletedJobs { get; set; }
+        public List<string> CompletedJobs { get; set; }
+        public int CompletedJobCount { get; set; }
         public List<string> PreferredLanguages { get; set; }
         public string Profession { get; set; }
         public string? Resume { get; set; }
