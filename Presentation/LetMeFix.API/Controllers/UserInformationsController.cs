@@ -15,6 +15,7 @@ namespace LetMeFix.API.Controllers
             _userService = userService;
         }
 
+        [HttpGet("getUserById")]
         public async Task<IActionResult> GetUserById (string id)
         {
             try
@@ -28,25 +29,28 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        public async Task<IActionResult> UpdateUser([FromBody] UserInformations user)
+        [HttpPost("createUser")]
+        public async Task<IActionResult> CreateNewUser([FromBody] UserInformations user)
         {
             try
             {
-                await _userService.UpdateAsync(user);
-                return Ok();
+                user.Id = Guid.NewGuid().ToString();
+                await _userService.AddAsync(user);
+                return Ok(user);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
-        public async Task<IActionResult> CreateNewUser([FromBody] UserInformations user)
+        
+        [HttpPut("updateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserInformations user)
         {
             try
             {
-                await _userService.AddAsync(user);
-                return Ok();
+                await _userService.UpdateAsync(user);
+                return Ok(user);
             }
             catch (Exception ex)
             {

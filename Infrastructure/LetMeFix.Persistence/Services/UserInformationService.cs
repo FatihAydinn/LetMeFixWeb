@@ -27,12 +27,12 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<UserInformations> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.UserId == id).FirstOrDefaultAsync();
+            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
         
         public async Task UpdateAsync(UserInformations entity)
         {
-            await _collection.ReplaceOneAsync(x => x.UserId == entity.UserId, entity);
+            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
         
         public Task DeleteAsync(string id)

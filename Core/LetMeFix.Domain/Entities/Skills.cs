@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    internal class Skills
+    public class Skills
     {
+        public string SkillId { get; set; }
+        public string SkillTitle { get; set; }
+        public List<string> SkillCategories { get; set; }
     }
 }

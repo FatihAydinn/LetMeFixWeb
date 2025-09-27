@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +10,10 @@ namespace LetMeFix.Domain.Entities
 {
     public class UserInformations
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.String)]
+        public string Id { get; set; }
         public string? AboutMe { get; set; }
-        public string UserId { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
