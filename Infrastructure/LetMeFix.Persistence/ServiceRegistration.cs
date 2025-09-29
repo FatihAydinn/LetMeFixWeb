@@ -18,6 +18,7 @@ namespace LetMeFix.Persistence
             services.AddSingleton<IGenericRepository<Ticket>, TicketService>();
             services.AddSingleton<IGenericRepository<Category>, CategoryService>();
             services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
+            services.AddSingleton<IGenericRepository<Skills>, SkillsService>();
         }
     }
 }
