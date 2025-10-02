@@ -67,6 +67,25 @@ namespace LetMeFix.API.Controllers
 
                 if (result.Succeeded)
                 {
+                    Response.Cookies.Append("access_token", token, new CookieOptions
+                    {
+                        HttpOnly = true,
+                        //for prod = true
+                        Secure = false, 
+                        SameSite = SameSiteMode.Strict,
+                        Expires = DateTime.UtcNow.AddMinutes(15)
+                    });
+
+                    Response.Cookies.Append("refresh_token", refreshToken, new CookieOptions
+                    {
+                        HttpOnly = true,
+                        //
+                        Secure = false,
+                        SameSite = SameSiteMode.Strict,
+                        Expires = DateTime.UtcNow.AddDays(7)
+                    });
+
+
                     return Ok(new
                     {
                         token,
@@ -95,23 +114,38 @@ namespace LetMeFix.API.Controllers
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto model)
         {
-            var user = await _userManager.FindByIdAsync(model.UserId);
-            if (user == null || user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-                return Unauthorized("Invalid refresh token");
-
-            var newToken = await _jwtService.GenerateTokenAsync(user);
-            var newRefreshToken = _jwtService.GenerateRefreshToken();
-
-            user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
-            await _userManager.UpdateAsync(user);
-
-            return Ok(new
+            try
             {
-                token = newToken,
-                refreshToken = newRefreshToken,
-                //expiration = DateTime.UtcNow.AddMinutes(15)
-            });
+                var user = await _userManager.FindByIdAsync(model.UserId);
+                if (user == null || user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+                    return Unauthorized("Invalid refresh token");
+
+                var newToken = await _jwtService.GenerateTokenAsync(user);
+                var newRefreshToken = _jwtService.GenerateRefreshToken();
+
+                user.RefreshToken = newRefreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+                await _userManager.UpdateAsync(user);
+
+                Response.Cookies.Append("access_token", newToken, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddMinutes(15)
+                });
+
+                return Ok(new
+                {
+                    token = newToken,
+                    refreshToken = newRefreshToken,
+                    //expiration = DateTime.UtcNow.AddMinutes(15)
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("logout")]
@@ -125,6 +159,9 @@ namespace LetMeFix.API.Controllers
 
                 var result = await _jwtService.RevokeRefreshToken(userId);
                 if (!result) return BadRequest("Logout failed!");
+
+                Response.Cookies.Delete("access_token");
+                Response.Cookies.Delete("refresh_token");
 
                 return Ok(new { message = "Logout successfull!" });
             }
