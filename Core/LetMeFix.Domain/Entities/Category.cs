@@ -15,7 +15,7 @@ namespace LetMeFix.Domain.Entities
         public Category()
         {
             SubCategories = new HashSet<Category>();
-            Tickets = new HashSet<Ticket>();
+            Jobs = new HashSet<Job>();
         }
 
         [BsonId]
@@ -28,7 +28,7 @@ namespace LetMeFix.Domain.Entities
 
         public Category Parent { get; set; }
         public ICollection<Category> SubCategories { get; set; }
-        public ICollection<Ticket> Tickets { get; set; }
+        public ICollection<Job> Jobs { get; set; }
 
         //public Ticket Ticket { get; set; }
     }

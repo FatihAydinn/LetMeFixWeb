@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Ticket /*: EntityBase*/
+    public class Job /*: EntityBase*/
     {
         public string? Id { get; set; }
         public string UserId { get; set; }
@@ -17,7 +17,7 @@ namespace LetMeFix.Domain.Entities
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
 
-        public CategoryInfo Categories { get; set; } //one-to many relation
+        //public CategoryInfo Categories { get; set; } //one-to many relation
         //public Category Categories { get; set; } //one-to many relation
         //public ICollection<Category> Categories { get; set; } //one-to many relation
 
@@ -42,8 +42,8 @@ namespace LetMeFix.Domain.Entities
 
         public bool GetNotifications { get; set; }
 
-        public TicketStatus Status { get; set; }
-        public Review? Review { get; set; }
+        //public JobStatus Status { get; set; }
+        public Reviews? Reviews { get; set; }
         public PaymentType PaymentType { get; set; }
         //Bid?
     }
@@ -55,7 +55,7 @@ namespace LetMeFix.Domain.Entities
         ServiceRecipient = 2
     }
 
-    public enum TicketStatus
+    public enum JobStatus
     {
         Active = 1,
         InProgress = 2,
@@ -65,10 +65,10 @@ namespace LetMeFix.Domain.Entities
         Waiting = 6
     }
 
-    public class Review
+    public class Reviews
     {
         public int Id { get; set; }
-        public string TicketId { get; set; }
+        public string JobId { get; set; }
         public string UserId { get; set; }
         public string ReviewText { get; set; }
 

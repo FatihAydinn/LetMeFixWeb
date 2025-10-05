@@ -10,16 +10,16 @@ using LetMeFix.Domain.Interfaces;
 
 namespace LetMeFix.Infrastructure.Services
 {
-    public class TicketService : IGenericRepository<Ticket>
+    public class JobService : IGenericRepository<Job>
     {
-        private readonly IMongoCollection<Ticket> _collection;
+        private readonly IMongoCollection<Job> _collection;
 
-        public TicketService(IMongoDatabase database)
+        public JobService(IMongoDatabase database)
         {
-            _collection = database.GetCollection<Ticket>("Tickets");
+            _collection = database.GetCollection<Job>("Tickets");
         }
 
-        public async Task AddAsync(Ticket ticket)
+        public async Task AddAsync(Job ticket)
         {
             await _collection.InsertOneAsync(ticket);
         }
@@ -29,17 +29,17 @@ namespace LetMeFix.Infrastructure.Services
             await _collection.DeleteOneAsync(t => t.Id == id);
         }
 
-        public async Task<List<Ticket>> GetAllAsync()
+        public async Task<List<Job>> GetAllAsync()
         {
             return await _collection.Find(x => true).ToListAsync();
         }
 
-        public async Task<Ticket> GetByIdAsync(string id)
+        public async Task<Job> GetByIdAsync(string id)
         {
             return await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task UpdateAsync(Ticket ticket)
+        public async Task UpdateAsync(Job ticket)
         {
             await _collection.ReplaceOneAsync(t => t.Id == ticket.Id, ticket);
         }

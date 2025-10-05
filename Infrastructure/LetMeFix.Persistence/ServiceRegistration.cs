@@ -15,7 +15,7 @@ namespace LetMeFix.Persistence
     {
         public static void AddPersistanceServices(this IServiceCollection services)
         {
-            services.AddSingleton<IGenericRepository<Ticket>, TicketService>();
+            services.AddSingleton<IGenericRepository<Job>, JobService>();
             services.AddSingleton<IGenericRepository<Category>, CategoryService>();
             services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
             services.AddSingleton<IGenericRepository<Skills>, SkillsService>();

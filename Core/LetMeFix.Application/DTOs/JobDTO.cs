@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.DTOs
 {
-    public class TicketDTO
+    public class JobDTO
     {
         public string? Id { get; set; }
         public string Title { get; set; } //!?
