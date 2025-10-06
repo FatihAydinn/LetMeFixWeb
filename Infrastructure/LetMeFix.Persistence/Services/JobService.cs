@@ -16,12 +16,12 @@ namespace LetMeFix.Infrastructure.Services
 
         public JobService(IMongoDatabase database)
         {
-            _collection = database.GetCollection<Job>("Tickets");
+            _collection = database.GetCollection<Job>("Jobs");
         }
 
-        public async Task AddAsync(Job ticket)
+        public async Task AddAsync(Job job)
         {
-            await _collection.InsertOneAsync(ticket);
+            await _collection.InsertOneAsync(job);
         }
 
         public async Task DeleteAsync(string id)
@@ -39,9 +39,9 @@ namespace LetMeFix.Infrastructure.Services
             return await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task UpdateAsync(Job ticket)
+        public async Task UpdateAsync(Job job)
         {
-            await _collection.ReplaceOneAsync(t => t.Id == ticket.Id, ticket);
+            await _collection.ReplaceOneAsync(t => t.Id == job.Id, job);
         }
     }
 }

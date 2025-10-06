@@ -8,46 +8,14 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Job /*: EntityBase*/
+    public class Job : WorkBase
     {
-        public string? Id { get; set; }
-        public string UserId { get; set; }
-        public string Title { get; set; } //!?
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public int CategoryId { get; set; }
-
-        //public CategoryInfo Categories { get; set; } //one-to many relation
-        //public Category Categories { get; set; } //one-to many relation
-        //public ICollection<Category> Categories { get; set; } //one-to many relation
-
-        //publiInfrastructurec string ImagePath { get; set; } 
-
-        //public ServiceType ServiceType { get; set; }
-
-        public bool IsRemoteJob { get; set; }
-        public string? Country { get; set; }
-        public string? City { get; set; }
-        public string? District { get; set; }
-        public string? Neighborhood { get; set; }
-        public string? Address { get; set; }
-
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public DateTime? Deadline { get; set; }
-        //!+
-
-        public int? EstimatedDuration { get; set; }
-        public string? TimeType { get; set; }
-
-        public bool GetNotifications { get; set; }
-
-        //public JobStatus Status { get; set; }
-        public Reviews? Reviews { get; set; }
-        public PaymentType PaymentType { get; set; }
-        //Bid?
+        public bool? IsAvailableAnyTime { get; set; }
+        public List<string>? AvailableDays { get; set; }
+        public List<string>? AvailableHours { get; set; }
+        public List<string>? ReviewIds { get; set; }
+        public List<string>? OfferIds { get; set; }
     }
-        //public Socials Socials { get; set; }
 
     public enum ServiceType
     {
@@ -67,10 +35,10 @@ namespace LetMeFix.Domain.Entities
 
     public class Reviews
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string JobId { get; set; }
         public string UserId { get; set; }
-        public string ReviewText { get; set; }
+        public string? ReviewText { get; set; }
 
         [Range (1,5)]
         public int Rating { get; set; }
