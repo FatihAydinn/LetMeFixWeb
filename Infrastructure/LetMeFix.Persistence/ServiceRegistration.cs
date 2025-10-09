@@ -20,6 +20,7 @@ namespace LetMeFix.Persistence
             services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
             services.AddSingleton<IGenericRepository<Skills>, SkillsService>();
             services.AddSingleton<IGenericRepository<Languages>, LanguageService>();
+            services.AddSingleton<IGenericRepository<Contracts>, ContractService>();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LetMeFix.Domain.Entities
 {
     public class Offers
-    { //job ve contract sınıflarını ayarla sonra da offer crud yap
+    {
         public string Id { get; set; }
         public string JobId { get; set; }
         public string CustomerId { get; set; }
