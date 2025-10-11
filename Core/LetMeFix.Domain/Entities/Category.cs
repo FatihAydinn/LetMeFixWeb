@@ -10,26 +10,14 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Category /*: EntityBase*/
+    public class Category
     {
-        public Category()
-        {
-            SubCategories = new HashSet<Category>();
-            Jobs = new HashSet<Job>();
-        }
-
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public string? Id { get; set; }
         public string Name { get; set; }
-        public string? ParentId { get; set; }
-        public int Priorty { get; set; }
-        public bool IsActive { get; set; }
-
-        public Category Parent { get; set; }
-        public ICollection<Category> SubCategories { get; set; }
-        public ICollection<Job> Jobs { get; set; }
-
-        //public Ticket Ticket { get; set; }
+        public string FullPath { get; set; }
+        public int Priority { get; set; }
+        public int Level => Id.Length / 3;
     }
 }

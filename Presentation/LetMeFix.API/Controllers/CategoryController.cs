@@ -45,20 +45,13 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPost("createCategory")]
-        public async Task<IActionResult> CreateCategory([FromBody] CategoryDTO category)
+        public async Task<IActionResult> CreateCategory([FromBody] Category category)
         {
             try
             {
-                var content = new Category
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = category.Name,
-                    ParentId = category.ParentId,
-                    Priorty = category.Priorty,
-                    IsActive = category.IsActive,
-                };
+                category.Id = Guid.NewGuid().ToString();
 
-                await _categoryService.AddAsync(content);
+                await _categoryService.AddAsync(category);
                 return Ok();
             }
             catch (Exception ex)
@@ -68,19 +61,11 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPost("updateCategory")]
-        public async Task<IActionResult> UpdateCategory([FromBody] CategoryDTO category)
+        public async Task<IActionResult> UpdateCategory([FromBody] Category category)
         {
             try
             {
-                var content = new Category
-                {
-                    Id = category.Id,
-                    Name = category.Name,
-                    ParentId = category.ParentId,
-                    Priorty = category.Priorty,
-                    IsActive = category.IsActive,
-                };
-                await _categoryService.UpdateAsync(content);
+                await _categoryService.UpdateAsync(category);
                 return Ok();
             }
             catch (Exception ex)
