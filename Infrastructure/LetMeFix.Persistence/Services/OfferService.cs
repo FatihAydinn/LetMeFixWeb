@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class OfferService : IGenericRepository<Offers>
+    public class OfferService : IOfferRepository
     {
         private readonly IMongoCollection<Offers> _collection;
 
@@ -28,24 +28,30 @@ namespace LetMeFix.Persistence.Services
             await _collection.DeleteOneAsync(x => x.Id == id);
         }
 
-        public async Task<List<Offers>> GetAllAsync()
-        {
-            return await _collection.Find(x => true).ToListAsync();    
-        }
-
         public async Task<Offers> GetByIdAsync(string id)
         {
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<Offers> GetByCustomerIdandJobIdAsync(string id)
+        public async Task<List<Offers>> GetOffersByJobIdAsync(string jobId)
         {
-            throw new NotImplementedException();
+            return await _collection.Find(x => x.JobId == jobId).ToListAsync();
+        }
+
+        public async Task<List<Offers>> GetOffersByCustomerIPerJobId(string jobId, string customerId)
+        {
+            var value = await _collection.Find(x => x.JobId == jobId && x.CustomerId == customerId).ToListAsync();
+            return value;
         }
 
         public async Task UpdateAsync(Offers entity)
         {
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+        }
+
+        public Task<List<Offers>> GetAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

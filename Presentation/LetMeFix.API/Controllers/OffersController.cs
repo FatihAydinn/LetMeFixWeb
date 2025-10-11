@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,13 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class OffersController : ControllerBase
     {
-        private readonly IGenericRepository<Offers> _offers;
+        //private readonly IGenericRepository<Offers> _offerRepository;
+        //private readonly OfferService _offerService;
+        private readonly IOfferRepository _offerRepository;
 
-        public OffersController(IGenericRepository<Offers> offers)
+        public OffersController(IOfferRepository offerRepository)
         {
-            _offers = offers;
+            _offerRepository = offerRepository;
         }
 
         [HttpGet("getOfferById")]
@@ -21,7 +24,7 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                var value = await _offers.GetByIdAsync(id);
+                var value = await _offerRepository.GetByIdAsync(id);
                 return Ok(value);
             }
             catch (Exception ex)
@@ -35,7 +38,8 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                await _offers.AddAsync(offer);
+                offer.Id = Guid.NewGuid().ToString();
+                await _offerRepository.AddAsync(offer);
                 return Ok(offer);
             }
             catch (Exception ex)
@@ -49,7 +53,7 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                await _offers.UpdateAsync(offer);
+                await _offerRepository.UpdateAsync(offer);
                 return Ok(offer);
             }
             catch (Exception ex)
@@ -63,8 +67,36 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                await _offers.DeleteAsync(id);
+                await _offerRepository.DeleteAsync(id);
                 return Ok("success");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("getOffersByJob")]
+        public async Task<IActionResult> GetOffersByJob(string jobId)
+        {
+            try
+            {
+                var values = await _offerRepository.GetOffersByJobIdAsync(jobId);
+                return Ok(values);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("getContractsByCustomerIdPerJob")]
+        public async Task<IActionResult> GetContractsByCustomerIdPerJob(string jobId, string customerId)
+        {
+            try
+            {
+                var value = await _offerRepository.GetOffersByCustomerIPerJobId(jobId, customerId);
+                return Ok(value);
             }
             catch (Exception ex)
             {

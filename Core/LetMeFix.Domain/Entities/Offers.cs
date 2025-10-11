@@ -8,7 +8,7 @@ namespace LetMeFix.Domain.Entities
 {
     public class Offers
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public string JobId { get; set; }
         public string CustomerId { get; set; }
         public decimal Price { get; set; }
