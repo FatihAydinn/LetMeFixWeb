@@ -22,6 +22,7 @@ namespace LetMeFix.Persistence
             services.AddSingleton<IGenericRepository<Languages>, LanguageService>();
             services.AddSingleton<IGenericRepository<Contracts>, ContractService>();
             services.AddScoped<IOfferRepository, OfferService>();
+            services.AddSingleton<IGenericRepository<CategoryStages>, CategoryStageService>();
         }
     }
 }
