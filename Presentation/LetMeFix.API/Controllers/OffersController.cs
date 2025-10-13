@@ -10,11 +10,9 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class OffersController : ControllerBase
     {
-        //private readonly IGenericRepository<Offers> _offerRepository;
-        //private readonly OfferService _offerService;
-        private readonly IOfferRepository _offerRepository;
+        private readonly OfferService _offerRepository;
 
-        public OffersController(IOfferRepository offerRepository)
+        public OffersController(OfferService offerRepository)
         {
             _offerRepository = offerRepository;
         }

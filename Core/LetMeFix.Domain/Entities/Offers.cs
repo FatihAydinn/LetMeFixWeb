@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Offers
+    public class Offers : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string? Id { get; set; }
+        //public string? Id { get; set; }
         public string JobId { get; set; }
         public string CustomerId { get; set; }
         public decimal Price { get; set; }
