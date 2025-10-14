@@ -11,8 +11,8 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class CategoryStagesController : ControllerBase
     {
-        private readonly IGenericRepository<CategoryStages> _stages;
-        public CategoryStagesController(IGenericRepository<CategoryStages> stages)
+        private readonly CategoryStageService _stages;
+        public CategoryStagesController(CategoryStageService stages)
         {
             _stages = stages;
         }

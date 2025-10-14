@@ -3,6 +3,7 @@ using LetMeFix.Domain.Entities;
 using LetMeFix.Application.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LetMeFix.Persistence.Services;
 
 namespace LetMeFix.API.Controllers
 {
@@ -10,8 +11,8 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly IGenericRepository<Category> _categoryService;
-        public CategoryController(IGenericRepository<Category> categoryService)
+        private readonly CategoryService _categoryService;
+        public CategoryController(CategoryService categoryService)
         {
             _categoryService = categoryService;
         }
@@ -49,7 +50,7 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                category.Id = Guid.NewGuid().ToString();
+                //category.Id = Guid.NewGuid().ToString();
 
                 await _categoryService.AddAsync(category);
                 return Ok();
@@ -60,7 +61,7 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        [HttpPost("updateCategory")]
+        [HttpPut("updateCategory")]
         public async Task<IActionResult> UpdateCategory([FromBody] Category category)
         {
             try

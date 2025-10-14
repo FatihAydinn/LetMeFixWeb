@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Category
+    public class Category : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string? Id { get; set; }
         public string Name { get; set; }
         public string FullPath { get; set; }
         public int Priority { get; set; }

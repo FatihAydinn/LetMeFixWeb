@@ -39,7 +39,7 @@ namespace LetMeFix.API.Controllers
             //return CreatedAtAction(nameof(GetById), new { id = job.Id }, job);
         }
 
-        [HttpPost("UpdateJob")]
+        [HttpPut("UpdateJob")]
         public async Task<IActionResult> UpdateJob(Job job)
         {
             await _genericService.UpdateAsync(job);

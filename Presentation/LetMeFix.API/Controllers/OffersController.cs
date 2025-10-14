@@ -11,7 +11,6 @@ namespace LetMeFix.API.Controllers
     public class OffersController : ControllerBase
     {
         private readonly OfferService _offerRepository;
-
         public OffersController(OfferService offerRepository)
         {
             _offerRepository = offerRepository;

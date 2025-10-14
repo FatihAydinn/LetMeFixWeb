@@ -18,7 +18,7 @@ namespace LetMeFix.Persistence.Services
         //    _collection = database.GetCollection<Offers>("Offers");
         //}
 
-        public OfferService(IMongoDatabase database) : base(database, "Offers") { }
+        public OfferService(IMongoDatabase database) : base (database, "Offers") { }
 
         public async Task<List<Offers>> GetOffersByJobIdAsync(string jobId)
         {

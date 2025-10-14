@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class CategoryStages
+    public class CategoryStages : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string Id { get; set; }
         public string Name { get; set; }
         public string? PreviousParent { get; set; }
     }

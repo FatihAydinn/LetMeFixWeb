@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class CategoryStageService : IGenericRepository<CategoryStages>
+    public class CategoryStageService : BaseService<CategoryStages>
     {
-        private readonly IMongoCollection<CategoryStages> _collection;
 
-        public CategoryStageService(IMongoDatabase database)
+        public CategoryStageService(IMongoDatabase database) : base (database, "CategoryStages")
         {
-            _collection = database.GetCollection<CategoryStages>("CategoryStages");
+
         }
 
         public async Task AddAsync(CategoryStages entity)
@@ -41,6 +40,12 @@ namespace LetMeFix.Persistence.Services
         public async Task UpdateAsync(CategoryStages entity)
         {
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+        }
+
+        public async Task<string> GetNamebyId(string id)
+        {
+            var val = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return val.Name.ToString();
         }
     }
 }
