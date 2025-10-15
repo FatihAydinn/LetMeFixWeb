@@ -30,7 +30,13 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<List<Category>> GetAllAsync()
         {
-            return await _collection.Find(x => true).ToListAsync();
+            var values = await _collection.Find(x => true).ToListAsync();
+            foreach (var item in values)
+            {
+                var fullpath = await GetCategoryNames(item.Id);
+                item.FullPath = fullpath;
+            }
+            return values;
         }
 
         public async Task<Category> GetByIdAsync(string id)

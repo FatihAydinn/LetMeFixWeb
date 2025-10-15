@@ -8,11 +8,11 @@ namespace LetMeFix.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactsController : ControllerBase
+    public class ContractsController : ControllerBase
     {
         private readonly IGenericRepository<Contracts> _contracts;
 
-        public ContactsController(IGenericRepository<Contracts> contracts)
+        public ContractsController(IGenericRepository<Contracts> contracts)
         {
             _contracts = contracts;
         }
