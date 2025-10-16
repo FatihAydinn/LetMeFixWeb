@@ -33,20 +33,6 @@ namespace LetMeFix.Domain.Entities
         Waiting = 6
     }
 
-    public class Reviews
-    {
-        public string Id { get; set; }
-        public string JobId { get; set; }
-        public string UserId { get; set; }
-        public string? ReviewText { get; set; }
-
-        [Range (1,5)]
-        public int Rating { get; set; }
-
-        public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
-    }
-
     public class Socials
     {
         public string Instagram { get; set; }

@@ -19,7 +19,7 @@ namespace LetMeFix.Domain.Entities
         public string? Neighborhood { get; set; }
         public string? Address { get; set; }
 
-        public Reviews? Review { get; set; }
+        public Review? Review { get; set; }
         public bool IsPaymentCompleted { get; set; }
         public decimal?  Tip { get; set; }
     }
