@@ -11,10 +11,8 @@ namespace LetMeFix.Persistence.Services
 {
     public class CategoryStageService : BaseService<CategoryStages>
     {
-
         public CategoryStageService(IMongoDatabase database) : base (database, "CategoryStages")
         {
-
         }
 
         public async Task AddAsync(CategoryStages entity)
@@ -46,6 +44,15 @@ namespace LetMeFix.Persistence.Services
         {
             var val = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
             return val.Name.ToString();
+        }
+
+        public async Task<string> GetPreviousCategory(string id)
+        {
+            string fullPath = "";
+            var prev = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            if (prev != null) fullPath = prev.FullPath.ToString();
+            else fullPath = "";
+            return fullPath;
         }
     }
 }

@@ -50,6 +50,8 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
+                if (entity.PreviousParent == null) entity.FullPath = entity.Name;
+                else entity.FullPath = await _stages.GetPreviousCategory(entity.PreviousParent) + "/" + entity.Name;
                 await _stages.AddAsync(entity);
                 return Ok(entity);
             }
@@ -80,6 +82,20 @@ namespace LetMeFix.API.Controllers
             {
                 await _stages.DeleteAsync(id);
                 return Ok("success");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("getPreviousCategory")]
+        public async Task<IActionResult> GetPreviousCategory(string id)
+        {
+            try
+            {
+                var val = await _stages.GetPreviousCategory(id);
+                return Ok(val);
             }
             catch (Exception ex)
             {

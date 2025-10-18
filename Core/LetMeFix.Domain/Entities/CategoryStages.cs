@@ -12,5 +12,8 @@ namespace LetMeFix.Domain.Entities
     {
         public string Name { get; set; }
         public string? PreviousParent { get; set; }
+        public string FullPath { get; set; }
+        public int Priority { get; set; }
+        //public int Priority => Id.Length / 3;
     }
 }
