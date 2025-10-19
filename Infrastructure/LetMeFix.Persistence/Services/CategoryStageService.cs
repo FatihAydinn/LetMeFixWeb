@@ -40,18 +40,18 @@ namespace LetMeFix.Persistence.Services
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
 
-        public async Task<string> GetNamebyId(string id)
-        {
-            var val = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
-            return val.Name.ToString();
-        }
+        //public async Task<string> GetNamebyId(string id)
+        //{
+        //    var val = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        //    return val.Name.ToString();
+        //}
 
-        public async Task<string> GetPreviousCategory(string id)
+        public async Task<Dictionary<string, string>> GetPreviousCategory(string id)
         {
-            string fullPath = "";
+            Dictionary<string, string> fullPath = new();
             var prev = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
-            if (prev != null) fullPath = prev.FullPath.ToString();
-            else fullPath = "";
+            if (prev != null) fullPath = prev.FullPaths;
+            //else fullPath = "";
             return fullPath;
         }
     }

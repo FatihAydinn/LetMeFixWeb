@@ -10,9 +10,9 @@ namespace LetMeFix.Domain.Entities
 {
     public class CategoryStages : BaseEntity
     {
-        public string Name { get; set; }
+        public Dictionary<string, string> Names { get; set; } = new();
         public string? PreviousParent { get; set; }
-        public string FullPath { get; set; }
+        public Dictionary<string, string> FullPaths { get; set; } = new();
         public int Priority { get; set; }
         //public int Priority => Id.Length / 3;
     }

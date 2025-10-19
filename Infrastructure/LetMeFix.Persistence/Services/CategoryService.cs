@@ -62,7 +62,8 @@ namespace LetMeFix.Persistence.Services
             var idsplit = Enumerable.Range(0, 3).Select(x => id.Substring(x * 3, 3));
             string fullpath = "";
             foreach (var name in idsegments) {
-                fullpath += await _stage.GetNamebyId(name) + "/";
+                fullpath += "";
+                //fullpath += await _stage.GetNamebyId(name) + "/";
             }
             return fullpath.Substring(0, fullpath.Length - 1);
             //return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
