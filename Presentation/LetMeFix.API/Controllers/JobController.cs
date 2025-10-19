@@ -3,6 +3,7 @@ using LetMeFix.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LetMeFix.Infrastructure.Services;
 
 namespace LetMeFix.API.Controllers
 {
@@ -11,30 +12,30 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
-        private readonly IGenericRepository<Job> _genericService;
-        public JobController(IGenericRepository<Job> jobService)
+        private readonly JobService _jobService;
+        public JobController(JobService jobService)
         {
-            _genericService = jobService;
+            _jobService = jobService;
         }
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetJobs()
         {
-            var jobs = await _genericService.GetAllAsync();
+            var jobs = await _jobService.GetAllAsync();
             return Ok(jobs);
         }
 
         [HttpGet("GetById")]
         public async Task<IActionResult> GetJobsById(string id)
         {
-            var job = await _genericService.GetByIdAsync(id);
+            var job = await _jobService.GetByIdAsync(id);
             return Ok(job);
         }
 
         [HttpPost("AddJob")]
         public async Task<IActionResult> PostJobs([FromBody] Job job) {
             job.Id = Guid.NewGuid().ToString();
-            await _genericService.AddAsync(job);
+            await _jobService.AddAsync(job);
             return Ok();
             //return CreatedAtAction(nameof(GetById), new { id = job.Id }, job);
         }
@@ -42,14 +43,14 @@ namespace LetMeFix.API.Controllers
         [HttpPut("UpdateJob")]
         public async Task<IActionResult> UpdateJob(Job job)
         {
-            await _genericService.UpdateAsync(job);
+            await _jobService.UpdateAsync(job);
             return Ok();
         }
 
         [HttpDelete("DeleteJob")]
         public async Task DeleteJob(string id)
         {
-            await _genericService.DeleteAsync(id);
+            await _jobService.DeleteAsync(id);
         }
     }
 }

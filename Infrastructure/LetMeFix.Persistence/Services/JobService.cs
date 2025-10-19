@@ -7,16 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LetMeFix.Domain.Interfaces;
+using LetMeFix.Persistence.Services;
+using static MongoDB.Driver.WriteConcern;
+using SharpCompress.Common;
 
 namespace LetMeFix.Infrastructure.Services
 {
-    public class JobService : IGenericRepository<Job>
+    public class JobService : BaseService<Job>
     {
-        private readonly IMongoCollection<Job> _collection;
-
-        public JobService(IMongoDatabase database)
+        CategoryStageService _categoryStages;
+        public JobService(IMongoDatabase database, CategoryStageService categoryStages) : base (database, "Jobs") 
         {
-            _collection = database.GetCollection<Job>("Jobs");
+            _categoryStages = categoryStages;
         }
 
         public async Task AddAsync(Job job)
@@ -31,12 +33,21 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task<List<Job>> GetAllAsync()
         {
-            return await _collection.Find(x => true).ToListAsync();
+            var values = await _collection.Find(x => true).ToListAsync();
+            foreach (var item in values)
+            {
+                var categoryfullpath = await _categoryStages.GetByIdAsync(item.CategoryId.Substring(item.CategoryId.Length - 3));
+                item.CategoryId = categoryfullpath.FullPaths["EN"];
+            }
+            return values; 
         }
 
         public async Task<Job> GetByIdAsync(string id)
         {
-            return await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
+            var value = await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
+            var categoryfullpath = await _categoryStages.GetByIdAsync(value.CategoryId.Substring(value.CategoryId.Length - 3));
+            value.CategoryId = categoryfullpath.FullPaths["EN"];
+            return value;
         }
 
         public async Task UpdateAsync(Job job)

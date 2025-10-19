@@ -5,14 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LetMeFix.Domain.Common;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class WorkBase
+    public class WorkBase : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string? Id { get; set; }
         public string ProviderId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -28,6 +26,5 @@ namespace LetMeFix.Domain.Entities
         public int? EstimatedDuration { get; set; }
 
         public PaymentType PaymentType { get; set; }
-
     }
 }

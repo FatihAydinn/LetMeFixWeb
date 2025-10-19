@@ -15,12 +15,13 @@ namespace LetMeFix.Persistence
     {
         public static void AddPersistanceServices(this IServiceCollection services)
         {
-            services.AddSingleton<IGenericRepository<Job>, JobService>();
+            //services.AddSingleton<IGenericRepository<Job>, JobService>();
             //services.AddSingleton<IGenericRepository<Category>, CategoryService>();
             services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
             services.AddSingleton<IGenericRepository<Skills>, SkillsService>();
             services.AddSingleton<IGenericRepository<Languages>, LanguageService>();
             services.AddSingleton<IGenericRepository<Contracts>, ContractService>();
+            services.AddScoped<JobService>();
             services.AddScoped<ReviewService>();
             services.AddScoped<OfferService>();
             services.AddScoped<CategoryStageService>();
