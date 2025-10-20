@@ -1,9 +1,9 @@
-﻿using LetMeFix.Domain.Interfaces;
-using LetMeFix.Domain.Entities;
-using LetMeFix.Application.DTOs;
+﻿using LetMeFix.Domain.Entities;
+using LetMeFix.Domain.Interfaces;
+using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using LetMeFix.Persistence.Services;
+using System.Globalization;
 
 namespace LetMeFix.API.Controllers
 {
@@ -11,19 +11,19 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryService _categoryService;
-        public CategoryController(CategoryService categoryService)
+        private readonly CategoryService _stages;
+        public CategoryController(CategoryService stages)
         {
-            _categoryService = categoryService;
+            _stages = stages;
         }
 
-        [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllCategories()
+        [HttpGet("listAllCategoryStages")]
+        public async Task<IActionResult> ListAllCategoryStages()
         {
             try
             {
-                var categories = await _categoryService.GetAllAsync();
-                return Ok(categories);
+                var values = await _stages.GetAllAsync();
+                return Ok(values);
             }
             catch (Exception ex)
             {
@@ -31,13 +31,13 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        [HttpGet("getById")]
-        public async Task<IActionResult> GetById(string id)
+        [HttpGet("getCategoryStagebyId")]
+        public async Task<IActionResult> GetCategoryStagebyId(string id)
         {
             try
             {
-                var content = await _categoryService.GetByIdAsync(id);
-                return Ok(content);
+                var value = await _stages.GetByIdAsync(id);
+                return Ok(value);
             }
             catch (Exception ex)
             {
@@ -45,15 +45,24 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        [HttpPost("createCategory")]
-        public async Task<IActionResult> CreateCategory([FromBody] Category category)
+        [HttpPost("createCategoryStage")]
+        public async Task<IActionResult> CreateCategoryStage([FromBody] Category entity)
         {
             try
             {
-                //category.Id = Guid.NewGuid().ToString();
 
-                await _categoryService.AddAsync(category);
-                return Ok();
+                if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
+                else
+                {
+                    var prev = await _stages.GetPreviousCategory(entity.PreviousParent);
+                    entity.FullPaths = entity.Names.ToDictionary(x => x.Key, x =>
+                    {
+                        string previousCategoryName = prev.ContainsKey(x.Key) ? prev[x.Key] : "";
+                        return $"{previousCategoryName} > {x.Value}";
+                    });
+                }
+                await _stages.AddAsync(entity);
+                return Ok(entity);
             }
             catch (Exception ex)
             {
@@ -61,13 +70,13 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        [HttpPut("updateCategory")]
-        public async Task<IActionResult> UpdateCategory([FromBody] Category category)
+        [HttpPut("updateCategoryStage")]
+        public async Task<IActionResult> UpdateCategoryStage([FromBody] Category entity)
         {
             try
             {
-                await _categoryService.UpdateAsync(category);
-                return Ok();
+                await _stages.UpdateAsync(entity);
+                return Ok(entity);
             }
             catch (Exception ex)
             {
@@ -75,10 +84,32 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        [HttpDelete("deleteCategory")]
-        public async Task DeleteCategory(string id)
+        [HttpDelete("deleteCategoryStage")]
+        public async Task<IActionResult> DeleteCategoryStage(string id)
         {
-            await _categoryService.DeleteAsync(id);
+            try
+            {
+                await _stages.DeleteAsync(id);
+                return Ok("success");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        //[HttpGet("getPreviousCategory")]
+        //public async Task<IActionResult> GetPreviousCategory(string id)
+        //{
+        //    try
+        //    {
+        //        var val = await _stages.GetPreviousCategory(id);
+        //        return Ok(val);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

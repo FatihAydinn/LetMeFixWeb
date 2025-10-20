@@ -24,7 +24,6 @@ namespace LetMeFix.Persistence
             services.AddScoped<JobService>();
             services.AddScoped<ReviewService>();
             services.AddScoped<OfferService>();
-            services.AddScoped<CategoryStageService>();
             services.AddScoped<CategoryService>();
             //services.AddSingleton<IGenericRepository<Offers>, OfferService>();
             //services.AddSingleton<IGenericRepository<CategoryStages>, CategoryStageService>();
