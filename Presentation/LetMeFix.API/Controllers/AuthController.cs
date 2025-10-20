@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using LetMeFix.Application.Mappings;
+using AutoMapper;
 
 namespace LetMeFix.API.Controllers
 {
@@ -16,11 +18,13 @@ namespace LetMeFix.API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IJwtService _jwtService;
-        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService)
+        private readonly IMapper _mapper;
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService, IMapper mapper)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtService = jwtService;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -28,7 +32,10 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                var user = new AppUser { Name = model.Name, LastName = model.Lastname, UserName = model.UserName, Email = model.Email };
+                //var user = new AppUser { Name = model.Name, LastName = model.Lastname, UserName = model.UserName, Email = model.Email };
+                //var result = await _userManager.CreateAsync(user, model.Password);
+
+                var user = _mapper.Map<AppUser>(model);
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded) {

@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using LetMeFix.Application.Mappings;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,11 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
+});
+
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile(new MappingProfile());
 });
 
 builder.Services.AddDbContext<UserDbContext>(options =>
