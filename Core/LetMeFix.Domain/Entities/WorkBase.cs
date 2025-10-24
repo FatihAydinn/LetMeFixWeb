@@ -16,6 +16,7 @@ namespace LetMeFix.Domain.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string CategoryId { get; set; }
+        public string CategoryPath { get; set; }
 
         public bool IsRemoteJob { get; set; }
         public string? Country { get; set; }

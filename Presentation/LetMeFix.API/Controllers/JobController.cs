@@ -52,5 +52,19 @@ namespace LetMeFix.API.Controllers
         {
             await _jobService.DeleteAsync(id);
         }
+
+        [HttpGet("ListJobsPerUser")]
+        public async Task<IActionResult> ListJobsPerUser(string userId)
+        {
+            try
+            {
+                var value = await _jobService.ListJobsPerUser(userId);
+                return Ok(value);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

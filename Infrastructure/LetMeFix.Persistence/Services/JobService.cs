@@ -10,6 +10,7 @@ using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using static MongoDB.Driver.WriteConcern;
 using SharpCompress.Common;
+using Microsoft.Identity.Client;
 
 namespace LetMeFix.Infrastructure.Services
 {
@@ -19,6 +20,15 @@ namespace LetMeFix.Infrastructure.Services
         public JobService(IMongoDatabase database, CategoryService categoryStages) : base (database, "Jobs") 
         {
             _categoryStages = categoryStages;
+        }
+
+        private async Task GetCategoryPaths(Job item)
+        {
+            if (item != null)
+            {
+                var categoryfullpath = await _categoryStages.GetByIdAsync(item.CategoryId.Substring(item.CategoryId.Length - 3));
+                item.CategoryPath = categoryfullpath.FullPaths["EN"];
+            }
         }
 
         public async Task AddAsync(Job job)
@@ -36,8 +46,9 @@ namespace LetMeFix.Infrastructure.Services
             var values = await _collection.Find(x => true).ToListAsync();
             foreach (var item in values)
             {
-                var categoryfullpath = await _categoryStages.GetByIdAsync(item.CategoryId.Substring(item.CategoryId.Length - 3));
-                item.CategoryId = categoryfullpath.FullPaths["EN"];
+                await GetCategoryPaths(item);
+                //var categoryfullpath = await _categoryStages.GetByIdAsync(item.CategoryId.Substring(item.CategoryId.Length - 3));
+                //item.CategoryId = categoryfullpath.FullPaths["EN"];
             }
             return values; 
         }
@@ -45,8 +56,8 @@ namespace LetMeFix.Infrastructure.Services
         public async Task<Job> GetByIdAsync(string id)
         {
             var value = await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
-            var categoryfullpath = await _categoryStages.GetByIdAsync(value.CategoryId.Substring(value.CategoryId.Length - 3));
-            value.CategoryId = categoryfullpath.FullPaths["EN"];
+            await GetCategoryPaths(value);
+
             return value;
         }
 
@@ -54,5 +65,10 @@ namespace LetMeFix.Infrastructure.Services
         {
             await _collection.ReplaceOneAsync(t => t.Id == job.Id, job);
         }
+
+        public async Task<List<Job>> ListJobsPerUser(string userId)
+        {
+            return await _collection.Find(x => x.ProviderId == userId).ToListAsync();
+        } 
     }
 }
