@@ -70,5 +70,10 @@ namespace LetMeFix.Infrastructure.Services
         {
             return await _collection.Find(x => x.ProviderId == userId).ToListAsync();
         } 
+
+        public async Task<List<Job>> ListJobsPerCategory(string categoryId)
+        {
+            return await _collection.Find(x => x.CategoryId == categoryId).ToListAsync();
+        }
     }
 }

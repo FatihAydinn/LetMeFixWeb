@@ -66,5 +66,19 @@ namespace LetMeFix.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("ListJobsPerCategory")]
+        public async Task<IActionResult> ListJobsPerCategory(string categoryId)
+        {
+            try
+            {
+                var value = await _jobService.ListJobsPerCategory(categoryId);
+                return Ok(value);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
