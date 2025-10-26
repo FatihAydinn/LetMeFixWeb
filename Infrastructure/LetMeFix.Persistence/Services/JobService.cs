@@ -73,7 +73,7 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task<List<Job>> ListJobsPerCategory(string categoryId)
         {
-            return await _collection.Find(x => x.CategoryId == categoryId).ToListAsync();
+            return await _collection.Find(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId)).ToListAsync();
         }
     }
 }
