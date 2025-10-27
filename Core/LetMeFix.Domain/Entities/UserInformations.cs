@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class UserInformations
+    public class UserInformations : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string Id { get; set; }
         public string? AboutMe { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -35,18 +32,22 @@ namespace LetMeFix.Domain.Entities
         public string? Neighborhood { get; set; }
         public string? Address { get; set; }
 
+        //preferences
         public decimal AvrageRate { get; set; }
         public List<string> Reviews { get; set; }
         public List<string> CompletedJobs { get; set; }
         public int CompletedJobCount { get; set; }
         public List<string> PreferredLanguages { get; set; }
         public string Profession { get; set; }
+
+        //socials
         public string? Resume { get; set; }
         public string? LinkedIn { get; set; }
         public string? Twitter { get; set; }
         public string? Github { get; set; }
         public string? Website { get; set; }
-        public string? Instragram { get; set; }
+        public string? Instagram { get; set; }
+
         public bool ShowInformationPublic { get; set; }
     }
 }

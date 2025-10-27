@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.Identity.Client;
 using MongoDB.Driver;
@@ -11,13 +12,16 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class UserInformationService : IGenericRepository<UserInformations>
+    public class UserInformationService : BaseService<UserInformations>
     {
-        private readonly IMongoCollection<UserInformations> _collection;
+        //private readonly IMongoCollection<UserInformations> _collection;
+        //public UserInformationService(IMongoDatabase database)
+        //{
+        //    _collection = database.GetCollection<UserInformations>("UserInformations");
+        //}
 
-        public UserInformationService(IMongoDatabase database)
+        public UserInformationService(IMongoDatabase database) : base (database, "UserInformations")
         {
-            _collection = database.GetCollection<UserInformations>("UserInformations");
         }
 
         public async Task AddAsync(UserInformations entity)
@@ -43,6 +47,19 @@ namespace LetMeFix.Persistence.Services
         public Task<List<UserInformations>> GetAllAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task UpdateSocials(UserInformationSocialsDTO entity)
+        {
+            var update = Builders<UserInformations>.Update
+                .Set(x => x.LinkedIn, entity.LinkedIn)
+                .Set(x => x.Instagram, entity.Instagram)
+                .Set(x => x.Github, entity.Github)
+                .Set(x => x.Resume, entity.Resume)
+                .Set(x => x.Website, entity.Website)
+                .Set(x => x.Twitter, entity.Twitter);
+
+            await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
         }
     }
 }

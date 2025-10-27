@@ -1,5 +1,7 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,8 +11,9 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class UserInformationsController : ControllerBase
     {
-        private readonly IGenericRepository<UserInformations> _userService;
-        public UserInformationsController(IGenericRepository<UserInformations> userService)
+        //private readonly IGenericRepository<UserInformations> _userService;
+        private readonly UserInformationService _userService;
+        public UserInformationsController(UserInformationService userService)
         {
             _userService = userService;
         }
@@ -34,7 +37,7 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
-                user.Id = Guid.NewGuid().ToString();
+                //user.Id = Guid.NewGuid().ToString();
                 await _userService.AddAsync(user);
                 return Ok(user);
             }
@@ -55,6 +58,20 @@ namespace LetMeFix.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("updateSocials")]
+        public async Task<IActionResult> UpdateSocials([FromBody] UserInformationSocialsDTO user)
+        {
+            try
+            {
+                await _userService.UpdateSocials(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"{ex.Message}");
             }
         }
     }

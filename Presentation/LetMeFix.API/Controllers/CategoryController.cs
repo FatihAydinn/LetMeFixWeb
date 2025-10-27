@@ -47,10 +47,9 @@ namespace LetMeFix.API.Controllers
 
         [HttpPost("createCategoryStage")]
         public async Task<IActionResult> CreateCategoryStage([FromBody] Category entity)
-        {
+        { //TR, EN
             try
             {
-
                 if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
                 else
                 {
