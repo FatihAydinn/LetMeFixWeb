@@ -84,5 +84,19 @@ namespace LetMeFix.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("pushNewMessage")]
+        public async Task<IActionResult> PushNewMessage(string id, MessageContent message)
+        {
+            try
+            {
+                await _service.PushMessage(id, message);
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

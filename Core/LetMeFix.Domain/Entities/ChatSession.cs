@@ -14,7 +14,8 @@ namespace LetMeFix.Domain.Entities
         //Participants
         public string ProviderId { get; set; }
         public string CustomerId { get; set; }
-        public bool IsChatCloded { get; set; }
+
+        public bool IsChatClosed { get; set; } = false;
 
         public List<MessageContent> MessageContent { get; set; }
     }
@@ -26,6 +27,7 @@ namespace LetMeFix.Domain.Entities
         public string? Content { get; set; }
         public decimal? Price { get; set; }
         public string? Currency { get; set; }
-        public DateTime SentDate { get; set; }
+        public DateTime SentDate { get; set; } = DateTime.UtcNow;
+        public bool IsMessageEdited { get; set; } = false;
     }
 }
