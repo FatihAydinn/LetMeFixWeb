@@ -17,17 +17,25 @@ namespace LetMeFix.Domain.Entities
 
         public bool IsChatClosed { get; set; } = false;
 
-        public List<MessageContent> MessageContent { get; set; }
+        public List<MessageContent>? MessageContent { get; set; }
     }
     
     public class MessageContent
     {
+        public string? MessageId { get; set; }
         public string Type { get; set; }
         public string SenderId { get; set; }
-        public string? Content { get; set; }
+        public string Content { get; set; }
         public decimal? Price { get; set; }
         public string? Currency { get; set; }
         public DateTime SentDate { get; set; } = DateTime.UtcNow;
-        public bool IsMessageEdited { get; set; } = false;
+        public string Status { get; set; }
+        public List<PreviousMessages>? PreviousMessages { get; set; }
+    }
+
+    public class PreviousMessages
+    {
+        public string EditedContent { get; set; }
+        public DateTime EditDate { get; set; }
     }
 }

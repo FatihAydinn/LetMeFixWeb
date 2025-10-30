@@ -22,6 +22,8 @@ namespace LetMeFix.API.Controllers
             try
             {
                 chatSession.Id = Guid.NewGuid().ToString();
+                //chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
+                chatSession.MessageContent ??= new List<MessageContent>();
                 await _service.AddAsync(chatSession);
                 return Ok(chatSession);
             }
@@ -44,18 +46,18 @@ namespace LetMeFix.API.Controllers
             }
         }
 
-        [HttpGet("getChatsByUserId")]
-        public async Task<IActionResult> GetChatsByUserId(string userId)
-        {
-            try
-            {
-                return Ok(await _service.GetByUserId(userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpGet("getChatsByUserId")]
+        //public async Task<IActionResult> GetChatsByUserId(string userId)
+        //{
+        //    try
+        //    {
+        //        return Ok(await _service.GetByUserId(userId));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [HttpPut("updateChat")]
         public async Task<IActionResult> UpdateChat([FromBody] ChatSession session)
@@ -90,8 +92,36 @@ namespace LetMeFix.API.Controllers
         {
             try
             {
+                message.MessageId = Guid.NewGuid().ToString();
                 await _service.PushMessage(id, message);
                 return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("deleteChat")]
+        public async Task<IActionResult> DeleteChat(string chatId, string messageId)
+        {
+            try
+            {
+                await _service.DeleteMessage(chatId, messageId);
+                return Ok("success");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("editMessage")]
+        public async Task<IActionResult> EditMessage(string id, MessageContent message)
+        {
+            try
+            {
+                return Ok("success");
             }
             catch (Exception ex)
             {

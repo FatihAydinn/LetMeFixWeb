@@ -45,5 +45,19 @@ namespace LetMeFix.Persistence.Services
             var update = Builders<ChatSession>.Update.Push(x => x.MessageContent, message);
             await _collection.UpdateOneAsync(filter, update);
         }
+
+        public async Task DeleteMessage(string chatSessionId, string messageId)
+        {
+            var roomfilter = Builders<ChatSession>.Filter.And(
+                Builders<ChatSession>.Filter.Eq(x => x.Id, chatSessionId),
+                Builders<ChatSession>.Filter.ElemMatch(x => x.MessageContent, Builders<MessageContent>.Filter.Eq(z => z.MessageId, messageId))
+                );
+            var update = Builders<ChatSession>.Update.Set("MessageContent.$.Status", "deleted");
+            await _collection.UpdateOneAsync(roomfilter, update);
+        }
+
+        public async Task EditMessage(string chatSessionId, MessageContent message)
+        {
+        }
     }
 }
