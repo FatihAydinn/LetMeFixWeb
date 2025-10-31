@@ -36,6 +36,6 @@ namespace LetMeFix.Domain.Entities
     public class PreviousMessages
     {
         public string EditedContent { get; set; }
-        public DateTime EditDate { get; set; }
+        public DateTime EditDate { get; set; } = DateTime.UtcNow;
     }
 }

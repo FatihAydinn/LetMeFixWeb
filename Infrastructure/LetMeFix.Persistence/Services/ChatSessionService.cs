@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,13 @@ namespace LetMeFix.Persistence.Services
         public async Task<ChatSession> GetByChatIdAsync(string id)
         {
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<MessageContent> GetMessageById(string chatsession, string messageid)
+        {
+            var chat = await _collection.Find(x => x.Id ==  chatsession).FirstOrDefaultAsync();
+            var msg = chat.MessageContent?.Find(x => x.MessageId == messageid);
+            return msg;
         }
 
         public async Task<List<ChatSession>> GetByUserId(string userid)
@@ -48,16 +56,31 @@ namespace LetMeFix.Persistence.Services
 
         public async Task DeleteMessage(string chatSessionId, string messageId)
         {
-            var roomfilter = Builders<ChatSession>.Filter.And(
+            var filter = Builders<ChatSession>.Filter.And(
                 Builders<ChatSession>.Filter.Eq(x => x.Id, chatSessionId),
                 Builders<ChatSession>.Filter.ElemMatch(x => x.MessageContent, Builders<MessageContent>.Filter.Eq(z => z.MessageId, messageId))
                 );
             var update = Builders<ChatSession>.Update.Set("MessageContent.$.Status", "deleted");
-            await _collection.UpdateOneAsync(roomfilter, update);
+            await _collection.UpdateOneAsync(filter, update);
         }
 
-        public async Task EditMessage(string chatSessionId, MessageContent message)
+        public async Task EditMessage(string editedmsg, string chatSessionId, string messageId)
         {
+            PreviousMessages previousMessage = new PreviousMessages();
+            var content = await _collection.Find(x => x.Id == chatSessionId).Project(x => x.MessageContent.FirstOrDefault(k => k.MessageId == messageId).Content).FirstOrDefaultAsync();
+
+            previousMessage.EditedContent = content.ToString();
+            previousMessage.EditDate = DateTime.Now;
+
+            var filter = Builders<ChatSession>.Filter.And(
+                Builders<ChatSession>.Filter.Eq(x => x.Id, chatSessionId),
+                Builders<ChatSession>.Filter.ElemMatch(x => x.MessageContent, Builders<MessageContent>.Filter.Eq(z => z.MessageId, messageId))                
+                );
+            var update = Builders<ChatSession>.Update
+                .Set("MessageContent.$.Status", "edited")
+                .Push("MessageContent.$.PreviousMessages", previousMessage)
+                .Set("MessageContent.$.Content", editedmsg);
+            await _collection.UpdateOneAsync(filter, update);
         }
     }
 }

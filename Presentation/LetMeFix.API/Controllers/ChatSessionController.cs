@@ -22,7 +22,6 @@ namespace LetMeFix.API.Controllers
             try
             {
                 chatSession.Id = Guid.NewGuid().ToString();
-                //chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
                 chatSession.MessageContent ??= new List<MessageContent>();
                 await _service.AddAsync(chatSession);
                 return Ok(chatSession);
@@ -117,11 +116,26 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPut("editMessage")]
-        public async Task<IActionResult> EditMessage(string id, MessageContent message)
+        public async Task<IActionResult> EditMessage(string editedmsg, string chatid, string messageid)
         {
             try
             {
-                return Ok("success");
+                await _service.EditMessage(editedmsg, chatid, messageid);
+                return Ok(editedmsg);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("getMessage")]
+        public async Task<IActionResult> GetMessageById(string chatId, string messageId)
+        {
+            try
+            {
+                var content = await _service.GetMessageById(chatId, messageId);
+                return Ok(content);
             }
             catch (Exception ex)
             {
