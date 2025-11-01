@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using LetMeFix.Application.Mappings;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,8 +103,17 @@ builder.Services.AddSingleton<IMongoDatabase>(sp => {
     return client.GetDatabase(settings.DatabaseName);
 });
 
-var app = builder.Build();
+//Log configurations
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .Enrich.WithProperty("Application", "LetMeFixAPI")
+    .Enrich.FromLogContext()
+    .CreateLogger();
 
+builder.Host.UseSerilog();
+
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

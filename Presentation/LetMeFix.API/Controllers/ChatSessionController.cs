@@ -19,17 +19,10 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createChatRoom")]
         public async Task<IActionResult> CreateChatRoom([FromBody] ChatSession chatSession)
         {
-            try
-            {
-                chatSession.Id = Guid.NewGuid().ToString();
-                chatSession.MessageContent ??= new List<MessageContent>();
-                await _service.AddAsync(chatSession);
-                return Ok(chatSession);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            chatSession.Id = Guid.NewGuid().ToString();
+            chatSession.MessageContent ??= new List<MessageContent>();
+            await _service.AddAsync(chatSession);
+            return Ok(chatSession);
         }
 
         [HttpGet("getChatbyId")]
