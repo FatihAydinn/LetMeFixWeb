@@ -20,6 +20,10 @@ namespace LetMeFix.Application.Mappings
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Lastname));
 
             CreateMap<UserInformations, UserInformationSocialsDTO>().ForAllMembers(x => x.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<ChatSessionDTO, ChatSession>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.MessageContent, opt => opt.MapFrom(src => new List<MessageContent>()));
         }
     }
 }

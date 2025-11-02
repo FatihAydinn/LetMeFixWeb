@@ -2,6 +2,8 @@
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LetMeFix.Application.DTOs;
+using AutoMapper;
 
 namespace LetMeFix.API.Controllers
 {
@@ -10,17 +12,19 @@ namespace LetMeFix.API.Controllers
     public class ChatSessionController : ControllerBase
     {
         private readonly ChatSessionService _service;
+        private readonly IMapper _mapper;
 
-        public ChatSessionController(ChatSessionService service)
+        public ChatSessionController(ChatSessionService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpPost("createChatRoom")]
-        public async Task<IActionResult> CreateChatRoom([FromBody] ChatSession chatSession)
+        public async Task<IActionResult> CreateChatRoom([FromBody] ChatSessionDTO dto)
         {
+            var chatSession = _mapper.Map<ChatSession>(dto);
             chatSession.Id = Guid.NewGuid().ToString();
-            chatSession.MessageContent ??= new List<MessageContent>();
             await _service.AddAsync(chatSession);
             return Ok(chatSession);
         }
@@ -28,14 +32,7 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getChatbyId")]
         public async Task<IActionResult> GetChatById(string id)
         {
-            try
-            {
-                return Ok(await _service.GetByChatIdAsync(id));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(await _service.GetByChatIdAsync(id));
         }
 
         //[HttpGet("getChatsByUserId")]
@@ -54,86 +51,44 @@ namespace LetMeFix.API.Controllers
         [HttpPut("updateChat")]
         public async Task<IActionResult> UpdateChat([FromBody] ChatSession session)
         {
-            try
-            {
-                await _service.UpdateAsync(session);
-                return Ok(session);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _service.UpdateAsync(session);
+            return Ok(session);
         }
 
         [HttpDelete("deleteChat")]
         public async Task<IActionResult> DeleteChat(string id)
         {
-            try
-            {
-                await _service.DeleteAsync(id);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _service.DeleteAsync(id);
+            return Ok("success");
         }
 
         [HttpPut("pushNewMessage")]
         public async Task<IActionResult> PushNewMessage(string id, MessageContent message)
         {
-            try
-            {
-                message.MessageId = Guid.NewGuid().ToString();
-                await _service.PushMessage(id, message);
-                return Ok(message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            message.MessageId = Guid.NewGuid().ToString();
+            await _service.PushMessage(id, message);
+            return Ok(message);
         }
 
         [HttpPut("deleteChat")]
         public async Task<IActionResult> DeleteChat(string chatId, string messageId)
         {
-            try
-            {
-                await _service.DeleteMessage(chatId, messageId);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _service.DeleteMessage(chatId, messageId);
+            return Ok("success");
         }
 
         [HttpPut("editMessage")]
         public async Task<IActionResult> EditMessage(string editedmsg, string chatid, string messageid)
         {
-            try
-            {
-                await _service.EditMessage(editedmsg, chatid, messageid);
-                return Ok(editedmsg);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _service.EditMessage(editedmsg, chatid, messageid);
+            return Ok(editedmsg);
         }
 
         [HttpGet("getMessage")]
         public async Task<IActionResult> GetMessageById(string chatId, string messageId)
         {
-            try
-            {
-                var content = await _service.GetMessageById(chatId, messageId);
-                return Ok(content);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var content = await _service.GetMessageById(chatId, messageId);
+            return Ok(content);
         }
     }
 }
