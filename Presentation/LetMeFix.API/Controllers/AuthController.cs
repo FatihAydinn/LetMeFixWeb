@@ -30,152 +30,123 @@ namespace LetMeFix.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO model)
         {
-            try
-            {
-                //var user = new AppUser { Name = model.Name, LastName = model.Lastname, UserName = model.UserName, Email = model.Email };
-                //var result = await _userManager.CreateAsync(user, model.Password);
+            //var user = new AppUser { Name = model.Name, LastName = model.Lastname, UserName = model.UserName, Email =model.Email };
+            //var result = await _userManager.CreateAsync(user, model.Password);
 
-                var user = _mapper.Map<AppUser>(model);
-                var result = await _userManager.CreateAsync(user, model.Password);
+            var user = _mapper.Map<AppUser>(model);
+            var result = await _userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded) {
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest(result.Errors);
-                }
-
+            if (result.Succeeded) {
+                return Ok();
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, ex.Message);
+                return BadRequest(result.Errors);
             }
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
-            try
+            AppUser user = null;
+
+            if (model.Email.Contains("@")) user = await _userManager.FindByEmailAsync(model.Email);
+            else user = await _userManager.FindByNameAsync(model.UserName);
+
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            var token = await _jwtService.GenerateTokenAsync(user);
+
+            //refresh token
+            var refreshToken = _jwtService.GenerateRefreshToken();
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+            await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
             {
-                AppUser user = null;
-
-                if (model.Email.Contains("@")) user = await _userManager.FindByEmailAsync(model.Email);
-                else user = await _userManager.FindByNameAsync(model.UserName);
-
-                var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
-                var token = await _jwtService.GenerateTokenAsync(user);
-
-                //refresh token
-                var refreshToken = _jwtService.GenerateRefreshToken();
-                user.RefreshToken = refreshToken;
-                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
-                await _userManager.UpdateAsync(user);
-
-                if (result.Succeeded)
+                Response.Cookies.Append("access_token", token, new CookieOptions
                 {
-                    Response.Cookies.Append("access_token", token, new CookieOptions
-                    {
-                        HttpOnly = true,
-                        //for prod = true
-                        Secure = false, 
-                        SameSite = SameSiteMode.Strict,
-                        Expires = DateTime.UtcNow.AddMinutes(15)
-                    });
+                    HttpOnly = true,
+                    //for prod = true
+                    Secure = false, 
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddMinutes(15)
+                });
 
-                    Response.Cookies.Append("refresh_token", refreshToken, new CookieOptions
-                    {
-                        HttpOnly = true,
-                        //
-                        Secure = false,
-                        SameSite = SameSiteMode.Strict,
-                        Expires = DateTime.UtcNow.AddDays(7)
-                    });
-
-
-                    return Ok(new
-                    {
-                        token,
-                        refreshToken,
-                        //expiration = DateTime.UtcNow.AddMinutes(15),
-                        user = new { user.Id, user.Email, user.UserName }
-                    });
-                    //return Ok(new
-                    //{
-                    //    token = token,
-                    //    expiration = DateTime.UtcNow.AddMinutes(60),
-                    //    user = new { user.Id, user.Email, user.UserName }
-                    //});
-                }
-                else
+                Response.Cookies.Append("refresh_token", refreshToken, new CookieOptions
                 {
-                    return BadRequest("Username or password incorrect!");
-                }
+                    HttpOnly = true,
+                    //
+                    Secure = false,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddDays(7)
+                });
+
+
+                return Ok(new
+                {
+                    token,
+                    refreshToken,
+                    //expiration = DateTime.UtcNow.AddMinutes(15),
+                    user = new { user.Id, user.Email, user.UserName }
+                });
+                //return Ok(new
+                //{
+                //    token = token,
+                //    expiration = DateTime.UtcNow.AddMinutes(60),
+                //    user = new { user.Id, user.Email, user.UserName }
+                //});
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, ex.Message);
+                return BadRequest("Username or password incorrect!");
             }
         }
 
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto model)
         {
-            try
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null || user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+                return Unauthorized("Invalid refresh token");
+
+            var newToken = await _jwtService.GenerateTokenAsync(user);
+            var newRefreshToken = _jwtService.GenerateRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+            await _userManager.UpdateAsync(user);
+
+            Response.Cookies.Append("access_token", newToken, new CookieOptions
             {
-                var user = await _userManager.FindByIdAsync(model.UserId);
-                if (user == null || user.RefreshToken != model.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-                    return Unauthorized("Invalid refresh token");
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.UtcNow.AddMinutes(15)
+            });
 
-                var newToken = await _jwtService.GenerateTokenAsync(user);
-                var newRefreshToken = _jwtService.GenerateRefreshToken();
-
-                user.RefreshToken = newRefreshToken;
-                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
-                await _userManager.UpdateAsync(user);
-
-                Response.Cookies.Append("access_token", newToken, new CookieOptions
-                {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTime.UtcNow.AddMinutes(15)
-                });
-
-                return Ok(new
-                {
-                    token = newToken,
-                    refreshToken = newRefreshToken,
-                    //expiration = DateTime.UtcNow.AddMinutes(15)
-                });
-            }
-            catch (Exception ex)
+            return Ok(new
             {
-                return BadRequest(ex.Message);
-            }
+                token = newToken,
+                refreshToken = newRefreshToken,
+                //expiration = DateTime.UtcNow.AddMinutes(15)
+            });
         }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            try
-            {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                if (string.IsNullOrEmpty(userId)) return BadRequest("Invalid User");
+            if (string.IsNullOrEmpty(userId)) return BadRequest("Invalid User");
 
-                var result = await _jwtService.RevokeRefreshToken(userId);
-                if (!result) return BadRequest("Logout failed!");
+            var result = await _jwtService.RevokeRefreshToken(userId);
+            if (!result) return BadRequest("Logout failed!");
 
-                Response.Cookies.Delete("access_token");
-                Response.Cookies.Delete("refresh_token");
+            Response.Cookies.Delete("access_token");
+            Response.Cookies.Delete("refresh_token");
 
-                return Ok(new { message = "Logout successfull!" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(new { message = "Logout successfull!" });
         }
 
         [Authorize] 

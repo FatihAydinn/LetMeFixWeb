@@ -20,90 +20,48 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getAllContracts")]
         public async Task<IActionResult> GetAllContracts()
         {
-            try
-            {
-                var values = await _contracts.GetAllAsync();
-                return Ok(values);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var values = await _contracts.GetAllAsync();
+            return Ok(values);
         }
 
         [HttpGet("getContractbyId")]
         public async Task<IActionResult> GetContractById(string id)
         {
-            try
-            {
-                var value = await _contracts.GetByIdAsync(id);
-                return Ok(value);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var value = await _contracts.GetByIdAsync(id);
+            return Ok(value);
         }
 
         [HttpPost("createContract")]
         public async Task<IActionResult> CreateContract([FromBody] Contracts model)
         {
-            try
-            {
-                model.Id = Guid.NewGuid().ToString();
-                await _contracts.AddAsync(model);
-                return Ok("success!");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            model.Id = Guid.NewGuid().ToString();
+            await _contracts.AddAsync(model);
+            return Ok("success!");
         }
 
         [HttpPut("updateContract")]
         public async Task<IActionResult> UpdateContract([FromBody] Contracts model)
         {
-            try
-            {
-                await _contracts.UpdateAsync(model);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _contracts.UpdateAsync(model);
+            return Ok("success");
         }
 
         [HttpPut("cancelContract")]
         public async Task<IActionResult> CancelContract(string id)
         {
-            try
-            {
-                Contracts model = await _contracts.GetByIdAsync(id);
-                model.Status = JobStatus.Cancelled;
+            Contracts model = await _contracts.GetByIdAsync(id);
+            model.Status = JobStatus.Cancelled;
 
 
-                await _contracts.UpdateAsync(model);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _contracts.UpdateAsync(model);
+            return Ok("success");
         }
 
         [HttpDelete("deleteContract")]
         public async Task<IActionResult> DeleteContract(string id)
         {
-            try
-            {
-                await _contracts.DeleteAsync(id);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _contracts.DeleteAsync(id);
+            return Ok("success");
         }
     }
 }

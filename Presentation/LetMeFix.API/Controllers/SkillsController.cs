@@ -18,74 +18,37 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createSkill")]
         public async Task<IActionResult> CreateSkill([FromBody] Skills model)
         {
-            try
-            {
-                model.SkillId = Guid.NewGuid().ToString();
-                await _skills.AddAsync(model);
-                return Ok(model);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            model.SkillId = Guid.NewGuid().ToString();
+            await _skills.AddAsync(model);
+            return Ok(model);
         }
 
         [HttpGet("getAllSkills")]
         public async Task<IActionResult> GetAllSkills()
         {
-            try
-            {
-                var values = await _skills.GetAllAsync();
-                return Ok(values);
-            }
-            catch (Exception ex)
-            {
-                BadRequest(ex.Message);
-                throw;
-            }
+            var values = await _skills.GetAllAsync();
+            return Ok(values);
         }
 
         [HttpPut("updateSkill")]
         public async Task<IActionResult> UpdateSkill([FromBody] Skills skill)
         {
-            try
-            {
-                await _skills.UpdateAsync(skill);
-                return Ok(skill);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _skills.UpdateAsync(skill);
+            return Ok(skill);
         }
 
         [HttpGet("getSkillById")]
         public async Task<IActionResult> GetSkillById(string id)
         {
-            try
-            {
-                var content = await _skills.GetByIdAsync(id);
-                return Ok(content);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var content = await _skills.GetByIdAsync(id);
+            return Ok(content);
         }
 
         [HttpDelete("deleteSkillById")]
         public async Task<IActionResult> DeleteSkill(string id)
         {
-            try
-            {
-                await _skills.DeleteAsync(id);
-                return Ok("Successfully deleted!");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _skills.DeleteAsync(id);
+            return Ok("Successfully deleted!");
         }
-
     }
 }

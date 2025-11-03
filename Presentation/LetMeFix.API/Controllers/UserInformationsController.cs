@@ -21,58 +21,30 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getUserById")]
         public async Task<IActionResult> GetUserById (string id)
         {
-            try
-            {
-                var userval = await _userService.GetByIdAsync(id);
-                return Ok(userval);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var userval = await _userService.GetByIdAsync(id);
+            return Ok(userval);
         }
 
         [HttpPost("createUser")]
         public async Task<IActionResult> CreateNewUser([FromBody] UserInformations user)
         {
-            try
-            {
-                //user.Id = Guid.NewGuid().ToString();
-                await _userService.AddAsync(user);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            //user.Id = Guid.NewGuid().ToString();
+            await _userService.AddAsync(user);
+            return Ok(user);
         }
         
         [HttpPut("updateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] UserInformations user)
         {
-            try
-            {
-                await _userService.UpdateAsync(user);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _userService.UpdateAsync(user);
+            return Ok(user);
         }
 
         [HttpPut("updateSocials")]
         public async Task<IActionResult> UpdateSocials([FromBody] UserInformationSocialsDTO user)
         {
-            try
-            {
-                await _userService.UpdateSocials(user);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"{ex.Message}");
-            }
+            await _userService.UpdateSocials(user);
+            return Ok(user);
         }
     }
 }

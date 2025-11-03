@@ -20,81 +20,46 @@ namespace LetMeFix.API.Controllers
         [HttpGet("listAllCategoryStages")]
         public async Task<IActionResult> ListAllCategoryStages()
         {
-            try
-            {
-                var values = await _stages.GetAllAsync();
-                return Ok(values);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var values = await _stages.GetAllAsync();
+            return Ok(values);
         }
 
         [HttpGet("getCategoryStagebyId")]
         public async Task<IActionResult> GetCategoryStagebyId(string id)
         {
-            try
-            {
-                var value = await _stages.GetByIdAsync(id);
-                return Ok(value);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var value = await _stages.GetByIdAsync(id);
+            return Ok(value);
         }
 
         [HttpPost("createCategoryStage")]
         public async Task<IActionResult> CreateCategoryStage([FromBody] Category entity)
         { //TR, EN
-            try
+            if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
+            else
             {
-                if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
-                else
+                var prev = await _stages.GetPreviousCategory(entity.PreviousParent);
+                entity.FullPaths = entity.Names.ToDictionary(x => x.Key, x =>
                 {
-                    var prev = await _stages.GetPreviousCategory(entity.PreviousParent);
-                    entity.FullPaths = entity.Names.ToDictionary(x => x.Key, x =>
-                    {
-                        string previousCategoryName = prev.ContainsKey(x.Key) ? prev[x.Key] : "";
-                        return $"{previousCategoryName} > {x.Value}";
-                    });
-                }
-                await _stages.AddAsync(entity);
-                return Ok(entity);
+                    string previousCategoryName = prev.ContainsKey(x.Key) ? prev[x.Key] : "";
+                    return $"{previousCategoryName} > {x.Value}";
+                });
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _stages.AddAsync(entity);
+            return Ok(entity);
         }
 
         [HttpPut("updateCategoryStage")]
         public async Task<IActionResult> UpdateCategoryStage([FromBody] Category entity)
         {
-            try
-            {
-                await _stages.UpdateAsync(entity);
-                return Ok(entity);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _stages.UpdateAsync(entity);
+            return Ok(entity);
         }
 
         [HttpDelete("deleteCategoryStage")]
         public async Task<IActionResult> DeleteCategoryStage(string id)
         {
-            try
-            {
-                await _stages.DeleteAsync(id);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _stages.DeleteAsync(id);
+            return Ok("success");
         }
 
         //[HttpGet("getPreviousCategory")]

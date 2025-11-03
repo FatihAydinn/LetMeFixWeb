@@ -19,86 +19,44 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getOfferById")]
         public async Task<IActionResult> GetOfferById(string id)
         {
-            try
-            {
-                var value = await _offerRepository.GetByIdAsync(id);
-                return Ok(value);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var value = await _offerRepository.GetByIdAsync(id);
+            return Ok(value);
         }
 
         [HttpPost("createOffer")]
         public async Task<IActionResult> CreateOffer(Offers offer)
         {
-            try
-            {
-                offer.Id = Guid.NewGuid().ToString();
-                await _offerRepository.AddAsync(offer);
-                return Ok(offer);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            offer.Id = Guid.NewGuid().ToString();
+            await _offerRepository.AddAsync(offer);
+            return Ok(offer);
         }
 
         [HttpPut("updateOffer")]
         public async Task<IActionResult> UpdateOffer(Offers offer)
         {
-            try
-            {
-                await _offerRepository.UpdateAsync(offer);
-                return Ok(offer);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _offerRepository.UpdateAsync(offer);
+            return Ok(offer);
         }
 
         [HttpDelete("deleteOffer")]
         public async Task<IActionResult> DeleteOffer(string id)
         {
-            try
-            {
-                await _offerRepository.DeleteAsync(id);
-                return Ok("success");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _offerRepository.DeleteAsync(id);
+            return Ok("success");
         }
 
         [HttpGet("getOffersByJob")]
         public async Task<IActionResult> GetOffersByJob(string jobId)
         {
-            try
-            {
-                var values = await _offerRepository.GetOffersByJobIdAsync(jobId);
-                return Ok(values);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var values = await _offerRepository.GetOffersByJobIdAsync(jobId);
+            return Ok(values);
         }
 
         [HttpGet("getContractsByCustomerIdPerJob")]
         public async Task<IActionResult> GetContractsByCustomerIdPerJob(string jobId, string customerId)
         {
-            try
-            {
-                var value = await _offerRepository.GetOffersByCustomerIPerJobId(jobId, customerId);
-                return Ok(value);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var value = await _offerRepository.GetOffersByCustomerIPerJobId(jobId, customerId);
+            return Ok(value);
         }
     }
 }

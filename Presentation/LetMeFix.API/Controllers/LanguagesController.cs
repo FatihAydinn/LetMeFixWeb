@@ -33,44 +33,23 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createLanguage")]
         public async Task<IActionResult> CreateLanguage([FromBody] Languages lang)
         {
-            try
-            {
-                lang.LanguageId = Guid.NewGuid().ToString();
-                await _languageService.AddAsync(lang);
-                return Ok(lang);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            lang.LanguageId = Guid.NewGuid().ToString();
+            await _languageService.AddAsync(lang);
+            return Ok(lang);
         }
 
         [HttpPut("updateLanguage")]
         public async Task<IActionResult> UpdateLanguage([FromBody] Languages lang)
         {
-            try
-            {
-                await _languageService.UpdateAsync(lang);
-                return Ok(lang);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _languageService.UpdateAsync(lang);
+            return Ok(lang);
         }
 
         [HttpDelete("deleteLanguage")]
         public async Task<IActionResult> DeleteLanguage(string id)
         {
-            try
-            {
-                await _languageService.DeleteAsync(id);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _languageService.DeleteAsync(id);
+            return Ok();
         }
 
     }
