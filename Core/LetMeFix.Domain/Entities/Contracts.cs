@@ -19,8 +19,8 @@ namespace LetMeFix.Domain.Entities
         public string? Neighborhood { get; set; }
         public string? Address { get; set; }
 
-        public Review? Review { get; set; }
+        public string? ReviewId { get; set; }
         public bool IsPaymentCompleted { get; set; }
-        public decimal?  Tip { get; set; }
+        public decimal? Tip { get; set; }
     }
 }

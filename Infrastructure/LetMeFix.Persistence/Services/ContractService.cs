@@ -9,13 +9,10 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class ContractService : IGenericRepository<Contracts>
+    public class ContractService : BaseService<Contracts>
     {
-        private readonly IMongoCollection<Contracts> _collection;
-
-        public ContractService(IMongoDatabase contracts)
+        public ContractService(IMongoDatabase contracts) : base (contracts, "Contracts")
         {
-            _collection = contracts.GetCollection<Contracts>("Contracts");
         }
 
         public async Task AddAsync(Contracts entity)
@@ -41,6 +38,14 @@ namespace LetMeFix.Persistence.Services
         public async Task UpdateAsync(Contracts entity)
         {
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+        }
+
+        public async Task GiveATip(string id, decimal tip)
+        {
+            var filter = Builders<Contracts>.Filter.Eq(x => x.Id, id);
+            var update = Builders<Contracts>.Update.Set(x => x.Tip, tip);
+
+            await _collection.UpdateOneAsync(filter, update);
         }
     }
 }

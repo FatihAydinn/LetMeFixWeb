@@ -10,9 +10,8 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class ContractsController : ControllerBase
     {
-        private readonly IGenericRepository<Contracts> _contracts;
-
-        public ContractsController(IGenericRepository<Contracts> contracts)
+        private readonly ContractService _contracts;
+        public ContractsController(ContractService contracts)
         {
             _contracts = contracts;
         }
@@ -62,6 +61,13 @@ namespace LetMeFix.API.Controllers
         {
             await _contracts.DeleteAsync(id);
             return Ok("success");
+        }
+
+        [HttpPut("giveATip")]
+        public async Task<IActionResult> GiveATip(string id, decimal tip)
+        {
+            await _contracts.GiveATip(id, tip);
+            return Ok(tip);
         }
     }
 }
