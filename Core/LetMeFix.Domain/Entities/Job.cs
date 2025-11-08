@@ -25,12 +25,11 @@ namespace LetMeFix.Domain.Entities
 
     public enum JobStatus
     {
-        Active = 1,
+        Waiting = 1,
         InProgress = 2,
         Completed = 3,
         Cancelled = 4,
-        Expired = 5,
-        Waiting = 6
+        Expired = 5
     }
 
     public class Socials

@@ -15,6 +15,6 @@ namespace LetMeFix.Domain.Entities
         public string? LanguageId { get; set; }
         public string Language { get; set; }
         public string LanguageCode { get; set; }
-        public string LanguageEmoji { get; set; }
+        public string CountryEmoji { get; set; }
     }
 }

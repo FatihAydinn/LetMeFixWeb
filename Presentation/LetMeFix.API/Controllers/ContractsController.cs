@@ -45,17 +45,6 @@ namespace LetMeFix.API.Controllers
             return Ok("success");
         }
 
-        [HttpPut("cancelContract")]
-        public async Task<IActionResult> CancelContract(string id)
-        {
-            Contracts model = await _contracts.GetByIdAsync(id);
-            model.Status = JobStatus.Cancelled;
-
-
-            await _contracts.UpdateAsync(model);
-            return Ok("success");
-        }
-
         [HttpDelete("deleteContract")]
         public async Task<IActionResult> DeleteContract(string id)
         {
@@ -68,6 +57,13 @@ namespace LetMeFix.API.Controllers
         {
             await _contracts.GiveATip(id, tip);
             return Ok(tip);
+        }
+
+        [HttpPut("changeStatus")]
+        public async Task<IActionResult> ChangeStatus(string id, int status)
+        {
+            await _contracts.ChangeStatus(id, status);
+            return Ok("success");
         }
     }
 }
