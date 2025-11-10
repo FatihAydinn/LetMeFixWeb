@@ -32,7 +32,7 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<Translations> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return await _collection.Find(x => x.LanguageId == id).FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(Translations entity)

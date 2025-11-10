@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    public class Languages
+    public class Languages : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
-        public string? LanguageId { get; set; }
         public string Language { get; set; }
         public string LanguageCode { get; set; }
         public string CountryEmoji { get; set; }

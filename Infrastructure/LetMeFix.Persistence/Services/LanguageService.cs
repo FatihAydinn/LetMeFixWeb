@@ -24,7 +24,7 @@ namespace LetMeFix.Persistence.Services
 
         public async Task DeleteAsync(string id)
         {
-            await _languages.DeleteOneAsync(x => x.LanguageId == id);
+            await _languages.DeleteOneAsync(x => x.Id == id);
         }
 
         public async Task<List<Languages>> GetAllAsync()
@@ -34,12 +34,12 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<Languages> GetByIdAsync(string id)
         {
-            return await _languages.Find(x => x.LanguageId == id).FirstOrDefaultAsync();
+            return await _languages.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(Languages entity)
         {
-            await _languages.ReplaceOneAsync(x => x.LanguageId == entity.LanguageId, entity);
+            await _languages.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
     }
 }

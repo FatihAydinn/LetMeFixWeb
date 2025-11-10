@@ -33,7 +33,7 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createLanguage")]
         public async Task<IActionResult> CreateLanguage([FromBody] Languages lang)
         {
-            lang.LanguageId = Guid.NewGuid().ToString();
+            lang.Id = Guid.NewGuid().ToString();
             await _languageService.AddAsync(lang);
             return Ok(lang);
         }
