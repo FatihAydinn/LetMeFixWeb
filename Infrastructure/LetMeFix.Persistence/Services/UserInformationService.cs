@@ -61,5 +61,16 @@ namespace LetMeFix.Persistence.Services
 
             await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
         }
+
+        public async Task UpdateAddress(UserinformationAddressDTO entity)
+        {
+            var update = Builders<UserInformations>.Update
+                .Set(x => x.Country, entity.Country)
+                .Set(x => x.City, entity.City)
+                .Set(x => x.District, entity.District)
+                .Set(x => x.Neighborhood, entity.Neighborhood)
+                .Set(x => x.Address, entity.Address);
+            await _collection.UpdateOneAsync(x => x.Id == entity.userId, update);
+        }
     }
 }

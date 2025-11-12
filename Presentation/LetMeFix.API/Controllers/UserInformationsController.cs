@@ -46,5 +46,12 @@ namespace LetMeFix.API.Controllers
             await _userService.UpdateSocials(user);
             return Ok(user);
         }
+
+        [HttpPut("updateAddress")]
+        public async Task<IActionResult> UpdateAddress([FromBody] UserinformationAddressDTO user)
+        {
+            await _userService.UpdateAddress(user);
+            return Ok(user);
+        }
     }
 }
