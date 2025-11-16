@@ -32,7 +32,7 @@ namespace LetMeFix.Domain.Entities
         public string? Neighborhood { get; set; }
         public string? Address { get; set; }
 
-        //preferences
+        //summary
         public decimal AvrageRate { get; set; }
         public List<string> Reviews { get; set; }
         public List<string> CompletedJobs { get; set; }

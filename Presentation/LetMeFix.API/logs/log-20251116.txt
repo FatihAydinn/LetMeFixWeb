@@ -1,0 +1,49 @@
+2025-11-16 21:56:26.138 +03:00 [INF] User profile is available. Using 'C:\Users\afati\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-16 21:56:26.334 +03:00 [INF] Creating key {35575167-4f73-409c-8002-b5a2ccee4f60} with creation date 2025-11-16 18:56:26Z, activation date 2025-11-16 18:56:26Z, and expiration date 2026-02-14 18:56:26Z.
+2025-11-16 21:56:26.349 +03:00 [INF] Writing data to file 'C:\Users\afati\AppData\Local\ASP.NET\DataProtection-Keys\key-35575167-4f73-409c-8002-b5a2ccee4f60.xml'.
+2025-11-16 21:56:26.786 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/index.html - null null
+2025-11-16 21:56:26.934 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 21:56:26.935 +03:00 [INF] Hosting environment: Development
+2025-11-16 21:56:26.935 +03:00 [INF] Content root path: C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API
+2025-11-16 21:56:27.662 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/index.html - 200 null text/html;charset=utf-8 902.4479ms
+2025-11-16 21:56:27.697 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-16 21:56:27.713 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 8.2325ms
+2025-11-16 21:56:27.732 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_vs/browserLink - null null
+2025-11-16 21:56:27.906 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 174.7593ms
+2025-11-16 21:56:27.955 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
+2025-11-16 21:56:28.151 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 195.3322ms
+2025-11-16 21:56:58.235 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44347/api/UserInformations/updateSummary - application/json 212
+2025-11-16 21:56:58.442 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.UserInformationsController.UpdateSummary (LetMeFix.API)'
+2025-11-16 21:56:58.486 +03:00 [INF] Route matched with {action = "UpdateSummary", controller = "UserInformations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateSummary(LetMeFix.Application.DTOs.UserInformationSummaryDTO) on controller LetMeFix.API.Controllers.UserInformationsController (LetMeFix.API).
+2025-11-16 21:56:59.415 +03:00 [INF] Executing OkObjectResult, writing value of type 'LetMeFix.Application.DTOs.UserInformationSummaryDTO'.
+2025-11-16 21:56:59.424 +03:00 [INF] Executed action LetMeFix.API.Controllers.UserInformationsController.UpdateSummary (LetMeFix.API) in 935.0679ms
+2025-11-16 21:56:59.424 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.UserInformationsController.UpdateSummary (LetMeFix.API)'
+2025-11-16 21:56:59.426 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:44347/api/UserInformations/updateSummary - 200 null application/json; charset=utf-8 1190.9325ms
+2025-11-16 21:57:07.990 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/UserInformations/getUserById?id=string - null null
+2025-11-16 21:57:07.996 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API)'
+2025-11-16 21:57:08.006 +03:00 [INF] Route matched with {action = "GetUserById", controller = "UserInformations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUserById(System.String) on controller LetMeFix.API.Controllers.UserInformationsController (LetMeFix.API).
+2025-11-16 21:57:08.117 +03:00 [INF] Executing OkObjectResult, writing value of type 'LetMeFix.Domain.Entities.UserInformations'.
+2025-11-16 21:57:08.131 +03:00 [INF] Executed action LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API) in 124.6049ms
+2025-11-16 21:57:08.131 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API)'
+2025-11-16 21:57:08.131 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/UserInformations/getUserById?id=string - 200 null application/json; charset=utf-8 140.5838ms
+2025-11-16 21:57:10.767 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/UserInformations/getUserById?id=string1 - null null
+2025-11-16 21:57:10.769 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API)'
+2025-11-16 21:57:10.770 +03:00 [INF] Route matched with {action = "GetUserById", controller = "UserInformations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUserById(System.String) on controller LetMeFix.API.Controllers.UserInformationsController (LetMeFix.API).
+2025-11-16 21:57:10.787 +03:00 [INF] Executing OkObjectResult, writing value of type 'null'.
+2025-11-16 21:57:10.788 +03:00 [INF] Executed action LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API) in 18.5609ms
+2025-11-16 21:57:10.788 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API)'
+2025-11-16 21:57:10.793 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/UserInformations/getUserById?id=string1 - 204 null null 26.1187ms
+2025-11-16 21:57:40.049 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44347/api/UserInformations/updateSummary - application/json 208
+2025-11-16 21:57:40.050 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.UserInformationsController.UpdateSummary (LetMeFix.API)'
+2025-11-16 21:57:40.050 +03:00 [INF] Route matched with {action = "UpdateSummary", controller = "UserInformations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateSummary(LetMeFix.Application.DTOs.UserInformationSummaryDTO) on controller LetMeFix.API.Controllers.UserInformationsController (LetMeFix.API).
+2025-11-16 21:57:40.059 +03:00 [INF] Executing OkObjectResult, writing value of type 'LetMeFix.Application.DTOs.UserInformationSummaryDTO'.
+2025-11-16 21:57:40.059 +03:00 [INF] Executed action LetMeFix.API.Controllers.UserInformationsController.UpdateSummary (LetMeFix.API) in 9.2202ms
+2025-11-16 21:57:40.060 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.UserInformationsController.UpdateSummary (LetMeFix.API)'
+2025-11-16 21:57:40.060 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:44347/api/UserInformations/updateSummary - 200 null application/json; charset=utf-8 10.6088ms
+2025-11-16 21:57:45.906 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/UserInformations/getUserById?id=string - null null
+2025-11-16 21:57:45.907 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API)'
+2025-11-16 21:57:45.907 +03:00 [INF] Route matched with {action = "GetUserById", controller = "UserInformations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUserById(System.String) on controller LetMeFix.API.Controllers.UserInformationsController (LetMeFix.API).
+2025-11-16 21:57:45.913 +03:00 [INF] Executing OkObjectResult, writing value of type 'LetMeFix.Domain.Entities.UserInformations'.
+2025-11-16 21:57:45.914 +03:00 [INF] Executed action LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API) in 6.4374ms
+2025-11-16 21:57:45.914 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.UserInformationsController.GetUserById (LetMeFix.API)'
+2025-11-16 21:57:45.914 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/UserInformations/getUserById?id=string - 200 null application/json; charset=utf-8 7.9529ms

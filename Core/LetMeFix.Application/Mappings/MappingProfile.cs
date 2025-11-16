@@ -23,6 +23,8 @@ namespace LetMeFix.Application.Mappings
 
             CreateMap<UserInformations, UserinformationAddressDTO>().ForAllMembers(x => x.Condition((src, dest, srcMember) => srcMember != null));
 
+            CreateMap<UserInformations, UserInformationSummaryDTO>().ForAllMembers(x => x.Condition((src, dest, srcMember) => srcMember != null));
+
             CreateMap<ChatSessionDTO, ChatSession>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.MessageContent, opt => opt.MapFrom(src => new List<MessageContent>()));

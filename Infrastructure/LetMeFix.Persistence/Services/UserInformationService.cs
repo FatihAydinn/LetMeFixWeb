@@ -70,7 +70,20 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.District, entity.District)
                 .Set(x => x.Neighborhood, entity.Neighborhood)
                 .Set(x => x.Address, entity.Address);
-            await _collection.UpdateOneAsync(x => x.Id == entity.userId, update);
+            await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
+        }
+
+        public async Task UpdateSummary(UserInformationSummaryDTO entity)
+        {
+            var update = Builders<UserInformations>.Update
+                .Set(x => x.AvrageRate, entity.AvrageRate)
+                .Set(x => x.Reviews, entity.Reviews)
+                .Set(x => x.CompletedJobs, entity.CompletedJobs)
+                .Set(x => x.CompletedJobCount, entity.CompletedJobCount)
+                .Set(x => x.PreferredLanguages, entity.PreferredLanguages)
+                .Set(x => x.Profession, entity.Profession);
+
+            await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
         }
     }
 }
