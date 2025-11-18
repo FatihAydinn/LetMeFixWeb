@@ -42,5 +42,10 @@ namespace LetMeFix.Persistence.Services
         {
             await _skills.ReplaceOneAsync(x => x.SkillId == entity.SkillId, entity);
         }
+
+        public async Task<Skills> GetSkillsbyCategory(string category)
+        {
+            return await _skills.Find(x => x.RelatedCategories.Contains(category)).FirstOrDefaultAsync();
+        }
     }
 }
