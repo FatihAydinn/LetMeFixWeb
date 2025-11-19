@@ -10,42 +10,40 @@ using ZstdSharp.Unsafe;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class SkillsService : IGenericRepository<Skills>
+    public class SkillsService : BaseService<Skills>
     {
-        private readonly IMongoCollection<Skills> _skills;
-        public SkillsService(IMongoDatabase skills)
-        {
-            _skills = skills.GetCollection<Skills>("Skills");
-        }
+        //private readonly IMongoCollection<Skills> _collection;
+        public SkillsService(IMongoDatabase database) : base (database, "Skills")
+        { }
 
         public async Task AddAsync(Skills entity)
         {
-            await _skills.InsertOneAsync(entity);
+            await _collection.InsertOneAsync(entity);
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _skills.DeleteOneAsync(x => x.SkillId == id);
+            await _collection.DeleteOneAsync(x => x.Id == id);
         }
 
         public async Task<List<Skills>> GetAllAsync()
         {
-            return await _skills.Find(x => true).ToListAsync();
+            return await _collection.Find(x => true).ToListAsync();
         }
 
         public async Task<Skills> GetByIdAsync(string id)
         {
-            return await _skills.Find(x => x.SkillId == id).FirstOrDefaultAsync();
+            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(Skills entity)
         {
-            await _skills.ReplaceOneAsync(x => x.SkillId == entity.SkillId, entity);
+            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
 
-        public async Task<Skills> GetSkillsbyCategory(string category)
+        public async Task<List<Skills>> GetSkillsbyCategory(string category)
         {
-            return await _skills.Find(x => x.RelatedCategories.Contains(category)).FirstOrDefaultAsync();
+            return await _collection.Find(x => x.RelatedCategories.Contains(category)).ToListAsync();
         }
     }
 }

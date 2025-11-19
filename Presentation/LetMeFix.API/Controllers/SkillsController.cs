@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,18 +10,10 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class SkillsController : ControllerBase
     {
-        private readonly IGenericRepository<Skills> _skills;
-        public SkillsController(IGenericRepository<Skills> skills)
+        private readonly SkillsService _skills;
+        public SkillsController(SkillsService skills)
         {
             _skills = skills;
-        }
-
-        [HttpPost("createSkill")]
-        public async Task<IActionResult> CreateSkill([FromBody] Skills model)
-        {
-            model.SkillId = Guid.NewGuid().ToString();
-            await _skills.AddAsync(model);
-            return Ok(model);
         }
 
         [HttpGet("getAllSkills")]
@@ -28,6 +21,14 @@ namespace LetMeFix.API.Controllers
         {
             var values = await _skills.GetAllAsync();
             return Ok(values);
+        }
+
+        [HttpPost("createSkill")]
+        public async Task<IActionResult> CreateSkill([FromBody] Skills model)
+        {
+            model.Id = Guid.NewGuid().ToString();
+            await _skills.AddAsync(model);
+            return Ok(model);
         }
 
         [HttpPut("updateSkill")]
@@ -49,6 +50,13 @@ namespace LetMeFix.API.Controllers
         {
             await _skills.DeleteAsync(id);
             return Ok("Successfully deleted!");
+        }
+
+        [HttpGet("getSkillsbyCategory")]
+        public async Task<IActionResult> GetSkillsbyCategory(string category)
+        {
+            var values = await _skills.GetSkillsbyCategory(category);
+            return Ok(values);
         }
     }
 }
