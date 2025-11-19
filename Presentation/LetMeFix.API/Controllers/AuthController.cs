@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using LetMeFix.Application.Mappings;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace LetMeFix.API.Controllers
 {
@@ -35,8 +36,8 @@ namespace LetMeFix.API.Controllers
 
             var user = _mapper.Map<AppUser>(model);
             var result = await _userManager.CreateAsync(user, model.Password);
-
             if (result.Succeeded) {
+                var token = await GenerateConfirmationToken(user);
                 return Ok();
             }
             else
@@ -169,6 +170,23 @@ namespace LetMeFix.API.Controllers
                 user.Name,
                 user.LastName
             });
+        }
+
+        [NonAction]
+        public async Task<string> GenerateConfirmationToken(AppUser model)
+        {
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(model);
+            //var user = await _userManager.FindByIdAsync(model.Id);
+            //var result = await _userManager.ConfirmEmailAsync(user, token);
+            await ConfirmToken(model, token);
+            return token;
+        }
+
+        [NonAction]
+        public async Task<bool> ConfirmToken(AppUser user, string token)
+        {
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            return result.Succeeded;
         }
     }
 }
