@@ -9,6 +9,7 @@ using System.Security.Claims;
 using LetMeFix.Application.Mappings;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Net;
 
 namespace LetMeFix.API.Controllers
 {
@@ -37,7 +38,7 @@ namespace LetMeFix.API.Controllers
             var user = _mapper.Map<AppUser>(model);
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded) {
-                var token = await GenerateConfirmationToken(user);
+                await GenerateConfirmationLink(user);
                 return Ok();
             }
             else
@@ -173,20 +174,19 @@ namespace LetMeFix.API.Controllers
         }
 
         [NonAction]
-        public async Task<string> GenerateConfirmationToken(AppUser model)
+        public async Task GenerateConfirmationLink(AppUser model)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(model);
-            //var user = await _userManager.FindByIdAsync(model.Id);
-            //var result = await _userManager.ConfirmEmailAsync(user, token);
-            await ConfirmToken(model, token);
-            return token;
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+            var link = $"{baseUrl}/api/Auth/confirm-email?userId={model.Id}&token={WebUtility.UrlEncode(token)}";
         }
 
-        [NonAction]
-        public async Task<bool> ConfirmToken(AppUser user, string token)
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
+            var user = await _userManager.FindByIdAsync(userId);
             var result = await _userManager.ConfirmEmailAsync(user, token);
-            return result.Succeeded;
+            return Ok(result.Succeeded? "success": "failed");
         }
     }
 }
