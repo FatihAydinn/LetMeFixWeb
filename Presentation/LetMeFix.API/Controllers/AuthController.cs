@@ -188,5 +188,16 @@ namespace LetMeFix.API.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, token);
             return Ok(result.Succeeded? "success": "failed");
         }
+
+        [HttpPut("change-password")]
+        public async Task<IActionResult> ChangePassword(string userId, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (newPassword != confirmNewPassword) return BadRequest("passwords are not matched");
+
+            var result = await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            if (result.Succeeded) return Ok("password changed successfully");
+            else return BadRequest(result.Errors);
+        }
     }
 }
