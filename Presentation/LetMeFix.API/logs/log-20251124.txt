@@ -1,0 +1,42 @@
+2025-11-24 22:18:25.652 +03:00 [INF] User profile is available. Using 'C:\Users\afati\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-24 22:18:26.161 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/index.html - null null
+2025-11-24 22:18:26.265 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-24 22:18:26.266 +03:00 [INF] Hosting environment: Development
+2025-11-24 22:18:26.267 +03:00 [INF] Content root path: C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API
+2025-11-24 22:18:27.110 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/index.html - 200 null text/html;charset=utf-8 961.447ms
+2025-11-24 22:18:27.132 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-24 22:18:27.144 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 7.4836ms
+2025-11-24 22:18:27.157 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_vs/browserLink - null null
+2025-11-24 22:18:28.168 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 1010.9395ms
+2025-11-24 22:18:28.220 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
+2025-11-24 22:18:28.492 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 272.0411ms
+2025-11-24 22:36:58.613 +03:00 [INF] Request starting HTTP/2 POST https://localhost:44347/api/ChatSession/createChatRoom - application/json 577
+2025-11-24 22:36:58.767 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.ChatSessionController.CreateChatRoom (LetMeFix.API)'
+2025-11-24 22:36:58.803 +03:00 [INF] Route matched with {action = "CreateChatRoom", controller = "ChatSession"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateChatRoom(LetMeFix.Application.DTOs.ChatSessionDTO) on controller LetMeFix.API.Controllers.ChatSessionController (LetMeFix.API).
+2025-11-24 22:36:59.407 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-11-24 22:36:59.626 +03:00 [INF] Executing OkObjectResult, writing value of type 'LetMeFix.Domain.Entities.ChatSession'.
+2025-11-24 22:36:59.634 +03:00 [INF] Executed action LetMeFix.API.Controllers.ChatSessionController.CreateChatRoom (LetMeFix.API) in 826.4343ms
+2025-11-24 22:36:59.634 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.ChatSessionController.CreateChatRoom (LetMeFix.API)'
+2025-11-24 22:36:59.636 +03:00 [INF] Request finished HTTP/2 POST https://localhost:44347/api/ChatSession/createChatRoom - 200 null application/json; charset=utf-8 1027.8207ms
+2025-11-24 22:37:05.202 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/ChatSession/getChatbyId?id=e9591c18-6373-4a39-9e61-cea2491ba652 - null null
+2025-11-24 22:37:05.206 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.ChatSessionController.GetChatById (LetMeFix.API)'
+2025-11-24 22:37:05.219 +03:00 [INF] Route matched with {action = "GetChatById", controller = "ChatSession"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetChatById(System.String) on controller LetMeFix.API.Controllers.ChatSessionController (LetMeFix.API).
+2025-11-24 22:37:05.328 +03:00 [INF] Executing OkObjectResult, writing value of type 'LetMeFix.Domain.Entities.ChatSession'.
+2025-11-24 22:37:05.334 +03:00 [INF] Executed action LetMeFix.API.Controllers.ChatSessionController.GetChatById (LetMeFix.API) in 115.0195ms
+2025-11-24 22:37:05.334 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.ChatSessionController.GetChatById (LetMeFix.API)'
+2025-11-24 22:37:05.334 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/ChatSession/getChatbyId?id=e9591c18-6373-4a39-9e61-cea2491ba652 - 200 null application/json; charset=utf-8 132.3119ms
+2025-11-24 22:37:23.545 +03:00 [INF] Request starting HTTP/2 DELETE https://localhost:44347/api/ChatSession/deleteChat?id=e9591c18-6373-4a39-9e61-cea2491ba652 - null null
+2025-11-24 22:37:23.547 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.ChatSessionController.DeleteChat (LetMeFix.API)'
+2025-11-24 22:37:23.551 +03:00 [INF] Route matched with {action = "DeleteChat", controller = "ChatSession"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteChat(System.String) on controller LetMeFix.API.Controllers.ChatSessionController (LetMeFix.API).
+2025-11-24 22:37:23.581 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-11-24 22:37:23.581 +03:00 [INF] Executed action LetMeFix.API.Controllers.ChatSessionController.DeleteChat (LetMeFix.API) in 29.507ms
+2025-11-24 22:37:23.581 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.ChatSessionController.DeleteChat (LetMeFix.API)'
+2025-11-24 22:37:23.581 +03:00 [INF] Request finished HTTP/2 DELETE https://localhost:44347/api/ChatSession/deleteChat?id=e9591c18-6373-4a39-9e61-cea2491ba652 - 200 null text/plain; charset=utf-8 36.4175ms
+2025-11-24 22:40:55.161 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/index.html - null null
+2025-11-24 22:40:55.179 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/index.html - 200 null text/html;charset=utf-8 18.6026ms
+2025-11-24 22:40:55.210 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-24 22:40:55.210 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_vs/browserLink - null null
+2025-11-24 22:40:55.211 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 1.1532ms
+2025-11-24 22:40:55.227 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 17.1115ms
+2025-11-24 22:40:55.378 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
+2025-11-24 22:40:55.407 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 28.957ms

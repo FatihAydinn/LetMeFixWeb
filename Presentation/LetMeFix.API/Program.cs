@@ -111,7 +111,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
-
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 

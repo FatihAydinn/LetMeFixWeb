@@ -10,6 +10,7 @@ using LetMeFix.Application.Mappings;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Net;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace LetMeFix.API.Controllers
 {
@@ -21,6 +22,8 @@ namespace LetMeFix.API.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IJwtService _jwtService;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _cache;
+
         public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService, IMapper mapper)
         {
             _signInManager = signInManager;
@@ -198,6 +201,39 @@ namespace LetMeFix.API.Controllers
             var result = await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
             if (result.Succeeded) return Ok("password changed successfully");
             else return BadRequest(result.Errors);
+        }
+
+        [HttpGet("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return BadRequest("email not found!");
+            Random random = new Random();
+            int code = random.Next(999, 9999);
+            _cache.Set($"reset{email}", code, TimeSpan.FromMinutes(10));
+            return Ok("Code sent!");
+        }
+
+        [HttpGet("verify-resetpassword-code")]
+        public async Task<IActionResult> VerifyResetpasswordCode(string email, int code)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            var cachecode = _cache.Get<int>($"reset{email}");
+            if (code != cachecode) return BadRequest("codes not match!");
+            
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            _cache.Set($"resetToken{user.Id}", resetToken, TimeSpan.FromMinutes(10));
+            var userId = user.Id;
+            return Ok();
+        }
+
+        [HttpPut("reset-password")]
+        public async Task<IActionResult> ResetPassword(string userid, string password)
+        {
+            var user = await _userManager.FindByIdAsync(userid);
+            var token = _cache.Get<string>($"resetToken{user.Id}");
+            await _userManager.ResetPasswordAsync(user, token, password);
+            return Ok("success");
         }
     }
 }
