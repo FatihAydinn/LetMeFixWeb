@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using LetMeFix.Application.Mappings;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using LetMeFix.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddPersistanceServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddTransient<IEmailService, EmailService>();
 //builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
 {

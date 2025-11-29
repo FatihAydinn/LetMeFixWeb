@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using DotNetEnv;
+using LetMeFix.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,24 @@ namespace LetMeFix.Infrastructure.Services
 {
     public class EmailService : IEmailService
     {
+        public EmailService()
+        {
+            var basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            var envPath = Path.Combine(basePath, "LetMeFixWeb", ".env");
+            Env.Load(envPath);
+        }
         public Task SendEmailAsync(string to, string subject, string body)
         {
-            var email = "";
-            var pass = "";
+            var email = Env.GetString("EMAIL_USER");
+            var pass = Env.GetString("EMAIL_PASS");
+            var host = Env.GetString("EMAIL_HOST");
+            var port = Env.GetInt("EMAIL_PORT");
 
-            var client = new SmtpClient("smtp-mail.outlook.com", 587)
+            var client = new SmtpClient(host, port)
             {
                 EnableSsl = true,
+                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
                 Credentials = new NetworkCredential(email, pass)
             };
 

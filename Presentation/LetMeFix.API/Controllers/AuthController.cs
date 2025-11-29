@@ -11,6 +11,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Net;
 using Microsoft.Extensions.Caching.Memory;
+using LetMeFix.Application.Interfaces;
 
 namespace LetMeFix.API.Controllers
 {
@@ -23,13 +24,14 @@ namespace LetMeFix.API.Controllers
         private readonly IJwtService _jwtService;
         private readonly IMapper _mapper;
         private readonly IMemoryCache _cache;
-
-        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService, IMapper mapper)
+        private readonly IEmailService _emailsender;
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService, IMapper mapper, IEmailService emailService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtService = jwtService;
             _mapper = mapper;
+            _emailsender = emailService;
         }
 
         [HttpPost("register")]
