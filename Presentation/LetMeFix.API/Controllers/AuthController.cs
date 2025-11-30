@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Net;
 using Microsoft.Extensions.Caching.Memory;
 using LetMeFix.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace LetMeFix.API.Controllers
 {
@@ -43,7 +44,20 @@ namespace LetMeFix.API.Controllers
             var user = _mapper.Map<AppUser>(model);
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded) {
-                await GenerateConfirmationLink(user);
+                var link = await GenerateConfirmationLink(user);
+                var verifybody = $@"
+                    <div style=""max-width:600px; margin: 0 auto;"">
+                      <table>
+                        <tr> <img src=""https://pangrampangram.com/cdn/shop/articles/442269ac56eddaecd3fa3dd752c38870.jpg?v=1631828825"" width=""100"" height=""60""> </tr>
+                        <tr> <p style=""font-size: 21px;""> Verify your email address to complete registration</p> </tr>
+                        <tr> <p style=""font-size: 16px;""> Hi {model.Name}, </p> </tr> 
+                        <tr> <p style=""font-size: 16px; margin-top:0; margin-bottom:5%;""> Thanks for your interest in joining <b> Let Me Fix! </b> To complete your registration, we need you to verify your   email     address.   </p> </tr> 
+                        <tr> <div style=""text-align:center;""> <a href=""{link}"" style=""background-color:#14a800;border:2px solid #14a800;border-radius:100px;width: 250px;color:#ffffff;white-space:nowrap;font-weight:normal;display: inline-block;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:40px;text-align:center;text-decoration:none;""> Verify Email </a> <div> </tr>
+                      </table>
+                    <div>";
+                
+//<button style=""border-radius:50px; border-color: transparent; background-color: green;  color: white; height: 35px; width:  200px; font-size: 15px; cursor:pointer;""> Verify   Email  </button> 
+                await _emailsender.SendEmailAsync(model.Email, "Verify your email address", verifybody, isHtml: true);
                 return Ok();
             }
             else
@@ -179,11 +193,12 @@ namespace LetMeFix.API.Controllers
         }
 
         [NonAction]
-        public async Task GenerateConfirmationLink(AppUser model)
+        public async Task<string> GenerateConfirmationLink(AppUser model)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(model);
             var baseUrl = $"{Request.Scheme}://{Request.Host}";
             var link = $"{baseUrl}/api/Auth/confirm-email?userId={model.Id}&token={WebUtility.UrlEncode(token)}";
+            return link;
         }
 
         [HttpGet("confirm-email")]
@@ -236,6 +251,18 @@ namespace LetMeFix.API.Controllers
             var token = _cache.Get<string>($"resetToken{user.Id}");
             await _userManager.ResetPasswordAsync(user, token, password);
             return Ok("success");
+        }
+
+        [HttpGet]
+        public async Task<string> TestEmail()
+        {
+            var receiver = "a.fatihaydn@gmail.com";
+            var sub = "test";
+            var message = "n'aber müdür?";
+
+            await _emailsender.SendEmailAsync(receiver, sub, message);
+
+            return "Ok";
         }
     }
 }

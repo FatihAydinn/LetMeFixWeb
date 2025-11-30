@@ -1,5 +1,6 @@
 ﻿using DotNetEnv;
 using LetMeFix.Application.Interfaces;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace LetMeFix.Infrastructure.Services
             var envPath = Path.Combine(basePath, "LetMeFixWeb", ".env");
             Env.Load(envPath);
         }
-        public Task SendEmailAsync(string to, string subject, string body)
+
+        public Task SendEmailAsync(string to, string subject, string body, bool isHtml = true)
         {
             var email = Env.GetString("EMAIL_USER");
             var pass = Env.GetString("EMAIL_PASS");
@@ -33,7 +35,15 @@ namespace LetMeFix.Infrastructure.Services
                 Credentials = new NetworkCredential(email, pass)
             };
 
-            return client.SendMailAsync(new MailMessage(from: email, to: to, subject, body));
+            var mime = new MimeMessage();
+            var bodyBuilder = new BodyBuilder();
+            if (isHtml) bodyBuilder.HtmlBody = body;
+            else bodyBuilder.TextBody = body;
+            mime.Body = bodyBuilder.ToMessageBody();
+            var mailmessage = new MailMessage(from: email, to: to, subject, body);
+            mailmessage.IsBodyHtml = isHtml;
+
+            return client.SendMailAsync(mailmessage);
         }
     }
 }
