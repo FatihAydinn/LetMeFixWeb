@@ -226,8 +226,21 @@ namespace LetMeFix.API.Controllers
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null) return BadRequest("email not found!");
             Random random = new Random();
-            int code = random.Next(999, 9999);
+            int code = random.Next(99999, 999999);
             _cache.Set($"reset{email}", code, TimeSpan.FromMinutes(10));
+
+            var verifybody = $@"
+                <div style=""max-width:600px; margin: 0 auto;"">
+                  <table>
+                    <tr> <img src=""https://pangrampangram.com/cdn/shop/articles/442269ac56eddaecd3fa3dd752c38870.jpg?v=1631828825"" width=""100"" height=""60""> </tr>
+                    <tr> <p style=""font-size: 21px;""> Verify your email address to complete registration</p> </tr>
+                    <tr> <p style=""font-size: 16px;""> Hello, </p> </tr> 
+                    <tr> <p style=""font-size: 16px;""> We received a request to reset your password. Use the code below to proceed:</p> </tr> 
+                    <tr> <p style=""font-size: 16px;""> Reset Code: <b style=""font-size: 20px;"">{code}</b> </p> </tr> 
+                    <tr> <p style=""font-size: 16px;""> This code will expire in 10 minutes. If you didn’t request this change, please ignore this email. </p> </tr> 
+                  </table>
+                <div>";
+            await _emailsender.SendEmailAsync(email, "Reset password request", verifybody, isHtml: true);
             return Ok("Code sent!");
         }
 
@@ -251,18 +264,6 @@ namespace LetMeFix.API.Controllers
             var token = _cache.Get<string>($"resetToken{user.Id}");
             await _userManager.ResetPasswordAsync(user, token, password);
             return Ok("success");
-        }
-
-        [HttpGet]
-        public async Task<string> TestEmail()
-        {
-            var receiver = "a.fatihaydn@gmail.com";
-            var sub = "test";
-            var message = "n'aber müdür?";
-
-            await _emailsender.SendEmailAsync(receiver, sub, message);
-
-            return "Ok";
         }
     }
 }
