@@ -26,13 +26,14 @@ namespace LetMeFix.API.Controllers
         private readonly IMapper _mapper;
         private readonly IMemoryCache _cache;
         private readonly IEmailService _emailsender;
-        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService, IMapper mapper, IEmailService emailService)
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtService jwtService, IMapper mapper, IEmailService emailService, IMemoryCache cache)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtService = jwtService;
             _mapper = mapper;
             _emailsender = emailService;
+            _cache = cache;
         }
 
         [HttpPost("register")]
@@ -48,7 +49,7 @@ namespace LetMeFix.API.Controllers
                 var verifybody = $@"
                     <div style=""max-width:600px; margin: 0 auto;"">
                       <table>
-                        <tr> <img src=""https://pangrampangram.com/cdn/shop/articles/442269ac56eddaecd3fa3dd752c38870.jpg?v=1631828825"" width=""100"" height=""60""> </tr>
+                        <tr> <img src=""https://i.imgur.com/B0Eyy00.jpeg"" style=""border-radius: 12px;"" width=""135"" height=""65""> </tr>
                         <tr> <p style=""font-size: 21px;""> Verify your email address to complete registration</p> </tr>
                         <tr> <p style=""font-size: 16px;""> Hi {model.Name}, </p> </tr> 
                         <tr> <p style=""font-size: 16px; margin-top:0; margin-bottom:5%;""> Thanks for your interest in joining <b> Let Me Fix! </b> To complete your registration, we need you to verify your   email     address.   </p> </tr> 
@@ -232,8 +233,7 @@ namespace LetMeFix.API.Controllers
             var verifybody = $@"
                 <div style=""max-width:600px; margin: 0 auto;"">
                   <table>
-                    <tr> <img src=""https://pangrampangram.com/cdn/shop/articles/442269ac56eddaecd3fa3dd752c38870.jpg?v=1631828825"" width=""100"" height=""60""> </tr>
-                    <tr> <p style=""font-size: 21px;""> Verify your email address to complete registration</p> </tr>
+                    <tr> <img src=""https://i.imgur.com/B0Eyy00.jpeg"" style=""border-radius: 12px;"" width=""135"" height=""65""> </tr>
                     <tr> <p style=""font-size: 16px;""> Hello, </p> </tr> 
                     <tr> <p style=""font-size: 16px;""> We received a request to reset your password. Use the code below to proceed:</p> </tr> 
                     <tr> <p style=""font-size: 16px;""> Reset Code: <b style=""font-size: 20px;"">{code}</b> </p> </tr> 
@@ -264,6 +264,18 @@ namespace LetMeFix.API.Controllers
             var token = _cache.Get<string>($"resetToken{user.Id}");
             await _userManager.ResetPasswordAsync(user, token, password);
             return Ok("success");
+        }
+
+        [HttpGet]
+        public async Task<string> TestEmail()
+        {
+            var receiver = "a.fatihaydn@gmail.com";
+            var sub = "test";
+            var message = "n'aber müdür?";
+
+            await _emailsender.SendEmailAsync(receiver, sub, message);
+
+            return "Ok";
         }
     }
 }

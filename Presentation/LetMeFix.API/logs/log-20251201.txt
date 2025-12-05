@@ -120,3 +120,115 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 2025-12-01 23:35:41.054 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 10.7116ms
 2025-12-01 23:35:41.223 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
 2025-12-01 23:35:41.242 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.0867ms
+2025-12-01 23:37:46.670 +03:00 [INF] User profile is available. Using 'C:\Users\afati\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-01 23:37:46.893 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/index.html - null null
+2025-12-01 23:37:47.013 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-01 23:37:47.014 +03:00 [INF] Hosting environment: Development
+2025-12-01 23:37:47.014 +03:00 [INF] Content root path: C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API
+2025-12-01 23:37:47.153 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/index.html - 200 null text/html;charset=utf-8 267.7252ms
+2025-12-01 23:37:47.161 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - null null
+2025-12-01 23:37:47.171 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 5.6965ms
+2025-12-01 23:37:47.185 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_vs/browserLink - null null
+2025-12-01 23:37:47.233 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 48.5395ms
+2025-12-01 23:37:47.380 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
+2025-12-01 23:37:47.601 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 221.0317ms
+2025-12-01 23:38:14.814 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/Auth/forgot-password?email=deneme%40denem.com - null null
+2025-12-01 23:38:14.919 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API)'
+2025-12-01 23:38:14.944 +03:00 [INF] Route matched with {action = "ForgotPassword", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ForgotPassword(System.String) on controller LetMeFix.API.Controllers.AuthController (LetMeFix.API).
+2025-12-01 23:38:15.163 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-01 23:38:16.437 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiryTime], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-12-01 23:40:21.919 +03:00 [INF] Executed action LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API) in 126970.4704ms
+2025-12-01 23:40:21.920 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API)'
+2025-12-01 23:40:21.925 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Microsoft.Extensions.Caching.Memory.CacheExtensions.Set[TItem](IMemoryCache cache, Object key, TItem value, TimeSpan absoluteExpirationRelativeToNow)
+   at LetMeFix.API.Controllers.AuthController.ForgotPassword(String email)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-12-01 23:40:21.958 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/Auth/forgot-password?email=deneme%40denem.com - 500 null text/plain; charset=utf-8 127144.9701ms
+2025-12-01 23:41:01.509 +03:00 [INF] User profile is available. Using 'C:\Users\afati\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-01 23:41:01.737 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/index.html - null null
+2025-12-01 23:41:01.914 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-01 23:41:01.915 +03:00 [INF] Hosting environment: Development
+2025-12-01 23:41:01.915 +03:00 [INF] Content root path: C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API
+2025-12-01 23:41:02.057 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/index.html - 200 null text/html;charset=utf-8 328.3767ms
+2025-12-01 23:41:02.073 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - null null
+2025-12-01 23:41:02.081 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 6.9116ms
+2025-12-01 23:41:02.104 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_vs/browserLink - null null
+2025-12-01 23:41:02.190 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 85.9579ms
+2025-12-01 23:41:02.350 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
+2025-12-01 23:41:02.521 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 170.8435ms
+2025-12-01 23:41:06.553 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/Auth/forgot-password?email=deneme%40denem.com - null null
+2025-12-01 23:41:06.644 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API)'
+2025-12-01 23:41:06.670 +03:00 [INF] Route matched with {action = "ForgotPassword", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ForgotPassword(System.String) on controller LetMeFix.API.Controllers.AuthController (LetMeFix.API).
+2025-12-01 23:41:06.913 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-01 23:41:08.064 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiryTime], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-12-01 23:41:10.017 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-12-01 23:41:10.021 +03:00 [INF] Executed action LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API) in 3348.1274ms
+2025-12-01 23:41:10.021 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API)'
+2025-12-01 23:41:10.030 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/Auth/forgot-password?email=deneme%40denem.com - 200 null text/plain; charset=utf-8 3476.8024ms
+2025-12-01 23:41:40.475 +03:00 [INF] User profile is available. Using 'C:\Users\afati\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-01 23:41:40.691 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/index.html - null null
+2025-12-01 23:41:40.803 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-01 23:41:40.803 +03:00 [INF] Hosting environment: Development
+2025-12-01 23:41:40.803 +03:00 [INF] Content root path: C:\Users\afati\Documents\GitHub\LetMeFixWeb\Presentation\LetMeFix.API
+2025-12-01 23:41:40.920 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/index.html - 200 null text/html;charset=utf-8 235.5713ms
+2025-12-01 23:41:40.954 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - null null
+2025-12-01 23:41:40.958 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 3.3807ms
+2025-12-01 23:41:40.971 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/_vs/browserLink - null null
+2025-12-01 23:41:41.013 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/_vs/browserLink - 200 null text/javascript; charset=UTF-8 42.6829ms
+2025-12-01 23:41:41.111 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - null null
+2025-12-01 23:41:41.244 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 132.9999ms
+2025-12-01 23:41:45.394 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/Auth/forgot-password?email=deneme%40denem.com - null null
+2025-12-01 23:41:45.485 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API)'
+2025-12-01 23:41:45.508 +03:00 [INF] Route matched with {action = "ForgotPassword", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ForgotPassword(System.String) on controller LetMeFix.API.Controllers.AuthController (LetMeFix.API).
+2025-12-01 23:41:45.723 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-12-01 23:41:46.886 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiryTime], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-12-01 23:41:56.343 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-12-01 23:41:56.349 +03:00 [INF] Executed action LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API) in 10837.3811ms
+2025-12-01 23:41:56.349 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.AuthController.ForgotPassword (LetMeFix.API)'
+2025-12-01 23:41:56.356 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/Auth/forgot-password?email=deneme%40denem.com - 200 null text/plain; charset=utf-8 10962.8207ms
+2025-12-01 23:42:04.764 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/Auth/verify-resetpassword-code?email=deneme%40denem.com&code=6465421 - null null
+2025-12-01 23:42:04.768 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.AuthController.VerifyResetpasswordCode (LetMeFix.API)'
+2025-12-01 23:42:04.778 +03:00 [INF] Route matched with {action = "VerifyResetpasswordCode", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyResetpasswordCode(System.String, Int32) on controller LetMeFix.API.Controllers.AuthController (LetMeFix.API).
+2025-12-01 23:42:04.849 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiryTime], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-12-01 23:42:04.850 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2025-12-01 23:42:04.851 +03:00 [INF] Executed action LetMeFix.API.Controllers.AuthController.VerifyResetpasswordCode (LetMeFix.API) in 72.6158ms
+2025-12-01 23:42:04.851 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.AuthController.VerifyResetpasswordCode (LetMeFix.API)'
+2025-12-01 23:42:04.851 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/Auth/verify-resetpassword-code?email=deneme%40denem.com&code=6465421 - 400 null text/plain; charset=utf-8 87.7465ms
+2025-12-01 23:42:07.616 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44347/api/Auth/verify-resetpassword-code?email=deneme%40denem.com&code=646542 - null null
+2025-12-01 23:42:07.618 +03:00 [INF] Executing endpoint 'LetMeFix.API.Controllers.AuthController.VerifyResetpasswordCode (LetMeFix.API)'
+2025-12-01 23:42:07.619 +03:00 [INF] Route matched with {action = "VerifyResetpasswordCode", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] VerifyResetpasswordCode(System.String, Int32) on controller LetMeFix.API.Controllers.AuthController (LetMeFix.API).
+2025-12-01 23:42:07.654 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LastName], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[RefreshToken], [a].[RefreshTokenExpiryTime], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-12-01 23:42:07.664 +03:00 [INF] Executing StatusCodeResult, setting HTTP status code 200
+2025-12-01 23:42:07.665 +03:00 [INF] Executed action LetMeFix.API.Controllers.AuthController.VerifyResetpasswordCode (LetMeFix.API) in 45.8542ms
+2025-12-01 23:42:07.665 +03:00 [INF] Executed endpoint 'LetMeFix.API.Controllers.AuthController.VerifyResetpasswordCode (LetMeFix.API)'
+2025-12-01 23:42:07.666 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44347/api/Auth/verify-resetpassword-code?email=deneme%40denem.com&code=646542 - 200 null null 49.2402ms

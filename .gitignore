@@ -16,6 +16,8 @@ dist/
 build/
 target/
 
+Presentation/LetMeFix.API/logs/
+
 *.log
 npm-debug.log*
 
