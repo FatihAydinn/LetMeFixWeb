@@ -252,7 +252,7 @@ namespace LetMeFix.API.Controllers
             if (code != cachecode) return BadRequest("codes not match!");
             
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-            _cache.Set($"resetToken{user.Id}", resetToken, TimeSpan.FromMinutes(10));
+            _cache.Set($"resetToken{user.Id}", resetToken, TimeSpan.FromMinutes(30));
             var userId = user.Id;
             return Ok();
         }
@@ -262,20 +262,9 @@ namespace LetMeFix.API.Controllers
         {
             var user = await _userManager.FindByIdAsync(userid);
             var token = _cache.Get<string>($"resetToken{user.Id}");
-            await _userManager.ResetPasswordAsync(user, token, password);
-            return Ok("success");
-        }
-
-        [HttpGet]
-        public async Task<string> TestEmail()
-        {
-            var receiver = "a.fatihaydn@gmail.com";
-            var sub = "test";
-            var message = "n'aber müdür?";
-
-            await _emailsender.SendEmailAsync(receiver, sub, message);
-
-            return "Ok";
+            var result = await _userManager.ResetPasswordAsync(user, token, password);
+            if (result.Succeeded) return Ok("success");
+            else return BadRequest(result);
         }
     }
 }
