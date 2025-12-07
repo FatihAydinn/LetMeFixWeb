@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Domain.Entities
 {
-    class Reports : EntityBase
+    public class Reports : BaseEntity
     {
         public string ReportType { get; set; }
         public string UserId { get; set; }
