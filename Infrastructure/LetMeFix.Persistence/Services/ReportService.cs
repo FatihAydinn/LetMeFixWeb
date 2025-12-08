@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using Microsoft.Identity.Client;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,21 @@ namespace LetMeFix.Persistence.Services
             var status = (ReportStatus)statuscode;
             
             return await _collection.Find(x => x.ReportStatus == status).ToListAsync();
+        }
+
+        public async Task<List<Reports>> GetReportsByUser(string userId)
+        {
+            return await _collection.Find(x => x.UserId == userId).ToListAsync();
+        }
+
+        public async Task<List<Reports>> GetReportsByReportedUser(string userId)
+        {
+            return await _collection.Find(x => x.ReportedUserId == userId).ToListAsync();
+        }
+
+        public async Task AddResultToReport(Reports result)
+        {
+            await _collection.ReplaceOneAsync(x => x.Id == result.Id, result);
         }
     }
 }

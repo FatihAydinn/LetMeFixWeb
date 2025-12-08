@@ -1,5 +1,4 @@
-﻿using LetMeFix.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +10,20 @@ namespace LetMeFix.Domain.Entities
     {
         public string ReportType { get; set; }
         public string UserId { get; set; }
+        public string ReportedUserId { get; set; }
 
         //for job
         public string? JobId { get; set; }
-        public string? JobPosterId { get; set; }
 
         //for rewiew
         //jobId
         public string? ReviewId { get; set; }
-        public string? ReviewSenderId { get; set; }
 
         //for chat
         public string? ChatRoomId { get; set; }
-        public string? MessageSenderId { get; set; }
 
         public string Reason { get; set; }
+        public string Result { get; set; }
         public ReportStatus ReportStatus { get; set; }
     }
 

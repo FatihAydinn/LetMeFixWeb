@@ -28,6 +28,7 @@ namespace LetMeFix.Persistence
             services.AddScoped<CategoryService>();
             services.AddScoped<ChatSessionService>();
             services.AddScoped<TranslationService>();
+            services.AddScoped<ReportService>();
             //services.AddSingleton<IGenericRepository<Offers>, OfferService>();
             //services.AddSingleton<IGenericRepository<CategoryStages>, CategoryStageService>();
         }
