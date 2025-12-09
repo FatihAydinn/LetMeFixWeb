@@ -26,17 +26,17 @@ namespace LetMeFix.Persistence.Services
 
         public async Task AddAsync(UserInformations entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await base.AddAsync(entity);
         }
 
         public async Task<UserInformations> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return await base.GetByIdAsync(id);
         }
         
         public async Task UpdateAsync(UserInformations entity)
         {
-            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+            await base.UpdateAsync(entity);
         }
         
         public Task DeleteAsync(string id)
@@ -44,9 +44,9 @@ namespace LetMeFix.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<UserInformations>> GetAllAsync()
+        public async Task<List<UserInformations>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await base.GetAllAsync();
         }
 
         public async Task UpdateSocials(UserInformationSocialsDTO entity)

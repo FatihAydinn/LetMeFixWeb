@@ -17,27 +17,27 @@ namespace LetMeFix.Persistence.Services
 
         public async Task AddAsync(Category entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await base.AddAsync(entity);
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(x => x.Id == id);
+            await base.DeleteAsync(id);
         }
 
         public async Task<List<Category>> GetAllAsync()
         {
-            return await _collection.Find(x => true).ToListAsync();
+            return await base.GetAllAsync();
         }
 
         public async Task<Category> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return await base.GetByIdAsync(id);
         }
 
         public async Task UpdateAsync(Category entity)
         {
-            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+            await base.UpdateAsync(entity);
         }
 
         //public async Task<string> GetNamebyId(string id)
@@ -48,8 +48,8 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<Dictionary<string, string>> GetPreviousCategory(string id)
         {
-            Dictionary<string, string> fullPath = new();
-            var prev = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            Dictionary<string, string> fullPath = new();            
+            var prev = await base.GetByIdAsync(id);
             if (prev != null) fullPath = prev.FullPaths;
             //else fullPath = "";
             return fullPath;

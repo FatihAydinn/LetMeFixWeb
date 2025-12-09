@@ -17,17 +17,17 @@ namespace LetMeFix.Persistence.Services
 
         public async Task AddAsync(ChatSession entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await base.AddAsync(entity);
         }
 
         public async Task<ChatSession> GetByChatIdAsync(string id)
         {
-            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return await base.GetByIdAsync(id);
         }
 
         public async Task<MessageContent> GetMessageById(string chatsession, string messageid)
         {
-            var chat = await _collection.Find(x => x.Id ==  chatsession).FirstOrDefaultAsync();
+            var chat = await base.GetByIdAsync(messageid);
             var msg = chat.MessageContent?.Find(x => x.MessageId == messageid);
             return msg;
         }
@@ -39,12 +39,12 @@ namespace LetMeFix.Persistence.Services
 
         public async Task UpdateAsync(ChatSession entity)
         {
-            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+            await base.UpdateAsync(entity);
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(x => x.Id == id);
+            await base.DeleteAsync(id);
         }
 
         public async Task PushMessage(string chatSessionId, MessageContent message)

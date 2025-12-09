@@ -18,27 +18,27 @@ namespace LetMeFix.Persistence.Services
 
         public async Task AddAsync(Reports entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await base.AddAsync(entity);
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(x => x.Id == id);
+            await base.DeleteAsync(id);
         }
 
         public async Task<List<Reports>> GetAllAsync()
         {
-            return await _collection.Find(x => true).ToListAsync();
+            return await base.GetAllAsync();
         }
 
         public async Task<Reports> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return await base.GetByIdAsync(id);
         }
 
         public async Task UpdateAsync(Reports entity)
         {
-            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+            await base.UpdateAsync(entity);
         }
 
         public async Task<List<Reports>> GetReportsByStatusAsync(int statuscode)

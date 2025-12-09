@@ -17,27 +17,32 @@ namespace LetMeFix.Persistence.Services
 
         public async Task AddAsync(Translations entity)
         {
-            await _collection.InsertOneAsync(entity);
+            await base.AddAsync(entity);
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(x => x.Id == id);
+            await base.DeleteAsync(id);
         }
 
         public async Task<List<Translations>> GetAllAsync()
         {
-            return await _collection.Find(x => true).ToListAsync();
+            return await base.GetAllAsync();
         }
 
         public async Task<Translations> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.LanguageId == id).FirstOrDefaultAsync();
+            return await base.GetByIdAsync(id);
         }
 
         public async Task UpdateAsync(Translations entity)
         {
-            await _collection.DeleteOneAsync(x => x.Id == entity.Id);
+            await base.UpdateAsync(entity);
+        }
+
+        public async Task<List<Translations>> SearchFilter(string search, string filedName)
+        {
+            return await base.SearchFilter(search, filedName);
         }
     }
 }

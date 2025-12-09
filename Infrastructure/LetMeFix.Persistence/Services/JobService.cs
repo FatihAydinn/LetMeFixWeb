@@ -33,18 +33,17 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task AddAsync(Job job)
         {
-            await _collection.InsertOneAsync(job);
-            //await base.AddAsync(job);
+            await base.AddAsync(job);
         }
 
         public async Task DeleteAsync(string id)
         {
-            await _collection.DeleteOneAsync(t => t.Id == id);
+            await base.DeleteAsync(id);
         }
 
         public async Task<List<Job>> GetAllAsync()
         {
-            var values = await _collection.Find(x => true).ToListAsync();
+            var values = await base.GetAllAsync();
             foreach (var item in values)
             {
                 await GetCategoryPaths(item);
@@ -56,7 +55,7 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task<Job> GetByIdAsync(string id)
         {
-            var value = await _collection.Find(t => t.Id == id).FirstOrDefaultAsync();
+            var value = await base.GetByIdAsync(id);
             await GetCategoryPaths(value);
 
             return value;
@@ -64,7 +63,7 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task UpdateAsync(Job job)
         {
-            await _collection.ReplaceOneAsync(t => t.Id == job.Id, job);
+            await base.UpdateAsync(job);
         }
 
         public async Task<List<Job>> ListJobsPerUser(string userId)
@@ -79,7 +78,7 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task<List<Job>> SearchJob(string search, string filedName = "Title")
         {
-            return await SearchFilter(search, filedName);
+            return await base.SearchFilter(search, filedName);
         }
     }
 }
