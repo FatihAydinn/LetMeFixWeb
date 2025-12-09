@@ -56,29 +56,22 @@ namespace LetMeFix.API.Controllers
         [HttpGet("ListJobsPerUser")]
         public async Task<IActionResult> ListJobsPerUser(string userId)
         {
-            try
-            {
-                var value = await _jobService.ListJobsPerUser(userId);
-                return Ok(value);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var value = await _jobService.ListJobsPerUser(userId);
+            return Ok(value);
         }
 
         [HttpGet("ListJobsPerCategory")]
         public async Task<IActionResult> ListJobsPerCategory(string categoryId)
         {
-            try
-            {
-                var value = await _jobService.ListJobsPerCategory(categoryId);
-                return Ok(value);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var value = await _jobService.ListJobsPerCategory(categoryId);
+            return Ok(value);
+        }
+
+        [HttpGet("searchJob")]
+        public async Task<IActionResult> SearchJob(string search)
+        {
+            var value = await _jobService.SearchJob(search);
+            return Ok(value);
         }
     }
 }

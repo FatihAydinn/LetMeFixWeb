@@ -14,5 +14,6 @@ namespace LetMeFix.Domain.Interfaces
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(string id);
+        Task<List<T>> SearchFilter(string search, string filedName);
     }
 }

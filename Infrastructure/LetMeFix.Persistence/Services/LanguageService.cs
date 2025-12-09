@@ -37,6 +37,11 @@ namespace LetMeFix.Persistence.Services
             return await _languages.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
+        public Task<List<Languages>> SearchFilter(string search, string filedName)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task UpdateAsync(Languages entity)
         {
             await _languages.ReplaceOneAsync(x => x.Id == entity.Id, entity);
