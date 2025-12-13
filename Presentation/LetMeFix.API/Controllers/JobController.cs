@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Infrastructure.Services;
+using MongoDB.Driver;
 
 namespace LetMeFix.API.Controllers
 {
@@ -21,7 +22,8 @@ namespace LetMeFix.API.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetJobs(int page, int pageSize)
         {
-            var jobs = await _jobService.GetJobsPaged(page, pageSize);
+            var filter = Builders<Job>.Filter.Where(x => true);
+            var jobs = await _jobService.GetJobsPaged(filter ,page, pageSize);
             return Ok(jobs);
         }
 
@@ -37,7 +39,6 @@ namespace LetMeFix.API.Controllers
             job.Id = Guid.NewGuid().ToString();
             await _jobService.AddAsync(job);
             return Ok();
-            //return CreatedAtAction(nameof(GetById), new { id = job.Id }, job);
         }
 
         [HttpPut("UpdateJob")]
@@ -54,16 +55,29 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("ListJobsPerUser")]
-        public async Task<IActionResult> ListJobsPerUser(string userId)
+        public async Task<IActionResult> ListJobsPerUser(string userId, int page, int pageSize)
         {
-            var value = await _jobService.ListJobsPerUser(userId);
+            var filter = Builders<Job>.Filter.Eq(x => x.ProviderId, userId);
+            var value = await _jobService.GetJobsPaged(filter, page, pageSize);
             return Ok(value);
         }
 
         [HttpGet("ListJobsPerCategory")]
-        public async Task<IActionResult> ListJobsPerCategory(string categoryId)
+        public async Task<IActionResult> ListJobsPerCategory(string categoryId, int page, int pageSize)
         {
-            var value = await _jobService.ListJobsPerCategory(categoryId);
+            var filter = Builders<Job>.Filter.Where(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId));
+            var value = await _jobService.GetJobsPaged(filter, page, pageSize);
+            return Ok(value);
+        }
+
+        [HttpGet("ListJobsPerCategoryByUser")]
+        public async Task<IActionResult> ListJobsPerCategoryByUser(string categoryId, string userId, int page, int pageSize)
+        {
+            var filter = Builders<Job>.Filter.And(
+                Builders<Job>.Filter.Eq(filter => filter.ProviderId, userId),
+                Builders<Job>.Filter.Where(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId))
+            );
+            var value = await _jobService.GetJobsPaged(filter, page, pageSize);
             return Ok(value);
         }
 

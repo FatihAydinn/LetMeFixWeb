@@ -71,9 +71,11 @@ namespace LetMeFix.Infrastructure.Services
             return await _collection.Find(x => x.ProviderId == userId).ToListAsync();
         } 
 
-        public async Task<List<Job>> ListJobsPerCategory(string categoryId)
+        public async Task<PagedResult<Job>> ListJobsPerCategory(string categoryId, int page, int pageSize)
         {
-            return await _collection.Find(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId)).ToListAsync();
+            var filter = Builders<Job>.Filter.Where(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId));
+            //var value = await _collection.Find(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId)).ToListAsync();
+            return await GetJobsPaged(filter, page, pageSize);
         }
 
         public async Task<List<Job>> SearchJob(string search, string filedName = "Title")
@@ -81,9 +83,9 @@ namespace LetMeFix.Infrastructure.Services
             return await base.SearchFilter(search, filedName);
         }
 
-        public async Task<PagedResult<Job>> GetJobsPaged(int page, int pageSize)
+        public async Task<PagedResult<Job>> GetJobsPaged(FilterDefinition<Job> filter, int page, int pageSize)
         {
-            return await PaginationAsync(page, pageSize);
+            return await GetPagedWithFilterAsync(filter, page, pageSize);
         }
     }
 }
