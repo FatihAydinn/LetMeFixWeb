@@ -19,7 +19,7 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetJobs(int page = 1, int pageSize = 2)
+        public async Task<IActionResult> GetJobs(int page, int pageSize)
         {
             var jobs = await _jobService.GetJobsPaged(page, pageSize);
             return Ok(jobs);

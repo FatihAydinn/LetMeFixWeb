@@ -17,9 +17,9 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getTranslationsByLanguage")]
-        public async Task<IActionResult> GetTranslationsByLanguage(string id)
+        public async Task<IActionResult> GetTranslationsByLanguage(string langId, int page, int pageSize)
         {
-            var values = await _service.GetByIdAsync(id);
+            var values = await _service.GetByPage(langId, page, pageSize);
             return Ok(values);
         }
 

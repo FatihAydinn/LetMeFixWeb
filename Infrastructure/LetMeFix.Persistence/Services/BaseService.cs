@@ -48,13 +48,30 @@ namespace LetMeFix.Persistence.Services
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
 
-        public async Task<PagedResult<T>> PaginationAsync(int page = 1, int pageSize = 10)
+        public async Task<PagedResult<T>> PaginationAsync(int page, int pageSize)
         {
             var total = await _collection.CountDocumentsAsync(FilterDefinition<T>.Empty);
             var items = await _collection.Find(FilterDefinition<T>.Empty)
-                                                .Skip((page - 1) * pageSize)
-                                                .Limit(pageSize)
-                                                .ToListAsync();
+                                         .Skip((page - 1) * pageSize)
+                                         .Limit(pageSize)
+                                         .ToListAsync();
+
+            return new PagedResult<T>
+            {
+                Items = items,
+                TotalCount = (int)total,
+                Page = page,
+                PageSize = pageSize
+            };
+        }
+
+        public async Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, int page, int pageSize)
+        {
+            var total = await _collection.CountDocumentsAsync(filter);
+            var items = await _collection.Find(filter)
+                                         .Skip((page - 1) * pageSize)
+                                         .Limit(pageSize)
+                                         .ToListAsync();
 
             return new PagedResult<T>
             {

@@ -44,5 +44,11 @@ namespace LetMeFix.Persistence.Services
         {
             return await base.SearchFilter(search, filedName);
         }
+
+        public async Task<PagedResult<Translations>> GetByPage(string langId, int page, int pageSize)
+        {
+            var filter = Builders<Translations>.Filter.Eq(x => x.LanguageId, langId);
+            return await GetPagedWithFilterAsync(filter, page, pageSize);
+        }
     }
 }

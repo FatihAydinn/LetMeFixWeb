@@ -81,7 +81,7 @@ namespace LetMeFix.Infrastructure.Services
             return await base.SearchFilter(search, filedName);
         }
 
-        public async Task<PagedResult<Job>> GetJobsPaged(int page = 1, int pageSize = 2)
+        public async Task<PagedResult<Job>> GetJobsPaged(int page, int pageSize)
         {
             return await PaginationAsync(page, pageSize);
         }
