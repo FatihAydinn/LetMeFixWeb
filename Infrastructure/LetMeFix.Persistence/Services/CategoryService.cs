@@ -54,5 +54,10 @@ namespace LetMeFix.Persistence.Services
             //else fullPath = "";
             return fullPath;
         }
+
+        public async Task<PagedResult<Category>> GetCategoriesPages(FilterDefinition<Category> filter, int page, int pageSize)
+        {
+            return await GetPagedWithFilterAsync(filter, page, pageSize);
+        }
     }
 }
