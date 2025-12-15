@@ -2,6 +2,7 @@
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace LetMeFix.API.Controllers
 {
@@ -16,9 +17,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("listAllReports")]
-        public async Task<IActionResult> GetAllReports()
+        public async Task<IActionResult> GetAllReports(int page, int pageSize)
         {
-            var value = await _service.GetAllAsync();
+            var filter = Builders<Reports>.Filter.Where(x => true);
+            var value = await _service.GetPagedWithFilterAsync(filter, page, pageSize);
             return Ok(value);
         }
 
@@ -30,23 +32,26 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("listReportsByStatus")]
-        public async Task<IActionResult> GetAllReportsByStatus(int statusCode)
+        public async Task<IActionResult> GetAllReportsByStatus(ReportStatus statusCode, int page, int pageSize)
         {
-            var value = await _service.GetReportsByStatusAsync(statusCode);
+            var filter = Builders<Reports>.Filter.Eq(x => x.ReportStatus, statusCode);
+            var value = await _service.GetPagedWithFilterAsync(filter, page, pageSize);
             return Ok(value);
         }
 
         [HttpGet("listReportsByUser")]
-        public async Task<IActionResult> GetReportsByUser(string userId)
+        public async Task<IActionResult> GetReportsByUser(string userId, int page, int pageSize)
         {
-            var value = await _service.GetReportsByUser(userId);
+            var filter = Builders<Reports>.Filter.Eq(x => x.UserId, userId);
+            var value = await _service.GetPagedWithFilterAsync(filter, page, pageSize);
             return Ok(value);
         }
 
         [HttpGet("listReportsByReportedUser")]
-        public async Task<IActionResult> ListReportsByReportedUser(string userId)
+        public async Task<IActionResult> ListReportsByReportedUser(string userId, int page, int pageSize)
         {
-            var value = await _service.GetReportsByReportedUser(userId);
+            var filter = Builders<Reports>.Filter.Eq(x => x.ReportedUserId, userId);
+            var value = await _service.GetPagedWithFilterAsync(filter, page, pageSize);
             return Ok(value);
         }
 

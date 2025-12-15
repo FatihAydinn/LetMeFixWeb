@@ -41,26 +41,14 @@ namespace LetMeFix.Persistence.Services
             await base.UpdateAsync(entity);
         }
 
-        public async Task<List<Reports>> GetReportsByStatusAsync(int statuscode)
-        {
-            var status = (ReportStatus)statuscode;
-            
-            return await _collection.Find(x => x.ReportStatus == status).ToListAsync();
-        }
-
-        public async Task<List<Reports>> GetReportsByUser(string userId)
-        {
-            return await _collection.Find(x => x.UserId == userId).ToListAsync();
-        }
-
-        public async Task<List<Reports>> GetReportsByReportedUser(string userId)
-        {
-            return await _collection.Find(x => x.ReportedUserId == userId).ToListAsync();
-        }
-
         public async Task AddResultToReport(Reports result)
         {
             await _collection.ReplaceOneAsync(x => x.Id == result.Id, result);
+        }
+
+        public async Task<PagedResult<Reports>> GetJobReviewsPaged(FilterDefinition<Reports> filter, int page, int pageSize)
+        {
+            return await GetPagedWithFilterAsync(filter, page, pageSize);
         }
     }
 }
