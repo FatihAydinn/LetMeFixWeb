@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,11 @@ namespace LetMeFix.Persistence.Services
         public async Task<List<Skills>> GetSkillsbyCategory(string category)
         {
             return await _collection.Find(x => x.RelatedCategories.Contains(category)).ToListAsync();
+        }
+
+        public async Task<PagedResult<Skills>> GetPaged(FilterDefinition<Skills> filter, PagedRequest request)
+        {
+            return await GetPagedWithFilterAsync(filter, request);
         }
     }
 }

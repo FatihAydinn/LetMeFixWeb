@@ -3,6 +3,7 @@ using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace LetMeFix.API.Controllers
 {
@@ -17,9 +18,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getAllSkills")]
-        public async Task<IActionResult> GetAllSkills()
+        public async Task<IActionResult> GetAllSkills([FromQuery] PagedRequest request)
         {
-            var values = await _skills.GetAllAsync();
+            var filter = Builders<Skills>.Filter.Where(x => true);
+            var values = await _skills.GetPaged(filter, request);
             return Ok(values);
         }
 
@@ -53,9 +55,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getSkillsbyCategory")]
-        public async Task<IActionResult> GetSkillsbyCategory(string category)
+        public async Task<IActionResult> GetSkillsbyCategory(string category, [FromQuery] PagedRequest request)
         {
-            var values = await _skills.GetSkillsbyCategory(category);
+            var filter = Builders<Skills>.Filter.Where(x => x.RelatedCategories.Contains(category));
+            var values = await _skills.GetPaged(filter, request);
             return Ok(values);
         }
     }
