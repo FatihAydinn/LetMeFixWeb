@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -45,10 +46,10 @@ namespace LetMeFix.Persistence.Services
             return await base.SearchFilter(search, filedName);
         }
 
-        public async Task<PagedResult<Translations>> GetByPage(string langId, int page, int pageSize)
+        public async Task<PagedResult<Translations>> GetByPage(string langId, PagedRequest request)
         {
             var filter = Builders<Translations>.Filter.Eq(x => x.LanguageId, langId);
-            return await GetPagedWithFilterAsync(filter, page, pageSize);
+            return await GetPagedWithFilterAsync(filter, request);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -55,9 +56,9 @@ namespace LetMeFix.Persistence.Services
             return fullPath;
         }
 
-        public async Task<PagedResult<Category>> GetCategoriesPages(FilterDefinition<Category> filter, int page, int pageSize)
+        public async Task<PagedResult<Category>> GetCategoriesPages(FilterDefinition<Category> filter, PagedRequest request)
         {
-            return await GetPagedWithFilterAsync(filter, page, pageSize);
+            return await GetPagedWithFilterAsync(filter, request);
         }
     }
 }

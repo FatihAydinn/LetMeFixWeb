@@ -19,36 +19,36 @@ namespace LetMeFix.API.Controllers
 
         //admin
         [HttpGet("getAllReviews")]
-        public async Task<IActionResult> getAllReviews(int page, int pageSize)
+        public async Task<IActionResult> getAllReviews([FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Where(x => true);
-            var values = await _repository.GetPagedWithFilterAsync(filter, page, pageSize);
+            var values = await _repository.GetPagedWithFilterAsync(filter, request);
             return Ok(values);
         }
 
         [HttpGet("getJobsReviews")]
-        public async Task<IActionResult> GetJobsReviews(int page, int pageSize, string jobId)
+        public async Task<IActionResult> GetJobsReviews([FromQuery] PagedRequest request, string jobId)
         {
             var filter = Builders<Review>.Filter.Eq(x => x.JobId, jobId);
-            var value = await _repository.GetJobReviewsPaged(filter, page, pageSize);
+            var value = await _repository.GetJobReviewsPaged(filter, request);
             return Ok(value);
         }
 
         //users own reviews
         [HttpGet("getProvidersReviews")]
-        public async Task<IActionResult> GetProvidersReviews(string providerId, int page, int pageSize)
+        public async Task<IActionResult> GetProvidersReviews(string providerId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Eq(x => x.ProviderId, providerId);
-            var values = await _repository.GetPagedWithFilterAsync(filter, page, pageSize);
+            var values = await _repository.GetPagedWithFilterAsync(filter, request);
             return Ok(values);
         }
 
         //users received reviews
         [HttpGet("getCustomersReviews")]
-        public async Task<IActionResult> GetCustomersReviews(string customerId, int page, int pageSize)
+        public async Task<IActionResult> GetCustomersReviews(string customerId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Eq(x => x.CustomerId, customerId);
-            var values = await _repository.GetPagedWithFilterAsync(filter, page, pageSize);
+            var values = await _repository.GetPagedWithFilterAsync(filter, request);
             return Ok(values);
         }
 

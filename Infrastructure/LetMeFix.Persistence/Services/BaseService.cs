@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -48,37 +49,37 @@ namespace LetMeFix.Persistence.Services
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
 
-        public async Task<PagedResult<T>> PaginationAsync(int page, int pageSize)
+        public async Task<PagedResult<T>> PaginationAsync(PagedRequest request)
         {
             var total = await _collection.CountDocumentsAsync(FilterDefinition<T>.Empty);
             var items = await _collection.Find(FilterDefinition<T>.Empty)
-                                         .Skip((page - 1) * pageSize)
-                                         .Limit(pageSize)
+                                         .Skip((request.Page - 1) * request.PageSize)
+                                         .Limit(request.PageSize)
                                          .ToListAsync();
 
             return new PagedResult<T>
             {
                 Items = items,
                 TotalCount = (int)total,
-                Page = page,
-                PageSize = pageSize
+                Page = request.Page,
+                PageSize = request.PageSize
             };
         }
 
-        public async Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, int page, int pageSize)
+        public async Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, PagedRequest request)
         {
             var total = await _collection.CountDocumentsAsync(filter);
             var items = await _collection.Find(filter)
-                                         .Skip((page - 1) * pageSize)
-                                         .Limit(pageSize)
+                                         .Skip((request.Page - 1) * request.PageSize)
+                                         .Limit(request.PageSize)
                                          .ToListAsync();
 
             return new PagedResult<T>
             {
                 Items = items,
                 TotalCount = (int)total,
-                Page = page,
-                PageSize = pageSize
+                Page = request.Page,
+                PageSize = request.PageSize
             };
         }
     }

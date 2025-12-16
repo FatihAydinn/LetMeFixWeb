@@ -20,10 +20,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetJobs(int page, int pageSize)
+        public async Task<IActionResult> GetJobs([FromQuery] PagedRequest request)
         {
             var filter = Builders<Job>.Filter.Where(x => true);
-            var jobs = await _jobService.GetJobsPaged(filter ,page, pageSize);
+            var jobs = await _jobService.GetJobsPaged(filter, request);
             return Ok(jobs);
         }
 
@@ -55,29 +55,29 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("ListJobsPerUser")]
-        public async Task<IActionResult> ListJobsPerUser(string userId, int page, int pageSize)
+        public async Task<IActionResult> ListJobsPerUser(string userId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Job>.Filter.Eq(x => x.ProviderId, userId);
-            var value = await _jobService.GetJobsPaged(filter, page, pageSize);
+            var value = await _jobService.GetJobsPaged(filter, request);
             return Ok(value);
         }
 
         [HttpGet("ListJobsPerCategory")]
-        public async Task<IActionResult> ListJobsPerCategory(string categoryId, int page, int pageSize)
+        public async Task<IActionResult> ListJobsPerCategory(string categoryId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Job>.Filter.Where(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId));
-            var value = await _jobService.GetJobsPaged(filter, page, pageSize);
+            var value = await _jobService.GetJobsPaged(filter, request);
             return Ok(value);
         }
 
         [HttpGet("ListJobsPerCategoryByUser")]
-        public async Task<IActionResult> ListJobsPerCategoryByUser(string categoryId, string userId, int page, int pageSize)
+        public async Task<IActionResult> ListJobsPerCategoryByUser(string categoryId, string userId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Job>.Filter.And(
                 Builders<Job>.Filter.Eq(filter => filter.ProviderId, userId),
                 Builders<Job>.Filter.Where(x => x.CategoryId.Length % 3 == 0 && x.CategoryId.Contains(categoryId))
             );
-            var value = await _jobService.GetJobsPaged(filter, page, pageSize);
+            var value = await _jobService.GetJobsPaged(filter, request);
             return Ok(value);
         }
 

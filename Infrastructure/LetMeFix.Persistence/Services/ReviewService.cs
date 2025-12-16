@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -57,9 +58,9 @@ namespace LetMeFix.Persistence.Services
             return await _collection.Find(x => x.CustomerId == id).ToListAsync();
         }
 
-        public async Task<PagedResult<Review>> GetJobReviewsPaged(FilterDefinition<Review> filter, int page, int pageSize)
+        public async Task<PagedResult<Review>> GetJobReviewsPaged(FilterDefinition<Review> filter, PagedRequest request)
         {
-            return await GetPagedWithFilterAsync(filter, page, pageSize);
+            return await GetPagedWithFilterAsync(filter, request);
         }
     }
 }
