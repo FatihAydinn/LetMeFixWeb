@@ -87,8 +87,17 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getContractByStatusAndUserId")]
         public async Task<IActionResult> GetContractByStatusAndUserId([FromQuery] PagedRequest request, string userId, int status)
         {
-            //userId = providerId || customerId, Filter.And
-            return Ok();
+            var enumStatus = (JobStatus)status;
+            var userfilter = Builders<Contracts>.Filter.Or(
+                         Builders<Contracts>.Filter.Eq(x => x.ProviderId, userId),
+                         Builders<Contracts>.Filter.Eq(x => x.ClientId, userId)
+            );
+            var filter = Builders<Contracts>.Filter.And(
+                         userfilter,
+                         Builders<Contracts>.Filter.Eq(x => x.Status, enumStatus)
+            );
+            var result = await _contracts.GetPaged(filter, request);
+            return Ok(result);
         }
     }
 }
