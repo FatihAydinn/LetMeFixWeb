@@ -3,6 +3,7 @@ using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace LetMeFix.API.Controllers
 {
@@ -17,9 +18,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getAllContracts")]
-        public async Task<IActionResult> GetAllContracts()
+        public async Task<IActionResult> GetAllContracts([FromQuery] PagedRequest request)
         {
-            var values = await _contracts.GetAllAsync();
+            var filter = Builders<Contracts>.Filter.Where(x => true);
+            var values = await _contracts.GetPagedWithFilterAsync(filter, request);
             return Ok(values);
         }
 
@@ -64,6 +66,29 @@ namespace LetMeFix.API.Controllers
         {
             await _contracts.ChangeStatus(id, status);
             return Ok("success");
+        }
+
+        [HttpGet("getContractsByProviderId")]
+        public async Task<IActionResult> GetContractsByProviderId([FromQuery] PagedRequest request, string userId)
+        {
+            var filter = Builders<Contracts>.Filter.Eq(x => x.ProviderId, userId);
+            var result = await _contracts.GetPaged(filter, request);
+            return Ok(result);
+        }
+
+        [HttpGet("getContractsByClientId")]
+        public async Task<IActionResult> GetContractsByClientId([FromQuery] PagedRequest request, string userId)
+        {
+            var filter = Builders<Contracts>.Filter.Eq(x => x.ClientId, userId);
+            var result = await _contracts.GetPaged(filter, request);
+            return Ok(result);
+        }
+
+        [HttpGet("getContractByStatusAndUserId")]
+        public async Task<IActionResult> GetContractByStatusAndUserId([FromQuery] PagedRequest request, string userId, int status)
+        {
+            //userId = providerId || customerId, Filter.And
+            return Ok();
         }
     }
 }

@@ -18,9 +18,11 @@ namespace LetMeFix.Infrastructure.Services
     public class JobService : BaseService<Job>
     {
         CategoryService _categoryStages;
-        public JobService(IMongoDatabase database, CategoryService categoryStages) : base (database, "Jobs") 
+        ContractService _contractStages;
+        public JobService(IMongoDatabase database, CategoryService categoryStages, ContractService contractStages) : base (database, "Jobs") 
         {
             _categoryStages = categoryStages;
+            _contractStages = contractStages;
         }
 
         private async Task GetCategoryPaths(Job item)
@@ -87,6 +89,15 @@ namespace LetMeFix.Infrastructure.Services
         public async Task<PagedResult<Job>> GetJobsPaged(FilterDefinition<Job> filter, PagedRequest request)
         {
             return await GetPagedWithFilterAsync(filter, request);
+        }
+
+        public async Task DeleteJobWithReason(string jobId, string deleteReason)
+        {
+            var filter = Builders<Job>.Filter.Eq(x => x.Id, jobId);
+            var update = Builders<Job>.Update.Set(x => x.DeleteReason, deleteReason);
+
+            await _collection.UpdateOneAsync(filter, update);
+            await _contractStages.ChangeStatus(jobId, 4);
         }
     }
 }

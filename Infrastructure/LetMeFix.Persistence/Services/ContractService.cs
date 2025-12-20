@@ -74,5 +74,10 @@ namespace LetMeFix.Persistence.Services
 
             await _collection.UpdateOneAsync(filter, update);
         }
+
+        public async Task<PagedResult<Contracts>> GetPaged(FilterDefinition<Contracts> filter, PagedRequest request)
+        {
+            return await GetPagedWithFilterAsync(filter, request);
+        }
     }
 }

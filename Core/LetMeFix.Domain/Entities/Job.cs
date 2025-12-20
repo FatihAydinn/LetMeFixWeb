@@ -14,6 +14,9 @@ namespace LetMeFix.Domain.Entities
         public List<string>? AvailableHours { get; set; }
         public List<string>? ReviewIds { get; set; }
         public List<string>? OfferIds { get; set; }
+
+        //admin
+        public string DeleteReason { get; set; }
     }
 
     public enum ServiceType
@@ -28,7 +31,8 @@ namespace LetMeFix.Domain.Entities
         InProgress = 2,
         Completed = 3,
         Cancelled = 4,
-        Expired = 5
+        Expired = 5,
+        Deleted = 6
     }
 
     public class Socials
