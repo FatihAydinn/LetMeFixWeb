@@ -57,7 +57,8 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.Github, entity.Github)
                 .Set(x => x.Resume, entity.Resume)
                 .Set(x => x.Website, entity.Website)
-                .Set(x => x.Twitter, entity.Twitter);
+                .Set(x => x.Twitter, entity.Twitter)
+                .Set(x => x.UpdateDate, DateTime.Now);
 
             await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
         }
@@ -69,7 +70,8 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.City, entity.City)
                 .Set(x => x.District, entity.District)
                 .Set(x => x.Neighborhood, entity.Neighborhood)
-                .Set(x => x.Address, entity.Address);
+                .Set(x => x.Address, entity.Address)
+                .Set(x => x.UpdateDate, DateTime.Now);
             await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
         }
 
@@ -81,7 +83,8 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.CompletedJobs, entity.CompletedJobs)
                 .Set(x => x.CompletedJobCount, entity.CompletedJobCount)
                 .Set(x => x.PreferredLanguages, entity.PreferredLanguages)
-                .Set(x => x.Profession, entity.Profession);
+                .Set(x => x.Profession, entity.Profession)
+                .Set(x => x.UpdateDate, DateTime.Now);
 
             await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
         }

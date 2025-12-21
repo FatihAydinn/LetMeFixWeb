@@ -70,7 +70,7 @@ namespace LetMeFix.Persistence.Services
                     break;
             }
             var filter = Builders<Contracts>.Filter.Eq(x => x.Id, id);
-            var update = Builders<Contracts>.Update.Set(x => x.Status, statusval);
+            var update = Builders<Contracts>.Update.Set(x => x.Status, statusval).Set(x => x.UpdateDate, DateTime.Now);
 
             await _collection.UpdateOneAsync(filter, update);
         }

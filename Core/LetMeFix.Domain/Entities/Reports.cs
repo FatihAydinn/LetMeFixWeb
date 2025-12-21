@@ -22,8 +22,8 @@ namespace LetMeFix.Domain.Entities
         //for chat
         public string? ChatRoomId { get; set; }
 
-        public string Reason { get; set; }
-        public string Result { get; set; }
+        public string? Reason { get; set; }
+        public string? Result { get; set; }
         public ReportStatus ReportStatus { get; set; }
     }
 

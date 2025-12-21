@@ -78,11 +78,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPut("updateReson")]
-        public async Task<IActionResult> AddResultToReport(Reports reports)
+        public async Task<IActionResult> AddResultToReport(string id, string reason)
         {
-            reports.ReportStatus = ReportStatus.Concluded;
-            await _service.AddResultToReport(reports);
-            return Ok(reports);
+            await _service.AddResultToReport(id, reason);
+            return Ok("success");
         }
     }
 }

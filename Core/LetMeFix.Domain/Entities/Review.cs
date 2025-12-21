@@ -16,8 +16,6 @@ namespace LetMeFix.Domain.Entities
         [Range(1,5)]
         public decimal Rate { get; set; }
         public string? ReviewText { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime? UpdateDate { get; set; }
         public List<string>? Images { get; set; } //!?
     }
 }

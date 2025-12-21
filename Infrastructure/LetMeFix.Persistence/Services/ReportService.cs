@@ -42,9 +42,11 @@ namespace LetMeFix.Persistence.Services
             await base.UpdateAsync(entity);
         }
 
-        public async Task AddResultToReport(Reports result)
+        public async Task AddResultToReport(string id, string reason)
         {
-            await _collection.ReplaceOneAsync(x => x.Id == result.Id, result);
+            var filter = Builders<Reports>.Filter.Eq(x => x.Id, id);
+            var update = Builders<Reports>.Update.Set(x => x.Reason, reason).Set(x => x.UpdateDate, DateTime.Now).Set(x => x.ReportStatus, ReportStatus.Concluded);
+            await _collection.UpdateOneAsync(filter, update);
         }
 
         public async Task<PagedResult<Reports>> GetJobReviewsPaged(FilterDefinition<Reports> filter, PagedRequest request)

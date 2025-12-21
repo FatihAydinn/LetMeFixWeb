@@ -50,7 +50,7 @@ namespace LetMeFix.Persistence.Services
         public async Task PushMessage(string chatSessionId, MessageContent message)
         {
             var filter = Builders<ChatSession>.Filter.Eq(x => x.Id, chatSessionId);
-            var update = Builders<ChatSession>.Update.Push(x => x.MessageContent, message);
+            var update = Builders<ChatSession>.Update.Push(x => x.MessageContent, message).Set(x => x.UpdateDate, DateTime.Now);
             await _collection.UpdateOneAsync(filter, update);
         }
 
@@ -60,7 +60,7 @@ namespace LetMeFix.Persistence.Services
                 Builders<ChatSession>.Filter.Eq(x => x.Id, chatSessionId),
                 Builders<ChatSession>.Filter.ElemMatch(x => x.MessageContent, Builders<MessageContent>.Filter.Eq(z => z.MessageId, messageId))
                 );
-            var update = Builders<ChatSession>.Update.Set("MessageContent.$.Status", "deleted");
+            var update = Builders<ChatSession>.Update.Set("MessageContent.$.Status", "deleted").Set(x => x.UpdateDate, DateTime.Now);
             await _collection.UpdateOneAsync(filter, update);
         }
 

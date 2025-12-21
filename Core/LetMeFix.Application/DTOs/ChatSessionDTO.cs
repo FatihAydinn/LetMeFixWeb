@@ -10,6 +10,9 @@ namespace LetMeFix.Application.DTOs
     public class ChatSessionDTO
     {
         public string Id { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+
         public string? OfferId { get; set; }
         public string JobId { get; set; }
 

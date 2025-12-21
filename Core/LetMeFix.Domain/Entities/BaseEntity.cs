@@ -13,5 +13,7 @@ namespace LetMeFix.Domain.Entities
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public string? Id { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }
