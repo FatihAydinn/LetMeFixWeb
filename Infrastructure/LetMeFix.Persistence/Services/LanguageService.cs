@@ -37,7 +37,12 @@ namespace LetMeFix.Persistence.Services
             return await _languages.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task<List<Languages>> SearchFilter(string search, string filedName)
+        public Task<PagedResult<Languages>> GetPagedWithFilterAsync(FilterDefinition<Languages> filter, PagedRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PagedResult<Languages>> SearchFilter(string search, string filedName, PagedRequest request)
         {
             throw new NotImplementedException();
         }

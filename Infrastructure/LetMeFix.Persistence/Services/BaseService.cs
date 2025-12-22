@@ -38,10 +38,10 @@ namespace LetMeFix.Persistence.Services
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> SearchFilter(string search, string filedName)
+        public async Task<PagedResult<T>> SearchFilter(string search, string fieldName, PagedRequest request)
         {
-            var filter = Builders<T>.Filter.Regex(filedName, new MongoDB.Bson.BsonRegularExpression(search, "i"));
-            return await _collection.Find(filter).ToListAsync();
+            var filter = Builders<T>.Filter.Regex(fieldName, new MongoDB.Bson.BsonRegularExpression(search, "i"));
+            return await GetPagedWithFilterAsync(filter, request);          
         }
 
         public async Task UpdateAsync(T entity)

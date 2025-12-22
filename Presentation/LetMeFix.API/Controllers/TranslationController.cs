@@ -44,5 +44,12 @@ namespace LetMeFix.API.Controllers
             await _service.DeleteAsync(id);
             return Ok("success");
         }
+
+        [HttpGet("searchJob")]
+        public async Task<IActionResult> SearchJob(string search, [FromQuery] PagedRequest request)
+        {
+            var value = await _service.SearchTranslation(search, request);
+            return Ok(value);
+        }
     }
 }

@@ -61,5 +61,11 @@ namespace LetMeFix.API.Controllers
             var values = await _skills.GetPaged(filter, request);
             return Ok(values);
         }
+
+        [HttpGet("searchSkill")]
+        public async Task<PagedResult<Skills>> SearchSkills(string value, [FromQuery] PagedRequest request)
+        {
+            return await _skills.SearchSkill(value, request);
+        }
     }
 }

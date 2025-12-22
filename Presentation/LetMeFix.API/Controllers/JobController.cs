@@ -82,9 +82,9 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("searchJob")]
-        public async Task<IActionResult> SearchJob(string search)
+        public async Task<IActionResult> SearchJob(string search, [FromQuery] PagedRequest request)
         {
-            var value = await _jobService.SearchJob(search);
+            var value = await _jobService.SearchJob(search, request);
             return Ok(value);
         }
     }

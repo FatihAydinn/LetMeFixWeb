@@ -60,5 +60,10 @@ namespace LetMeFix.Persistence.Services
         {
             return await GetPagedWithFilterAsync(filter, request);
         }
+
+        public async Task<PagedResult<Category>> SearchCategory(string value, PagedRequest request)
+        {
+            return await SearchFilter(value, "FullPath", request);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LetMeFix.Domain.Entities;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace LetMeFix.Domain.Interfaces
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(string id);
-        Task<List<T>> SearchFilter(string search, string filedName);
+        Task<PagedResult<T>> SearchFilter(string search, string filedName, PagedRequest request);
+        Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, PagedRequest request);
     }
 }

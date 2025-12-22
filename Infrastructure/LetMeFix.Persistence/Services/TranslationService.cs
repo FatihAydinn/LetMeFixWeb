@@ -41,9 +41,9 @@ namespace LetMeFix.Persistence.Services
             await base.UpdateAsync(entity);
         }
 
-        public async Task<List<Translations>> SearchFilter(string search, string filedName)
+        public async Task<PagedResult<Translations>> SearchTranslation(string search, PagedRequest request)
         {
-            return await base.SearchFilter(search, filedName);
+            return await SearchFilter(search, "Key", request);
         }
 
         public async Task<PagedResult<Translations>> GetByPage(string langId, PagedRequest request)

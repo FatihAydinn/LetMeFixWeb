@@ -1,5 +1,6 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
+using LetMeFix.Infrastructure.Services;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,23 +12,23 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryService _stages;
+        private readonly CategoryService _categorService;
         public CategoryController(CategoryService stages)
         {
-            _stages = stages;
+            _categorService = stages;
         }
 
         [HttpGet("listAllCategoryStages")]
         public async Task<IActionResult> ListAllCategoryStages()
         {
-            var values = await _stages.GetAllAsync();
+            var values = await _categorService.GetAllAsync();
             return Ok(values);
         }
 
         [HttpGet("getCategoryStagebyId")]
         public async Task<IActionResult> GetCategoryStagebyId(string id)
         {
-            var value = await _stages.GetByIdAsync(id);
+            var value = await _categorService.GetByIdAsync(id);
             return Ok(value);
         }
 
@@ -37,29 +38,36 @@ namespace LetMeFix.API.Controllers
             if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
             else
             {
-                var prev = await _stages.GetPreviousCategory(entity.PreviousParent);
+                var prev = await _categorService.GetPreviousCategory(entity.PreviousParent);
                 entity.FullPaths = entity.Names.ToDictionary(x => x.Key, x =>
                 {
                     string previousCategoryName = prev.ContainsKey(x.Key) ? prev[x.Key] : "";
                     return $"{previousCategoryName} > {x.Value}";
                 });
             }
-            await _stages.AddAsync(entity);
+            await _categorService.AddAsync(entity);
             return Ok(entity);
         }
 
         [HttpPut("updateCategoryStage")]
         public async Task<IActionResult> UpdateCategoryStage([FromBody] Category entity)
         {
-            await _stages.UpdateAsync(entity);
+            await _categorService.UpdateAsync(entity);
             return Ok(entity);
         }
 
         [HttpDelete("deleteCategoryStage")]
         public async Task<IActionResult> DeleteCategoryStage(string id)
         {
-            await _stages.DeleteAsync(id);
+            await _categorService.DeleteAsync(id);
             return Ok("success");
+        }
+
+        [HttpGet("searchJob")]
+        public async Task<IActionResult> SearchJob(string search, [FromQuery] PagedRequest request)
+        {
+            var value = await _categorService.SearchCategory(search, request);
+            return Ok(value);
         }
 
         //[HttpGet("getPreviousCategory")]
@@ -67,7 +75,7 @@ namespace LetMeFix.API.Controllers
         //{
         //    try
         //    {
-        //        var val = await _stages.GetPreviousCategory(id);
+        //        var val = await _categorService.GetPreviousCategory(id);
         //        return Ok(val);
         //    }
         //    catch (Exception ex)
