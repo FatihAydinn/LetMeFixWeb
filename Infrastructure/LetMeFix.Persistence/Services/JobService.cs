@@ -83,7 +83,8 @@ namespace LetMeFix.Infrastructure.Services
 
         public async Task<PagedResult<Job>> SearchJob(string search, PagedRequest request)
         {
-            return await SearchFilter(search, "Title", request);
+            var fields = new List<string> { "Title" };
+            return await SearchFilter(search, fields, request);
         }
 
         public async Task<PagedResult<Job>> GetJobsPaged(FilterDefinition<Job> filter, PagedRequest request)

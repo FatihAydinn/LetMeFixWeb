@@ -54,7 +54,8 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<PagedResult<Skills>> SearchSkill(string value, PagedRequest request)
         {
-            return await SearchFilter(value, "SkillTitle", request);
+            var fields = new List<string> { "SkillTitle" };
+            return await SearchFilter(value, fields, request);
         }
     }
 }

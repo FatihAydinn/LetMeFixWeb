@@ -1,6 +1,7 @@
 ﻿using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -38,10 +39,20 @@ namespace LetMeFix.Persistence.Services
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<PagedResult<T>> SearchFilter(string search, string fieldName, PagedRequest request)
+        public async Task<PagedResult<T>> SearchFilter(string search, List<string> fieldNames, PagedRequest request)
         {
-            var filter = Builders<T>.Filter.Regex(fieldName, new MongoDB.Bson.BsonRegularExpression(search, "i"));
-            return await GetPagedWithFilterAsync(filter, request);          
+            //var filter = Builders<T>.Filter.Regex(fieldName, new MongoDB.Bson.BsonRegularExpression(search, "i"));
+            var filter = new List<FilterDefinition<T>>();
+
+            foreach (var field in fieldNames)
+            {
+                filter.Add(Builders<T>.Filter.Regex(field,
+                    new BsonRegularExpression(search, "i")));
+            }
+
+            var finalFilter = Builders<T>.Filter.Or(filter);
+
+            return await GetPagedWithFilterAsync(finalFilter, request);          
         }
 
         public async Task UpdateAsync(T entity)

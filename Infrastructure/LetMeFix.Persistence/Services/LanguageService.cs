@@ -42,7 +42,7 @@ namespace LetMeFix.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<Languages>> SearchFilter(string search, string filedName, PagedRequest request)
+        public Task<PagedResult<Languages>> SearchFilter(string search, List<string> fieldNames, PagedRequest request)
         {
             throw new NotImplementedException();
         }

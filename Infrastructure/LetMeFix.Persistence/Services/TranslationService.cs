@@ -43,7 +43,8 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<PagedResult<Translations>> SearchTranslation(string search, PagedRequest request)
         {
-            return await SearchFilter(search, "Key", request);
+            var fields = new List<string> { "Key", "Content" };
+            return await SearchFilter(search, fields, request);
         }
 
         public async Task<PagedResult<Translations>> GetByPage(string langId, PagedRequest request)
