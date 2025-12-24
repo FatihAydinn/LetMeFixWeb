@@ -17,9 +17,10 @@ namespace LetMeFix.Infrastructure.Services
 {
     public class JobService : BaseService<Job>
     {
-        CategoryService _categoryStages;
+        //CategoryService _categoryStages;
+        private readonly IGenericRepository<Category> _categoryStages;
         ContractService _contractStages;
-        public JobService(IMongoDatabase database, CategoryService categoryStages, ContractService contractStages) : base (database, "Jobs") 
+        public JobService(IMongoDatabase database, IGenericRepository<Category> categoryStages, ContractService contractStages) : base (database, "Jobs") 
         {
             _categoryStages = categoryStages;
             _contractStages = contractStages;

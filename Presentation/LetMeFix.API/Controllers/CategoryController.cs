@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Infrastructure.Services;
 using LetMeFix.Persistence.Services;
@@ -12,23 +13,26 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryService _categorService;
-        public CategoryController(CategoryService stages)
+        private readonly IGenericRepository<Category> _repository;
+        private readonly ICategoryService _categorService;
+
+        public CategoryController(IGenericRepository<Category> repository, ICategoryService categoryService)
         {
-            _categorService = stages;
+            _repository = repository;
+            _categorService = categoryService;
         }
 
         [HttpGet("listAllCategoryStages")]
         public async Task<IActionResult> ListAllCategoryStages()
         {
-            var values = await _categorService.GetAllAsync();
+            var values = await _repository.GetAllAsync();
             return Ok(values);
         }
 
         [HttpGet("getCategoryStagebyId")]
         public async Task<IActionResult> GetCategoryStagebyId(string id)
         {
-            var value = await _categorService.GetByIdAsync(id);
+            var value = await _repository.GetByIdAsync(id);
             return Ok(value);
         }
 
@@ -45,26 +49,26 @@ namespace LetMeFix.API.Controllers
                     return $"{previousCategoryName} > {x.Value}";
                 });
             }
-            await _categorService.AddAsync(entity);
+            await _repository.AddAsync(entity);
             return Ok(entity);
         }
 
         [HttpPut("updateCategoryStage")]
         public async Task<IActionResult> UpdateCategoryStage([FromBody] Category entity)
         {
-            await _categorService.UpdateAsync(entity);
+            await _repository.UpdateAsync(entity);
             return Ok(entity);
         }
 
         [HttpDelete("deleteCategoryStage")]
         public async Task<IActionResult> DeleteCategoryStage(string id)
         {
-            await _categorService.DeleteAsync(id);
+            await _repository.DeleteAsync(id);
             return Ok("success");
         }
 
-        [HttpGet("searchJob")]
-        public async Task<IActionResult> SearchJob(string search, [FromQuery] PagedRequest request)
+        [HttpGet("searchCategory")]
+        public async Task<IActionResult> SearchCategory(string search, [FromQuery] PagedRequest request)
         {
             var value = await _categorService.SearchCategory(search, request);
             return Ok(value);

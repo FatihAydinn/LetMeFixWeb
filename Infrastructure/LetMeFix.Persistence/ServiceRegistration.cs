@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LetMeFix.Persistence.Services;
+using LetMeFix.Application.Interfaces;
+using LetMeFix.Persistence.Repository;
 
 namespace LetMeFix.Persistence
 {
@@ -25,7 +27,9 @@ namespace LetMeFix.Persistence
             services.AddScoped<UserInformationService>();
             services.AddScoped<ReviewService>();
             services.AddScoped<OfferService>();
-            services.AddScoped<CategoryService>();
+            //services.AddScoped<CategoryService>();
+            services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ChatSessionService>();
             services.AddScoped<TranslationService>();
             services.AddScoped<ReportService>();
