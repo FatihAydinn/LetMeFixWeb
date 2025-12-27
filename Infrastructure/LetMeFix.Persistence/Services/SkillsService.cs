@@ -47,15 +47,15 @@ namespace LetMeFix.Persistence.Services
             return await _collection.Find(x => x.RelatedCategories.Contains(category)).ToListAsync();
         }
 
-        public async Task<PagedResult<Skills>> GetPaged(FilterDefinition<Skills> filter, PagedRequest request)
+        public async Task<PagedResult<Skills>> GetPaged(PagedRequest request, FilterDefinition<Skills> filter)
         {
-            return await GetPagedWithFilterAsync(filter, request);
+            return await GetPagedWithFilterAsync(request, filter);
         }
 
-        public async Task<PagedResult<Skills>> SearchSkill(string value, PagedRequest request)
+        public async Task<PagedResult<Skills>> SearchSkill(PagedRequest request, string value)
         {
             var fields = new List<string> { "SkillTitle" };
-            return await SearchFilter(value, fields, request);
+            return await SearchFilter(request, value, fields);
         }
     }
 }

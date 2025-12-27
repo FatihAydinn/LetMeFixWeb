@@ -41,16 +41,16 @@ namespace LetMeFix.Persistence.Services
             await base.UpdateAsync(entity);
         }
 
-        public async Task<PagedResult<Translations>> SearchTranslation(string search, PagedRequest request)
+        public async Task<PagedResult<Translations>> SearchTranslation(PagedRequest request, string search)
         {
             var fields = new List<string> { "Key", "Content" };
-            return await SearchFilter(search, fields, request);
+            return await SearchFilter(request ,search, fields);
         }
 
-        public async Task<PagedResult<Translations>> GetByPage(string langId, PagedRequest request)
+        public async Task<PagedResult<Translations>> GetByPage(PagedRequest request, string langId)
         {
             var filter = Builders<Translations>.Filter.Eq(x => x.LanguageId, langId);
-            return await GetPagedWithFilterAsync(filter, request);
+            return await GetPagedWithFilterAsync(request, filter);
         }
     }
 }

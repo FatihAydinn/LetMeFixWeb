@@ -39,7 +39,7 @@ namespace LetMeFix.Persistence.Services
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<PagedResult<T>> SearchFilter(string search, List<string> fieldNames, PagedRequest request)
+        public async Task<PagedResult<T>> SearchFilter(PagedRequest request, string search, List<string> fieldNames)
         {
             //var filter = Builders<T>.Filter.Regex(fieldName, new MongoDB.Bson.BsonRegularExpression(search, "i"));
             var filter = new List<FilterDefinition<T>>();
@@ -52,7 +52,7 @@ namespace LetMeFix.Persistence.Services
 
             var finalFilter = Builders<T>.Filter.Or(filter);
 
-            return await GetPagedWithFilterAsync(finalFilter, request);          
+            return await GetPagedWithFilterAsync(request, finalFilter);          
         }
 
         public async Task UpdateAsync(T entity)
@@ -77,7 +77,7 @@ namespace LetMeFix.Persistence.Services
             };
         }
 
-        public async Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, PagedRequest request)
+        public async Task<PagedResult<T>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<T> filter)
         {
             var total = await _collection.CountDocumentsAsync(filter);
             var items = await _collection.Find(filter)
@@ -94,7 +94,12 @@ namespace LetMeFix.Persistence.Services
             };
         }
 
-        public Task<List<T>> FindAsync(FilterDefinition<T> filter)
+        public Task<PagedResult<T>> FindAsync(PagedRequest request, FilterDefinition<T> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateWithFilter(FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
             throw new NotImplementedException();
         }

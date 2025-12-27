@@ -43,7 +43,7 @@ namespace LetMeFix.Application.Interfaces
             return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<PagedResult<T>> GetPagedWithFilterAsync(MongoDB.Driver.FilterDefinition<T> filter, PagedRequest request)
+        public async Task<PagedResult<T>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<T> filter)
         {
             var total = await _collection.CountDocumentsAsync(filter);
             var items = await _collection.Find(filter)
@@ -60,7 +60,7 @@ namespace LetMeFix.Application.Interfaces
             };
         }
 
-        public async Task<PagedResult<T>> SearchFilter(string search, List<string> fieldNames, PagedRequest request)
+        public async Task<PagedResult<T>> SearchFilter(PagedRequest request, string search, List<string> fieldNames)
         {
             var filter = new List<FilterDefinition<T>>();
 
@@ -72,12 +72,17 @@ namespace LetMeFix.Application.Interfaces
 
             var finalFilter = Builders<T>.Filter.Or(filter);
 
-            return await GetPagedWithFilterAsync(finalFilter, request);
+            return await GetPagedWithFilterAsync(request, finalFilter);
         }
 
-        public async Task<List<T>> FindAsync(FilterDefinition<T> filter)
+        public async Task<PagedResult<T>> FindAsync(PagedRequest request, FilterDefinition<T> filter)
         {
-            return await _collection.Find(filter).ToListAsync();
+            return await GetPagedWithFilterAsync(request, filter);
+        }
+
+        public async Task UpdateWithFilter(FilterDefinition<T> filter, UpdateDefinition<T> update)
+        {
+            await _collection.UpdateOneAsync(filter, update);
         }
     }
 }

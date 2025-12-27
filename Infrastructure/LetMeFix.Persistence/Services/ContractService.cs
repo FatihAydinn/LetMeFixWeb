@@ -1,43 +1,22 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class ContractService : BaseService<Contracts>
+    public class ContractService : IContractService
     {
-        public ContractService(IMongoDatabase contracts) : base (contracts, "Contracts")
+        private readonly IGenericRepository<Contracts> _repository;
+        public ContractService(IGenericRepository<Contracts> repository)
         {
-        }
-
-        public async Task AddAsync(Contracts entity)
-        {
-            await base.AddAsync(entity);
-        }
-
-        public async Task DeleteAsync(string id)
-        {
-            await base.DeleteAsync(id);
-        }
-
-        public async Task<List<Contracts>> GetAllAsync()
-        {
-            return await base.GetAllAsync();
-        }
-
-        public async Task<Contracts> GetByIdAsync(string id)
-        {
-            return await base.GetByIdAsync(id);
-        }
-
-        public async Task UpdateAsync(Contracts entity)
-        {
-            await base.UpdateAsync(entity);
+            _repository = repository;
         }
 
         public async Task GiveATip(string id, decimal tip)
@@ -45,7 +24,7 @@ namespace LetMeFix.Persistence.Services
             var filter = Builders<Contracts>.Filter.Eq(x => x.Id, id);
             var update = Builders<Contracts>.Update.Set(x => x.Tip, tip);
 
-            await _collection.UpdateOneAsync(filter, update);
+            await _repository.UpdateWithFilter(filter, update);
         }
 
         public async Task ChangeStatus(string id, int status)
@@ -72,12 +51,32 @@ namespace LetMeFix.Persistence.Services
             var filter = Builders<Contracts>.Filter.Eq(x => x.Id, id);
             var update = Builders<Contracts>.Update.Set(x => x.Status, statusval).Set(x => x.UpdateDate, DateTime.Now);
 
-            await _collection.UpdateOneAsync(filter, update);
+            await _repository.UpdateWithFilter(filter, update);
         }
 
-        public async Task<PagedResult<Contracts>> GetPaged(FilterDefinition<Contracts> filter, PagedRequest request)
+        public Task<PagedResult<Contracts>> GetContractsByProviderId(PagedRequest request, string userId)
         {
-            return await GetPagedWithFilterAsync(filter, request);
+            var filter = Builders<Contracts>.Filter.Eq(x => x.ProviderId, userId);
+            return _repository.FindAsync(request, filter);
+        }
+
+        public Task<PagedResult<Contracts>> GetContractsByClientId(PagedRequest request, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<PagedResult<Contracts>> GetContractByStatusAndUserId(PagedRequest request, string userId, int status)
+        {
+            var enumStatus = (JobStatus)status;
+            var userfilter = Builders<Contracts>.Filter.Or(
+                         Builders<Contracts>.Filter.Eq(x => x.ProviderId, userId),
+                         Builders<Contracts>.Filter.Eq(x => x.ClientId, userId)
+            );
+            var filter = Builders<Contracts>.Filter.And(
+                         userfilter,
+                         Builders<Contracts>.Filter.Eq(x => x.Status, enumStatus)
+            );
+            return await _repository.GetPagedWithFilterAsync(request, filter);
         }
     }
 }

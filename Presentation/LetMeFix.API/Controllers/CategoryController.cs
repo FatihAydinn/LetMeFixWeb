@@ -5,6 +5,7 @@ using LetMeFix.Infrastructure.Services;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using System.Globalization;
 
 namespace LetMeFix.API.Controllers
@@ -23,9 +24,10 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("listAllCategoryStages")]
-        public async Task<IActionResult> ListAllCategoryStages()
+        public async Task<IActionResult> ListAllCategoryStages([FromQuery] PagedRequest request)
         {
-            var values = await _repository.GetAllAsync();
+            var filter = Builders<Category>.Filter.Where(x => true);
+            var values = await _repository.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 

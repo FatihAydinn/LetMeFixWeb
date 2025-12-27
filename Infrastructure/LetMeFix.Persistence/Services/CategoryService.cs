@@ -22,13 +22,13 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<PagedResult<Category>> GetCategoriesPages(FilterDefinition<Category> filter, PagedRequest request)
         {
-            return await _repository.GetPagedWithFilterAsync(filter, request);
+            return await _repository.GetPagedWithFilterAsync(request, filter);
         }
 
         public async Task<PagedResult<Category>> SearchCategory(string value, PagedRequest request)
         {
             var fields = new List<string> { "Id" };
-            return await _repository.SearchFilter(value, fields, request);
+            return await _repository.SearchFilter(request, value, fields);
         }
 
         public async Task<Dictionary<string, string>> GetPreviousCategory(string id)

@@ -21,7 +21,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetAllSkills([FromQuery] PagedRequest request)
         {
             var filter = Builders<Skills>.Filter.Where(x => true);
-            var values = await _skills.GetPaged(filter, request);
+            var values = await _skills.GetPaged(request, filter);
             return Ok(values);
         }
 
@@ -55,17 +55,17 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getSkillsbyCategory")]
-        public async Task<IActionResult> GetSkillsbyCategory(string category, [FromQuery] PagedRequest request)
+        public async Task<IActionResult> GetSkillsbyCategory([FromQuery] PagedRequest request, string category)
         {
             var filter = Builders<Skills>.Filter.Where(x => x.RelatedCategories.Contains(category));
-            var values = await _skills.GetPaged(filter, request);
+            var values = await _skills.GetPaged(request, filter);
             return Ok(values);
         }
 
         [HttpGet("searchSkill")]
-        public async Task<PagedResult<Skills>> SearchSkills(string value, [FromQuery] PagedRequest request)
+        public async Task<PagedResult<Skills>> SearchSkills([FromQuery] PagedRequest request, string value)
         {
-            return await _skills.SearchSkill(value, request);
+            return await _skills.SearchSkill(request, value);
         }
     }
 }

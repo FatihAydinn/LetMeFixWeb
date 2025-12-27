@@ -45,10 +45,10 @@ namespace LetMeFix.Infrastructure.Services
             return values; 
         }
 
-        public async Task<List<Job>> ListJobsPerUser(string userId)
+        public async Task<PagedResult<Job>> ListJobsPerUser(PagedRequest request, string userId)
         {
             var filter = Builders<Job>.Filter.Eq(x => x.ProviderId, userId);
-            return await _repository.FindAsync(filter);
+            return await _repository.FindAsync(request, filter);
         } 
 
         public async Task<PagedResult<Job>> ListJobsPerCategory(string categoryId, PagedRequest request)
@@ -61,12 +61,12 @@ namespace LetMeFix.Infrastructure.Services
         public async Task<PagedResult<Job>> SearchJob(string search, PagedRequest request)
         {
             var fields = new List<string> { "Title" };
-            return await _repository.SearchFilter(search, fields, request);
+            return await _repository.SearchFilter(request, search, fields);
         }
 
         public async Task<PagedResult<Job>> GetJobsPaged(FilterDefinition<Job> filter, PagedRequest request)
         {
-            return await _repository.GetPagedWithFilterAsync(filter, request);
+            return await _repository.GetPagedWithFilterAsync(request, filter);
         }
 
         public async Task DeleteJobWithReason(string jobId, string deleteReason)
@@ -81,7 +81,12 @@ namespace LetMeFix.Infrastructure.Services
             await _contractStages.ChangeStatus(jobId, 4);
         }
 
-        public Task<List<Job>> FindAsync(FilterDefinition<Job> filter)
+        public Task<PagedResult<Job>> FindAsync(FilterDefinition<Job> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PagedResult<Job>> ListJobsPerUser(string userId)
         {
             throw new NotImplementedException();
         }

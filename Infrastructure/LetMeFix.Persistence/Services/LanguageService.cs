@@ -32,6 +32,11 @@ namespace LetMeFix.Persistence.Services
             throw new NotImplementedException();
         }
 
+        public Task<PagedResult<Languages>> FindAsync(PagedRequest request, FilterDefinition<Languages> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Languages>> GetAllAsync()
         {
             return await _languages.Find(x => true).ToListAsync();
@@ -47,7 +52,17 @@ namespace LetMeFix.Persistence.Services
             throw new NotImplementedException();
         }
 
+        public Task<PagedResult<Languages>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<Languages> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<PagedResult<Languages>> SearchFilter(string search, List<string> fieldNames, PagedRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PagedResult<Languages>> SearchFilter(PagedRequest request, string search, List<string> fieldNames)
         {
             throw new NotImplementedException();
         }
@@ -55,6 +70,11 @@ namespace LetMeFix.Persistence.Services
         public async Task UpdateAsync(Languages entity)
         {
             await _languages.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+        }
+
+        public Task UpdateWithFilter(FilterDefinition<Languages> filter, UpdateDefinition<Languages> update)
+        {
+            throw new NotImplementedException();
         }
     }
 }

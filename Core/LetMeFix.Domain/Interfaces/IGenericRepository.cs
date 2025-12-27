@@ -15,8 +15,9 @@ namespace LetMeFix.Domain.Interfaces
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(string id);
-        Task<PagedResult<T>> SearchFilter(string search, List<string> fieldNames, PagedRequest request);
-        Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, PagedRequest request);
-        Task<List<T>> FindAsync(FilterDefinition<T> filter);
+        Task<PagedResult<T>> SearchFilter(PagedRequest request, string search, List<string> fieldNames);
+        Task<PagedResult<T>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<T> filter);
+        Task<PagedResult<T>> FindAsync(PagedRequest request, FilterDefinition<T> filter);
+        Task UpdateWithFilter(FilterDefinition<T> filter, UpdateDefinition<T> update);
     }
 }

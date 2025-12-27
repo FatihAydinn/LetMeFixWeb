@@ -17,9 +17,9 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getTranslationsByLanguage")]
-        public async Task<IActionResult> GetTranslationsByLanguage(string langId, [FromQuery] PagedRequest request)
+        public async Task<IActionResult> GetTranslationsByLanguage([FromQuery] PagedRequest request, string langId)
         {
-            var values = await _service.GetByPage(langId, request);
+            var values = await _service.GetByPage(request, langId);
             return Ok(values);
         }
 
@@ -46,9 +46,9 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("searchJob")]
-        public async Task<IActionResult> SearchJob(string search, [FromQuery] PagedRequest request)
+        public async Task<IActionResult> SearchJob([FromQuery] PagedRequest request, string search)
         {
-            var value = await _service.SearchTranslation(search, request);
+            var value = await _service.SearchTranslation(request, search);
             return Ok(value);
         }
     }

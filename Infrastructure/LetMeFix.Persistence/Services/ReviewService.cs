@@ -60,7 +60,7 @@ namespace LetMeFix.Persistence.Services
 
         public async Task<PagedResult<Review>> GetJobReviewsPaged(FilterDefinition<Review> filter, PagedRequest request)
         {
-            return await GetPagedWithFilterAsync(filter, request);
+            return await GetPagedWithFilterAsync(request, filter);
         }
     }
 }

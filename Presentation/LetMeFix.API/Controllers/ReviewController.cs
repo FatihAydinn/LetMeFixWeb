@@ -22,7 +22,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> getAllReviews([FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Where(x => true);
-            var values = await _repository.GetPagedWithFilterAsync(filter, request);
+            var values = await _repository.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
@@ -39,7 +39,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetProvidersReviews(string providerId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Eq(x => x.ProviderId, providerId);
-            var values = await _repository.GetPagedWithFilterAsync(filter, request);
+            var values = await _repository.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
@@ -48,7 +48,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetCustomersReviews(string customerId, [FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Eq(x => x.CustomerId, customerId);
-            var values = await _repository.GetPagedWithFilterAsync(filter, request);
+            var values = await _repository.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
