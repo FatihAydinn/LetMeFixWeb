@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Infrastructure.Services;
 using MongoDB.Driver;
+using LetMeFix.Application.Interfaces;
 
 namespace LetMeFix.API.Controllers
 {
@@ -13,10 +14,12 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
-        private readonly JobService _jobService;
-        public JobController(JobService jobService)
+        private readonly IJobService _jobService;
+        private readonly IGenericRepository<Job> _genericRepository;
+        public JobController(IJobService jobService, IGenericRepository<Job> genericRepository)
         {
             _jobService = jobService;
+            _genericRepository = genericRepository;
         }
 
         [HttpGet("GetAll")]
@@ -30,28 +33,28 @@ namespace LetMeFix.API.Controllers
         [HttpGet("GetById")]
         public async Task<IActionResult> GetJobsById(string id)
         {
-            var job = await _jobService.GetByIdAsync(id);
+            var job = await _genericRepository.GetByIdAsync(id);
             return Ok(job);
         }
 
         [HttpPost("AddJob")]
         public async Task<IActionResult> PostJobs([FromBody] Job job) {
             job.Id = Guid.NewGuid().ToString();
-            await _jobService.AddAsync(job);
+            await _genericRepository.AddAsync(job);
             return Ok();
         }
 
         [HttpPut("UpdateJob")]
         public async Task<IActionResult> UpdateJob(Job job)
         {
-            await _jobService.UpdateAsync(job);
+            await _genericRepository.UpdateAsync(job);
             return Ok();
         }
 
         [HttpDelete("DeleteJob")]
         public async Task DeleteJob(string id)
         {
-            await _jobService.DeleteAsync(id);
+            await _genericRepository.DeleteAsync(id);
         }
 
         [HttpGet("ListJobsPerUser")]

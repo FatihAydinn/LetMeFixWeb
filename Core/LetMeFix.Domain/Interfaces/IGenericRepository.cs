@@ -17,5 +17,6 @@ namespace LetMeFix.Domain.Interfaces
         Task DeleteAsync(string id);
         Task<PagedResult<T>> SearchFilter(string search, List<string> fieldNames, PagedRequest request);
         Task<PagedResult<T>> GetPagedWithFilterAsync(FilterDefinition<T> filter, PagedRequest request);
+        Task<List<T>> FindAsync(FilterDefinition<T> filter);
     }
 }

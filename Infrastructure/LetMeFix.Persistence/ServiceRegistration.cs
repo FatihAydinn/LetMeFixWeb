@@ -23,13 +23,15 @@ namespace LetMeFix.Persistence
             services.AddSingleton<IGenericRepository<Languages>, LanguageService>();
             services.AddScoped<SkillsService>();
             services.AddScoped<ContractService>();
-            services.AddScoped<JobService>();
+            //services.AddScoped<JobService>();
             services.AddScoped<UserInformationService>();
             services.AddScoped<ReviewService>();
             services.AddScoped<OfferService>();
             //services.AddScoped<CategoryService>();
             services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IGenericRepository<Job>, JobRepository>();
+            services.AddScoped<IJobService, JobService>();
             services.AddScoped<ChatSessionService>();
             services.AddScoped<TranslationService>();
             services.AddScoped<ReportService>();

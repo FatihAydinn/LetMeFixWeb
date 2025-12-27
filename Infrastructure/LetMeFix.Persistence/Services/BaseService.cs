@@ -93,5 +93,10 @@ namespace LetMeFix.Persistence.Services
                 PageSize = request.PageSize
             };
         }
+
+        public Task<List<T>> FindAsync(FilterDefinition<T> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

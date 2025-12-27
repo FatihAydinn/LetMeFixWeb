@@ -27,6 +27,11 @@ namespace LetMeFix.Persistence.Services
             await _languages.DeleteOneAsync(x => x.Id == id);
         }
 
+        public Task<List<Languages>> FindAsync(FilterDefinition<Languages> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Languages>> GetAllAsync()
         {
             return await _languages.Find(x => true).ToListAsync();

@@ -23,9 +23,14 @@ namespace LetMeFix.Application.Interfaces
             await _collection.InsertOneAsync(entity);
         }
 
-        public Task DeleteAsync(string id)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            await _collection.DeleteOneAsync(x => x.Id == id);
         }
 
         public async Task<List<T>> GetAllAsync()
@@ -70,9 +75,9 @@ namespace LetMeFix.Application.Interfaces
             return await GetPagedWithFilterAsync(finalFilter, request);
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task<List<T>> FindAsync(FilterDefinition<T> filter)
         {
-            throw new NotImplementedException();
+            return await _collection.Find(filter).ToListAsync();
         }
     }
 }

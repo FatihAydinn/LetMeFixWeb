@@ -20,7 +20,6 @@ namespace LetMeFix.Persistence.Services
             _repository = repository;
         }
 
-
         public async Task<PagedResult<Category>> GetCategoriesPages(FilterDefinition<Category> filter, PagedRequest request)
         {
             return await _repository.GetPagedWithFilterAsync(filter, request);
