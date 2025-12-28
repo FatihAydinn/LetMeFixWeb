@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
+    //!!
     public class BaseService<T> : IGenericRepository<T> where T : BaseEntity
     {
         protected readonly IMongoCollection<T> _collection;
@@ -29,9 +30,9 @@ namespace LetMeFix.Persistence.Services
             await _collection.DeleteOneAsync(x => x.Id == id);
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<PagedResult<T>> GetAllAsync(PagedRequest request)
         {
-            return await _collection.Find(x => true).ToListAsync();
+            throw new NotImplementedException();
         }
 
         public async Task<T> GetByIdAsync(string id)

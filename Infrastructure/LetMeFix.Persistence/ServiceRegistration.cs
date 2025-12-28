@@ -25,10 +25,12 @@ namespace LetMeFix.Persistence
             //services.AddScoped<ContractService>();
             services.AddScoped<IGenericRepository<Contracts>, ContractRepository>();
             services.AddScoped<IContractService, ContractService>();
+            services.AddScoped<IGenericRepository<Offers>, OfferRepository>();
+            services.AddScoped<IOfferService, OfferService>();
             //services.AddScoped<JobService>();
             services.AddScoped<UserInformationService>();
             services.AddScoped<ReviewService>();
-            services.AddScoped<OfferService>();
+            //services.AddScoped<OfferService>();
             //services.AddScoped<CategoryService>();
             services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();

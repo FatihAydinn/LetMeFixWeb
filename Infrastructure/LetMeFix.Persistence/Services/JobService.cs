@@ -13,34 +13,36 @@ using SharpCompress.Common;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Application.Interfaces;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LetMeFix.Infrastructure.Services
 {
     public class JobService : IJobService
     {
         private readonly IGenericRepository<Job> _repository;
+        private readonly IGenericRepository<Category> _categoryService;
         ContractService _contractStages;
+        JobService _job;
 
-        public JobService(IGenericRepository<Job> repository) 
+        public JobService(IGenericRepository<Job> repository, IGenericRepository<Category> categoryService)
         {
             _repository = repository;
+            _categoryService = categoryService;
         }
 
-        private async Task GetCategoryPaths(Job item)
+        private async Task<string> GetCategoryPaths(Job item)
         {
-            if (item != null)
-            {
-                var categoryfullpath = await _repository.GetByIdAsync(item.CategoryId.Substring(item.CategoryId.Length - 3));
-                item.CategoryPath = categoryfullpath.CategoryPath;
-            }
+            var categoryfullpath = await _categoryService.GetByIdAsync(item.CategoryId.Substring(item.CategoryId.Length - 3));
+            return categoryfullpath.FullPaths["EN"];
         }
 
-        public async Task<List<Job>> GetAllAsync()
+        public async Task<PagedResult<Job>> GetAllAsync(PagedRequest request)
         {
-            var values = await _repository.GetAllAsync();
-            foreach (var item in values)
+            var values = await _repository.GetAllAsync(request);
+            foreach (var item in values.Items)
             {
-                await GetCategoryPaths(item);
+                var fullpath = await GetCategoryPaths(item);
+                item.CategoryPath = fullpath;
             }
             return values; 
         }

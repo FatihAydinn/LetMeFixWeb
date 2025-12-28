@@ -27,9 +27,9 @@ namespace LetMeFix.Persistence.Services
         }
 
         //admin
-        public async Task<List<Review>> GetAllAsync()
+        public async Task<PagedResult<Review>> GetAllAsync(PagedRequest request)
         {
-            return await base.GetAllAsync();
+            return await base.GetAllAsync(request);
         }
 
         public async Task<Review> GetByIdAsync(string id)

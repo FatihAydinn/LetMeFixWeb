@@ -16,5 +16,6 @@ namespace LetMeFix.Application.Interfaces
         Task<PagedResult<Job>> GetJobsPaged(FilterDefinition<Job> filter, PagedRequest request);
         Task DeleteJobWithReason(string jobId, string deleteReason);
         Task<PagedResult<Job>> FindAsync(FilterDefinition<Job> filter);
+        Task<PagedResult<Job>> GetAllAsync(PagedRequest request);
     }
 }

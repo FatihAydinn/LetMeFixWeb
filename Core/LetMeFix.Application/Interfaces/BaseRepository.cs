@@ -33,14 +33,16 @@ namespace LetMeFix.Application.Interfaces
             await _collection.DeleteOneAsync(x => x.Id == id);
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<PagedResult<T>> GetAllAsync(PagedRequest request)
         {
-            return await _collection.Find(x => true).ToListAsync();
+            var filter = Builders<T>.Filter.Where(x => true);
+            return await GetPagedWithFilterAsync(request, filter);
         }
 
         public async Task<T> GetByIdAsync(string id)
         {
-            return await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            var filter = await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return filter;
         }
 
         public async Task<PagedResult<T>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<T> filter)

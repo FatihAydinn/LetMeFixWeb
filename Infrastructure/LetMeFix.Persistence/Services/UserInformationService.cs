@@ -44,9 +44,9 @@ namespace LetMeFix.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public async Task<List<UserInformations>> GetAllAsync()
+        public async Task<PagedResult<UserInformations>> GetAllAsync(PagedRequest request)
         {
-            return await base.GetAllAsync();
+            return await base.GetAllAsync(request);
         }
 
         public async Task UpdateSocials(UserInformationSocialsDTO entity)

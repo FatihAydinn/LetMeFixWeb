@@ -37,9 +37,9 @@ namespace LetMeFix.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public async Task<List<Languages>> GetAllAsync()
+        public async Task<PagedResult<Languages>> GetAllAsync(PagedRequest request)
         {
-            return await _languages.Find(x => true).ToListAsync();
+            throw new NotImplementedException();
         }
 
         public async Task<Languages> GetByIdAsync(string id)

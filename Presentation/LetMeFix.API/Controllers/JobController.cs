@@ -26,7 +26,8 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetJobs([FromQuery] PagedRequest request)
         {
             var filter = Builders<Job>.Filter.Where(x => true);
-            var jobs = await _jobService.GetJobsPaged(filter, request);
+            var jobs = await _jobService.GetAllAsync(request);
+            //var jobs = await _jobService.GetJobsPaged(filter, request);
             return Ok(jobs);
         }
 

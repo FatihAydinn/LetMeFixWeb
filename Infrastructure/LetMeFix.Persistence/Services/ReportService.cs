@@ -27,9 +27,9 @@ namespace LetMeFix.Persistence.Services
             await base.DeleteAsync(id);
         }
 
-        public async Task<List<Reports>> GetAllAsync()
+        public async Task<PagedResult<Reports>> GetAllAsync(PagedRequest request)
         {
-            return await base.GetAllAsync();
+            return await base.GetAllAsync(request);
         }
 
         public async Task<Reports> GetByIdAsync(string id)
