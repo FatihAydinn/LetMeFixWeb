@@ -23,6 +23,7 @@ namespace LetMeFix.Domain.Entities
     public class MessageContent
     {
         public string? MessageId { get; set; }
+        public string ChatSessionId { get; set; }
         public string Type { get; set; }
         public string SenderId { get; set; }
         public string Content { get; set; }

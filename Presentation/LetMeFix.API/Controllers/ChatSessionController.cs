@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Application.DTOs;
 using AutoMapper;
+using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Interfaces;
 
 namespace LetMeFix.API.Controllers
 {
@@ -11,11 +13,13 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class ChatSessionController : ControllerBase
     {
-        private readonly ChatSessionService _service;
+        private readonly IChatSessionService _service;
+        private readonly IGenericRepository<ChatSession> _genericRepository;
         private readonly IMapper _mapper;
 
-        public ChatSessionController(ChatSessionService service, IMapper mapper)
+        public ChatSessionController(IChatSessionService service, IGenericRepository<ChatSession> genericRepository, IMapper mapper)
         {
+            _genericRepository = genericRepository;
             _service = service;
             _mapper = mapper;
         }
@@ -23,16 +27,20 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createChatRoom")]
         public async Task<IActionResult> CreateChatRoom([FromBody] ChatSessionDTO dto)
         {
+            MessageContent msgc = new MessageContent();
             var chatSession = _mapper.Map<ChatSession>(dto);
             chatSession.Id = Guid.NewGuid().ToString();
-            await _service.AddAsync(chatSession);
+            chatSession.MessageContent = dto.MessageContent;
+            chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
+            chatSession.MessageContent[0].ChatSessionId = chatSession.Id;
+            await _genericRepository.AddAsync(chatSession);
             return Ok(chatSession);
         }
 
         [HttpGet("getChatbyId")]
         public async Task<IActionResult> GetChatById(string id)
         {
-            return Ok(await _service.GetByChatIdAsync(id));
+            return Ok(await _genericRepository.GetByIdAsync(id));
         }
 
         //[HttpGet("getChatsByUserId")]
@@ -51,22 +59,22 @@ namespace LetMeFix.API.Controllers
         [HttpPut("updateChat")]
         public async Task<IActionResult> UpdateChat([FromBody] ChatSession session)
         {
-            await _service.UpdateAsync(session);
+            await _genericRepository.UpdateAsync(session);
             return Ok(session);
         }
 
         [HttpDelete("deleteChat")]
         public async Task<IActionResult> DeleteChat(string id)
         {
-            await _service.DeleteAsync(id);
+            await _genericRepository.DeleteAsync(id);
             return Ok("success");
         }
 
         [HttpPut("pushNewMessage")]
-        public async Task<IActionResult> PushNewMessage(string id, MessageContent message)
+        public async Task<IActionResult> PushNewMessage(MessageContent message)
         {
             message.MessageId = Guid.NewGuid().ToString();
-            await _service.PushMessage(id, message);
+            await _service.PushMessage(message.ChatSessionId, message);
             return Ok(message);
         }
 

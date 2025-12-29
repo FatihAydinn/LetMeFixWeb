@@ -36,7 +36,9 @@ namespace LetMeFix.Persistence
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IGenericRepository<Job>, JobRepository>();
             services.AddScoped<IJobService, JobService>();
-            services.AddScoped<ChatSessionService>();
+            //services.AddScoped<ChatSessionService>();
+            services.AddScoped<IGenericRepository<ChatSession>, ChatSessionRepository>();
+            services.AddScoped<IChatSessionService, ChatSessionService>();
             services.AddScoped<TranslationService>();
             services.AddScoped<ReportService>();
             //services.AddSingleton<IGenericRepository<Offers>, OfferService>();
