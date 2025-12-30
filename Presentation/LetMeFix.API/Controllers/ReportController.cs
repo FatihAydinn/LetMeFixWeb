@@ -3,6 +3,8 @@ using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using LetMeFix.Domain.Interfaces;
+using LetMeFix.Application.Interfaces;
 
 namespace LetMeFix.API.Controllers
 {
@@ -10,10 +12,13 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        readonly private ReportService _service;
-        public ReportController(ReportService service)
+        readonly private IGenericRepository<Reports> _service;
+        readonly private IReportService _reportService;
+
+        public ReportController(IGenericRepository<Reports> service, IReportService reportService)
         {
             _service = service;
+            _reportService = reportService;
         }
 
         [HttpGet("listAllReports")]
@@ -40,19 +45,9 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("listReportsByUser")]
-        public async Task<IActionResult> GetReportsByUser([FromQuery] PagedRequest request, string userId)
+        public async Task<PagedResult<Reports>> GetReportsByUser([FromQuery] PagedRequest request, string userId)
         {
-            var filter = Builders<Reports>.Filter.Eq(x => x.UserId, userId);
-            var value = await _service.GetPagedWithFilterAsync(request, filter);
-            return Ok(value);
-        }
-
-        [HttpGet("listReportsByReportedUser")]
-        public async Task<IActionResult> ListReportsByReportedUser([FromQuery] PagedRequest request, string userId)
-        {
-            var filter = Builders<Reports>.Filter.Eq(x => x.ReportedUserId, userId);
-            var value = await _service.GetPagedWithFilterAsync(request, filter);
-            return Ok(value);
+            return await _reportService.GetReportsByUser(request, userId);
         }
 
         [HttpPost ("createReport")]
@@ -80,7 +75,7 @@ namespace LetMeFix.API.Controllers
         [HttpPut("updateReson")]
         public async Task<IActionResult> AddResultToReport(string id, string reason)
         {
-            await _service.AddResultToReport(id, reason);
+            await _reportService.AddResultToReport(id, reason);
             return Ok("success");
         }
     }

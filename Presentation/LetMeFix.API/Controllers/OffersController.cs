@@ -13,9 +13,10 @@ namespace LetMeFix.API.Controllers
     {
         private readonly IGenericRepository<Offers> _repository;
         private readonly IOfferService _offer;
-        public OffersController(IGenericRepository<Offers> repository)
+        public OffersController(IGenericRepository<Offers> repository, IOfferService offer)
         {
             _repository = repository;
+            _offer = offer;
         }
 
         [HttpGet("getAllOffers")]
@@ -54,14 +55,14 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getOffersByJob")]
-        public async Task<IActionResult> GetOffersByJob(PagedRequest request, string jobId)
+        public async Task<IActionResult> GetOffersByJob([FromQuery] PagedRequest request, string jobId)
         {
             var values = await _offer.GetOffersByJobIdAsync(request, jobId);
             return Ok(values);
         }
 
         [HttpGet("getContractsByCustomerIdPerJob")]
-        public async Task<IActionResult> GetContractsByCustomerIdPerJob(PagedRequest request, string jobId, string customerId)
+        public async Task<IActionResult> GetContractsByCustomerIdPerJob([FromQuery] PagedRequest request, string jobId, string customerId)
         {
             var value = await _offer.GetOffersByCustomerIPerJobId(request, jobId, customerId);
             return Ok(value);
