@@ -21,7 +21,8 @@ namespace LetMeFix.Persistence
             //services.AddSingleton<IGenericRepository<Category>, CategoryService>();
             //services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
             services.AddSingleton<IGenericRepository<Languages>, LanguageService>();
-            services.AddScoped<SkillsService>();
+            services.AddScoped<IGenericRepository<Skills>, SkillsRepository>();
+            services.AddScoped<ISkillsService, SkillsService>();
             //services.AddScoped<ContractService>();
             services.AddScoped<IGenericRepository<Contracts>, ContractRepository>();
             services.AddScoped<IContractService, ContractService>();

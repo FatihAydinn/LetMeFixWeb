@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -11,51 +12,13 @@ using ZstdSharp.Unsafe;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class SkillsService : BaseService<Skills>
+    public class SkillsService : ISkillsService
     {
-        //private readonly IMongoCollection<Skills> _collection;
-        public SkillsService(IMongoDatabase database) : base (database, "Skills")
-        { }
+        private readonly IGenericRepository<Skills> _skillsRepository;
 
-        public async Task AddAsync(Skills entity)
+        public SkillsService(IGenericRepository<Skills> skillsRepository)
         {
-            await base.AddAsync(entity);
-        }
-
-        public async Task DeleteAsync(string id)
-        {
-            await base.DeleteAsync(id);
-        }
-
-        public async Task<PagedResult<Skills>> GetAllAsync(PagedRequest request)
-        {
-            return await base.GetAllAsync(request);
-        }
-
-        public async Task<Skills> GetByIdAsync(string id)
-        {
-            return await base.GetByIdAsync(id);
-        }
-
-        public async Task UpdateAsync(Skills entity)
-        {
-            await base.UpdateAsync(entity);
-        }
-
-        public async Task<List<Skills>> GetSkillsbyCategory(string category)
-        {
-            return await _collection.Find(x => x.RelatedCategories.Contains(category)).ToListAsync();
-        }
-
-        public async Task<PagedResult<Skills>> GetPaged(PagedRequest request, FilterDefinition<Skills> filter)
-        {
-            return await GetPagedWithFilterAsync(request, filter);
-        }
-
-        public async Task<PagedResult<Skills>> SearchSkill(PagedRequest request, string value)
-        {
-            var fields = new List<string> { "SkillTitle" };
-            return await SearchFilter(request, value, fields);
+            _skillsRepository = skillsRepository;
         }
     }
 }

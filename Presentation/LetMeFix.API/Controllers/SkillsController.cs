@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
@@ -11,17 +12,18 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class SkillsController : ControllerBase
     {
-        private readonly SkillsService _skills;
-        public SkillsController(SkillsService skills)
+        private readonly IGenericRepository<Skills> _skillsRepository;
+        private readonly ISkillsService _skillsService;
+        public SkillsController(IGenericRepository<Skills> skillsRepository, ISkillsService skillsService)
         {
-            _skills = skills;
+            _skillsRepository = skillsRepository;
+            _skillsService = skillsService;
         }
 
         [HttpGet("getAllSkills")]
         public async Task<IActionResult> GetAllSkills([FromQuery] PagedRequest request)
         {
-            var filter = Builders<Skills>.Filter.Where(x => true);
-            var values = await _skills.GetPaged(request, filter);
+            var values = await _skillsRepository.GetAllAsync(request);
             return Ok(values);
         }
 
@@ -29,43 +31,44 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateSkill([FromBody] Skills model)
         {
             model.Id = Guid.NewGuid().ToString();
-            await _skills.AddAsync(model);
+            await _skillsRepository.AddAsync(model);
             return Ok(model);
         }
 
         [HttpPut("updateSkill")]
         public async Task<IActionResult> UpdateSkill([FromBody] Skills skill)
         {
-            await _skills.UpdateAsync(skill);
+            await _skillsRepository.UpdateAsync(skill);
             return Ok(skill);
         }
 
         [HttpGet("getSkillById")]
         public async Task<IActionResult> GetSkillById(string id)
         {
-            var content = await _skills.GetByIdAsync(id);
+            var content = await _skillsRepository.GetByIdAsync(id);
             return Ok(content);
         }
 
         [HttpDelete("deleteSkillById")]
         public async Task<IActionResult> DeleteSkill(string id)
         {
-            await _skills.DeleteAsync(id);
+            await _skillsRepository.DeleteAsync(id);
             return Ok("Successfully deleted!");
-        }
-
-        [HttpGet("getSkillsbyCategory")]
-        public async Task<IActionResult> GetSkillsbyCategory([FromQuery] PagedRequest request, string category)
-        {
-            var filter = Builders<Skills>.Filter.Where(x => x.RelatedCategories.Contains(category));
-            var values = await _skills.GetPaged(request, filter);
-            return Ok(values);
         }
 
         [HttpGet("searchSkill")]
         public async Task<PagedResult<Skills>> SearchSkills([FromQuery] PagedRequest request, string value)
         {
-            return await _skills.SearchSkill(request, value);
+            var searchValues = new List<string> { "SkillTitle" };
+            return await _skillsRepository.SearchFilter(request, value, searchValues);
+        }
+
+        [HttpGet("getSkillsbyCategory")]
+        public async Task<IActionResult> GetSkillsbyCategory([FromQuery] PagedRequest request, string category)
+        {
+            var searchValues = new List<string> { "RelatedCategories" };
+            var values = await _skillsRepository.SearchFilter(request, category, searchValues);
+            return Ok(values);
         }
     }
 }
