@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,12 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly ReviewService _repository;
-        public ReviewController(ReviewService repository)
+        private readonly IGenericRepository<Review> _repository;
+        private readonly IReviewService _reviewRepository;
+        public ReviewController(IGenericRepository<Review> repository, IReviewService reviewRepository)
         {
             _repository = repository;
+            _reviewRepository = reviewRepository;
         }
 
         //admin
@@ -26,29 +29,17 @@ namespace LetMeFix.API.Controllers
             return Ok(values);
         }
 
-        [HttpGet("getJobsReviews")]
-        public async Task<IActionResult> GetJobsReviews([FromQuery] PagedRequest request, string jobId)
+        [HttpGet("getReviewsByUserId")]
+        public async Task<IActionResult> GetReviewsByUserId([FromQuery] PagedRequest request, string userId)
         {
-            var filter = Builders<Review>.Filter.Eq(x => x.JobId, jobId);
-            var value = await _repository.GetJobReviewsPaged(filter, request);
-            return Ok(value);
-        }
-
-        //users own reviews
-        [HttpGet("getProvidersReviews")]
-        public async Task<IActionResult> GetProvidersReviews(string providerId, [FromQuery] PagedRequest request)
-        {
-            var filter = Builders<Review>.Filter.Eq(x => x.ProviderId, providerId);
-            var values = await _repository.GetPagedWithFilterAsync(request, filter);
+            var values = await _reviewRepository.GetReviewsByUserId(request, userId);
             return Ok(values);
         }
 
-        //users received reviews
-        [HttpGet("getCustomersReviews")]
-        public async Task<IActionResult> GetCustomersReviews(string customerId, [FromQuery] PagedRequest request)
+        [HttpGet("getReviewsByJobId")]
+        public async Task<IActionResult> GetReviewsByJobId([FromQuery] PagedRequest request, string jobId)
         {
-            var filter = Builders<Review>.Filter.Eq(x => x.CustomerId, customerId);
-            var values = await _repository.GetPagedWithFilterAsync(request, filter);
+            var values = await _reviewRepository.GetReviewsByJobId(request, jobId);
             return Ok(values);
         }
 

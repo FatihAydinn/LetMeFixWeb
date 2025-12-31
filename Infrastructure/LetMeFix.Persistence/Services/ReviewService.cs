@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -11,56 +12,25 @@ using System.Threading.Tasks;
 namespace LetMeFix.Persistence.Services
 {
     //public class ReviewService : IGenericRepository<Review>
-    public class ReviewService : BaseService<Review>
+    public class ReviewService : IReviewService
     {
-        public ReviewService(IMongoDatabase database) : base (database, "Review") { }
+        private readonly IGenericRepository<Review> _repository;
 
-        public async Task AddAsync(Review entity)
+        public ReviewService(IGenericRepository<Review> repository) 
         {
-            await base.AddAsync(entity);
+            _repository = repository;
         }
 
-        //customer
-        public async Task DeleteAsync(string id)
+        public async Task<PagedResult<Review>> GetReviewsByJobId(PagedRequest request, string id)
         {
-            await base.DeleteAsync(id);
+            var filter = Builders<Review>.Filter.Where(x => x.JobId == id);
+            return await _repository.GetPagedWithFilterAsync(request, filter);
         }
 
-        //admin
-        public async Task<PagedResult<Review>> GetAllAsync(PagedRequest request)
+        public async Task<PagedResult<Review>> GetReviewsByUserId(PagedRequest request, string id)
         {
-            return await base.GetAllAsync(request);
-        }
-
-        public async Task<Review> GetByIdAsync(string id)
-        {
-            return await base.GetByIdAsync(id);
-        }
-
-        public async Task UpdateAsync(Review entity)
-        {
-            await base.UpdateAsync(entity);
-        }
-
-        public async Task<List<Review>> GetReviewsByProvideId(string id)
-        {
-            return await _collection.Find(x => x.ProviderId == id).ToListAsync();
-        }
-
-        public async Task<List<Review>> GetReviewsByJobId(string id)
-        {
-            return await _collection.Find(x => x.JobId == id).ToListAsync();
-        }
-
-        //admin
-        public async Task<List<Review>> GetReviewsByCustomerId(string id)
-        {
-            return await _collection.Find(x => x.CustomerId == id).ToListAsync();
-        }
-
-        public async Task<PagedResult<Review>> GetJobReviewsPaged(FilterDefinition<Review> filter, PagedRequest request)
-        {
-            return await GetPagedWithFilterAsync(request, filter);
+            var filter = Builders<Review>.Filter.Where(x => x.CustomerId == id);
+            return await _repository.GetPagedWithFilterAsync(request, filter);
         }
     }
 }

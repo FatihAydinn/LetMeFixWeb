@@ -29,7 +29,8 @@ namespace LetMeFix.Persistence
             services.AddScoped<IOfferService, OfferService>();
             //services.AddScoped<JobService>();
             services.AddScoped<UserInformationService>();
-            services.AddScoped<ReviewService>();
+            services.AddScoped<IGenericRepository<Review>, ReviewRepository>();
+            services.AddScoped<IReviewService, ReviewService>();
             //services.AddScoped<OfferService>();
             //services.AddScoped<CategoryService>();
             services.AddScoped<IGenericRepository<Category>, CategoryRepository>();
