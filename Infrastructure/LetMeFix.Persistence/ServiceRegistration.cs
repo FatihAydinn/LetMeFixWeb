@@ -20,7 +20,7 @@ namespace LetMeFix.Persistence
             //services.AddSingleton<IGenericRepository<Job>, JobService>();
             //services.AddSingleton<IGenericRepository<Category>, CategoryService>();
             //services.AddSingleton<IGenericRepository<UserInformations>, UserInformationService>();
-            services.AddSingleton<IGenericRepository<Languages>, LanguageService>();
+            services.AddSingleton<IGenericRepository<Languages>, LanguageRepository>();
             services.AddScoped<IGenericRepository<Skills>, SkillsRepository>();
             services.AddScoped<ISkillsService, SkillsService>();
             //services.AddScoped<ContractService>();
@@ -41,7 +41,8 @@ namespace LetMeFix.Persistence
             //services.AddScoped<ChatSessionService>();
             services.AddScoped<IGenericRepository<ChatSession>, ChatSessionRepository>();
             services.AddScoped<IChatSessionService, ChatSessionService>();
-            services.AddScoped<TranslationService>();
+            services.AddScoped<IGenericRepository<Translations>, TranslationRepository>();
+            //services.AddScoped<TranslationService>();
             //services.AddScoped<ReportService>();
             services.AddScoped<IGenericRepository<Reports>, ReportRepository>();
             services.AddScoped<IReportService, ReportService>();

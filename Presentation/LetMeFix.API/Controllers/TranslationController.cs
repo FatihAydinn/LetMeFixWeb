@@ -1,7 +1,9 @@
 ﻿using LetMeFix.Domain.Entities;
+using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace LetMeFix.API.Controllers
 {
@@ -9,9 +11,9 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class TranslationController : ControllerBase
     {
-        private readonly TranslationService _service;
+        private readonly IGenericRepository<Translations> _service;
 
-        public TranslationController(TranslationService service)
+        public TranslationController(IGenericRepository<Translations> service)
         {
             _service = service;
         }
@@ -19,7 +21,9 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getTranslationsByLanguage")]
         public async Task<IActionResult> GetTranslationsByLanguage([FromQuery] PagedRequest request, string langId)
         {
-            var values = await _service.GetByPage(request, langId);
+            langId = langId.ToLower();
+            var filter = Builders<Translations>.Filter.Where(x => x.LanguageId == langId);
+            var values = await _service.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
@@ -45,10 +49,11 @@ namespace LetMeFix.API.Controllers
             return Ok("success");
         }
 
-        [HttpGet("searchJob")]
-        public async Task<IActionResult> SearchJob([FromQuery] PagedRequest request, string search)
+        [HttpGet("searchTranslation")]
+        public async Task<IActionResult> SearchTranslation([FromQuery] PagedRequest request, string search)
         {
-            var value = await _service.SearchTranslation(request, search);
+            var fieldName = new List<string> { "Key", "Content" };
+            var value = await _service.SearchFilter(request, search, fieldName);
             return Ok(value);
         }
     }
