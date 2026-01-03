@@ -1,4 +1,5 @@
 ﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.Identity.Client;
@@ -12,45 +13,16 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Persistence.Services
 {
-    public class UserInformationService : BaseService<UserInformations>
+    public class UserInformationService : IUserInformationService
     {
-        //private readonly IMongoCollection<UserInformations> _collection;
-        //public UserInformationService(IMongoDatabase database)
-        //{
-        //    _collection = database.GetCollection<UserInformations>("UserInformations");
-        //}
-
-        public UserInformationService(IMongoDatabase database) : base (database, "UserInformations")
+        private readonly IGenericRepository<UserInformations> _collection;
+        public UserInformationService(IGenericRepository<UserInformations> collection)
         {
+            _collection = collection;
         }
-
-        public async Task AddAsync(UserInformations entity)
-        {
-            await base.AddAsync(entity);
-        }
-
-        public async Task<UserInformations> GetByIdAsync(string id)
-        {
-            return await base.GetByIdAsync(id);
-        }
-        
-        public async Task UpdateAsync(UserInformations entity)
-        {
-            await base.UpdateAsync(entity);
-        }
-        
-        public Task DeleteAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<PagedResult<UserInformations>> GetAllAsync(PagedRequest request)
-        {
-            return await base.GetAllAsync(request);
-        }
-
         public async Task UpdateSocials(UserInformationSocialsDTO entity)
         {
+            var filter = Builders<UserInformations>.Filter.Where(x => x.Id == entity.UserId);
             var update = Builders<UserInformations>.Update
                 .Set(x => x.LinkedIn, entity.LinkedIn)
                 .Set(x => x.Instagram, entity.Instagram)
@@ -60,11 +32,12 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.Twitter, entity.Twitter)
                 .Set(x => x.UpdateDate, DateTime.Now);
 
-            await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
+            await _collection.UpdateWithFilter(filter, update);
         }
 
         public async Task UpdateAddress(UserinformationAddressDTO entity)
         {
+            var filter = Builders<UserInformations>.Filter.Where(x => x.Id == entity.UserId);
             var update = Builders<UserInformations>.Update
                 .Set(x => x.Country, entity.Country)
                 .Set(x => x.City, entity.City)
@@ -72,11 +45,12 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.Neighborhood, entity.Neighborhood)
                 .Set(x => x.Address, entity.Address)
                 .Set(x => x.UpdateDate, DateTime.Now);
-            await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
+            await _collection.UpdateWithFilter(filter, update);
         }
 
         public async Task UpdateSummary(UserInformationSummaryDTO entity)
         {
+            var filter = Builders<UserInformations>.Filter.Where(x => x.Id == entity.UserId);
             var update = Builders<UserInformations>.Update
                 .Set(x => x.AvrageRate, entity.AvrageRate)
                 .Set(x => x.Reviews, entity.Reviews)
@@ -86,7 +60,7 @@ namespace LetMeFix.Persistence.Services
                 .Set(x => x.Profession, entity.Profession)
                 .Set(x => x.UpdateDate, DateTime.Now);
 
-            await _collection.UpdateOneAsync(x => x.Id == entity.UserId, update);
+            await _collection.UpdateWithFilter(filter, update);
         }
     }
 }

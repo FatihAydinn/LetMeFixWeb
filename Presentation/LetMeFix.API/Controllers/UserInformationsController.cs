@@ -1,9 +1,11 @@
 ﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace LetMeFix.API.Controllers
 {
@@ -11,17 +13,26 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class UserInformationsController : ControllerBase
     {
-        //private readonly IGenericRepository<UserInformations> _userService;
-        private readonly UserInformationService _userService;
-        public UserInformationsController(UserInformationService userService)
+        private readonly IGenericRepository<UserInformations> _genericRepository;
+        private readonly IUserInformationService _userService;
+        public UserInformationsController(IUserInformationService userService, IGenericRepository<UserInformations> genericRepository)
         {
             _userService = userService;
+            _genericRepository = genericRepository;
+        }
+
+        //admin
+        [HttpGet("getAllUsers")]
+        public async Task<IActionResult> GetAllUsers([FromQuery] PagedRequest request)
+        {
+            var result = await _genericRepository.GetAllAsync(request);
+            return Ok(result);
         }
 
         [HttpGet("getUserById")]
         public async Task<IActionResult> GetUserById (string id)
         {
-            var userval = await _userService.GetByIdAsync(id);
+            var userval = await _genericRepository.GetByIdAsync(id);
             return Ok(userval);
         }
 
@@ -29,14 +40,14 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateNewUser([FromBody] UserInformations user)
         {
             //user.Id = Guid.NewGuid().ToString();
-            await _userService.AddAsync(user);
+            await _genericRepository.AddAsync(user);
             return Ok(user);
         }
         
         [HttpPut("updateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] UserInformations user)
         {
-            await _userService.UpdateAsync(user);
+            await _genericRepository.UpdateAsync(user);
             return Ok(user);
         }
 
