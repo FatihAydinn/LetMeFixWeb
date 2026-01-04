@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace LetMeFix.Application.Interfaces
 {
     public interface IChatSessionService
     {
+        Task<ChatSession> CreateChatRoom(ChatSessionDTO dto);
         Task<PagedResult<ChatSession>> GetChatsByUserId(PagedRequest request, string userid);
         Task<string> GetMessageById(string chatsession, string messageid);
         Task PushMessage(string chatSessionId, MessageContent message);

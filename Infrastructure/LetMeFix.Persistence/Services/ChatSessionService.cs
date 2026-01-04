@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using MongoDB.Bson.Serialization.Serializers;
@@ -14,9 +16,25 @@ namespace LetMeFix.Persistence.Services
     public class ChatSessionService : IChatSessionService
     {
         private readonly IGenericRepository<ChatSession> _repository;
-        public ChatSessionService(IGenericRepository<ChatSession> repository)
+        private readonly IMapper _mapper;
+
+        public ChatSessionService(IGenericRepository<ChatSession> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
+        }
+
+        public async Task<ChatSession> CreateChatRoom(ChatSessionDTO dto)
+        {
+            MessageContent msgc = new MessageContent();
+            var chatSession = _mapper.Map<ChatSession>(dto);
+            chatSession.Id = Guid.NewGuid().ToString();
+            chatSession.MessageContent = dto.MessageContent;
+            chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
+            chatSession.MessageContent[0].ChatSessionId = chatSession.Id;
+            chatSession.MessageContent[0].PreviousMessages = [];
+            await _repository.AddAsync(chatSession);
+            return chatSession;
         }
 
         public async Task<string> GetMessageById(string chatsessionId, string messageid)
@@ -34,6 +52,8 @@ namespace LetMeFix.Persistence.Services
 
         public async Task PushMessage(string chatSessionId, MessageContent message)
         {
+            message.PreviousMessages = [];
+
             var filter = Builders<ChatSession>.Filter.Eq(x => x.Id, chatSessionId);
             var update = Builders<ChatSession>.Update.Push(x => x.MessageContent, message).Set(x => x.UpdateDate, DateTime.Now);
             await _repository.UpdateWithFilter(filter, update);

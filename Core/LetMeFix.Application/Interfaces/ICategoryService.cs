@@ -11,6 +11,7 @@ namespace LetMeFix.Application.Interfaces
 {
     public interface ICategoryService
     {
+        Task CreateCategoryStage(Category entity);
         Task<Dictionary<string, string>> GetPreviousCategory(string id);
         Task<PagedResult<Category>> SearchCategory(string value, PagedRequest request);
     }

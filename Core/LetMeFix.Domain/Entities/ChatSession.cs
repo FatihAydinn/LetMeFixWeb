@@ -23,7 +23,7 @@ namespace LetMeFix.Domain.Entities
     public class MessageContent
     {
         public string? MessageId { get; set; }
-        public string ChatSessionId { get; set; }
+        public string? ChatSessionId { get; set; }
         public string Type { get; set; }
         public string SenderId { get; set; }
         public string Content { get; set; }
@@ -31,12 +31,12 @@ namespace LetMeFix.Domain.Entities
         public string? Currency { get; set; }
         public DateTime SentDate { get; set; } = DateTime.UtcNow;
         public string Status { get; set; }
-        public List<PreviousMessages>? PreviousMessages { get; set; }
+        public List<PreviousMessages>? PreviousMessages { get; set; } = new();
     }
 
     public class PreviousMessages
     {
-        public string EditedContent { get; set; }
-        public DateTime EditDate { get; set; } = DateTime.UtcNow;
+        public string? EditedContent { get; set; }
+        public DateTime? EditDate { get; set; } = DateTime.UtcNow;
     }
 }

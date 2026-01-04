@@ -17,7 +17,7 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpGet("getAllLanguages")]
-        public async Task<PagedResult<Languages>> GetAllLanguages(PagedRequest request)
+        public async Task<PagedResult<Languages>> GetAllLanguages([FromQuery]PagedRequest request)
         {
             return await _languageService.GetAllAsync(request);
         }

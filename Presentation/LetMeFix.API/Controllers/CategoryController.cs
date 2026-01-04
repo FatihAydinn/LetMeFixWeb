@@ -41,17 +41,7 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createCategoryStage")]
         public async Task<IActionResult> CreateCategoryStage([FromBody] Category entity)
         { //TR, EN
-            if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
-            else
-            {
-                var prev = await _categorService.GetPreviousCategory(entity.PreviousParent);
-                entity.FullPaths = entity.Names.ToDictionary(x => x.Key, x =>
-                {
-                    string previousCategoryName = prev.ContainsKey(x.Key) ? prev[x.Key] : "";
-                    return $"{previousCategoryName} > {x.Value}";
-                });
-            }
-            await _repository.AddAsync(entity);
+            await _categorService.CreateCategoryStage(entity);
             return Ok(entity);
         }
 
@@ -75,19 +65,5 @@ namespace LetMeFix.API.Controllers
             var value = await _categorService.SearchCategory(search, request);
             return Ok(value);
         }
-
-        //[HttpGet("getPreviousCategory")]
-        //public async Task<IActionResult> GetPreviousCategory(string id)
-        //{
-        //    try
-        //    {
-        //        var val = await _categorService.GetPreviousCategory(id);
-        //        return Ok(val);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
     }
 }

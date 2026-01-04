@@ -27,13 +27,14 @@ namespace LetMeFix.API.Controllers
         [HttpPost("createChatRoom")]
         public async Task<IActionResult> CreateChatRoom([FromBody] ChatSessionDTO dto)
         {
-            MessageContent msgc = new MessageContent();
-            var chatSession = _mapper.Map<ChatSession>(dto);
-            chatSession.Id = Guid.NewGuid().ToString();
-            chatSession.MessageContent = dto.MessageContent;
-            chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
-            chatSession.MessageContent[0].ChatSessionId = chatSession.Id;
-            await _genericRepository.AddAsync(chatSession);
+            //MessageContent msgc = new MessageContent();
+            //var chatSession = _mapper.Map<ChatSession>(dto);
+            //chatSession.Id = Guid.NewGuid().ToString();
+            //chatSession.MessageContent = dto.MessageContent;
+            //chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
+            //chatSession.MessageContent[0].ChatSessionId = chatSession.Id;
+            //await _genericRepository.AddAsync(chatSession);
+            var chatSession = await _service.CreateChatRoom(dto);
             return Ok(chatSession);
         }
 
@@ -42,19 +43,6 @@ namespace LetMeFix.API.Controllers
         {
             return Ok(await _genericRepository.GetByIdAsync(id));
         }
-
-        //[HttpGet("getChatsByUserId")]
-        //public async Task<IActionResult> GetChatsByUserId(string userId)
-        //{
-        //    try
-        //    {
-        //        return Ok(await _service.GetByUserId(userId));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
 
         [HttpPut("updateChat")]
         public async Task<IActionResult> UpdateChat([FromBody] ChatSession session)
