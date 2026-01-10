@@ -1,26 +1,29 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using LetMeFix.Application.Interfaces;
+using LetMeFix.Application.Mappings;
+using LetMeFix.Application.Validations;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Infrastructure.Services;
-using LetMeFix.Domain.Entities;
 using LetMeFix.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
-using System.Text;
 using Microsoft.OpenApi.Models;
-using LetMeFix.Application.Mappings;
-using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
 using Serilog;
-using LetMeFix.Application.Interfaces;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistanceServices();
 
 // Add services to the container.
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddTransient<IEmailService, EmailService>();
@@ -56,6 +59,12 @@ builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile(new MappingProfile());
 });
+
+builder.Services.AddControllers()
+    .AddFluentValidation(fv =>
+    {
+        fv.RegisterValidatorsFromAssemblyContaining<JobValidator>();
+    });
 
 builder.Services.AddDbContext<UserDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnectionString")));

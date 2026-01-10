@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Infrastructure.Services;
 using MongoDB.Driver;
 using LetMeFix.Application.Interfaces;
+using LetMeFix.Application.Validations;
 
 namespace LetMeFix.API.Controllers
 {

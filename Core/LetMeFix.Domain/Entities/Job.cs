@@ -16,7 +16,7 @@ namespace LetMeFix.Domain.Entities
         public List<string>? OfferIds { get; set; }
 
         //admin
-        public string DeleteReason { get; set; }
+        public string? DeleteReason { get; set; }
     }
 
     public enum ServiceType
