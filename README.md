@@ -29,6 +29,8 @@ The project is being developed for **personal growth and portfolio building**.
 - **Architecture & Code Structure**
   - Onion Architecture with `Core`, `Infrastructure`, and `Presentation` layers
   - Dependency Injection with built-in ASP.NET Core IoC container
+  - Fluent Validation for request validation
+  - CORS policy configuration
   - Service abstraction via interfaces
   - Centralized exception handling via custom middleware
   - Service registration for modularity
@@ -65,21 +67,22 @@ LetMeFixWeb/
 │  └─ LetMeFix.Application (references Domain)
 │     ├─ DTOs
 │     ├─ Interfaces
+│     ├─ Validations
 │     └─ Mappings
 │
 ├─ Infrastructure
 │  ├─ LetMeFix.Persistence (references Application)
 │  │  ├─ Migrations
 │  │  ├─ Repository
-│  │  └─ Services
-│  │
-│  ├─ LetMeFix.Infrastructure (references Application)
 │  │  ├─ Services
-│  │  │  └─ EmailService.cs
 │  │  ├─ MongoDBSettings.cs
 │  │  ├─ ServiceRegistrations.cs
 │  │  └─ UserDbContext.cs
-│
+│  │
+│  └─ LetMeFix.Infrastructure (references Application)
+│     └─ Services
+│        └─ EmailService.cs
+│    
 ├─ Presentation
 │  └─ LetMeFix.API (references Persistence + Infrastructure + Application)
 │     ├─ Controllers
