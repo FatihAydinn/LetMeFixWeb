@@ -17,6 +17,8 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Serilog;
 using System.Text;
+using DotNetEnv;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +55,20 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
+});
+
+var basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+var envPath = Path.Combine(basePath, "LetMeFixWeb", ".env");
+Env.Load(envPath);
+var origins = Env.GetString("ALLOWED_ORIGINS").Split(',');
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CustomPolicy",
+        builder => builder
+        .WithOrigins(origins)
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 });
 
 builder.Services.AddAutoMapper(cfg =>
@@ -132,6 +148,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("CustomPolicy");
+
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 

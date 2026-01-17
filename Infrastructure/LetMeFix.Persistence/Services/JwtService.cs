@@ -11,11 +11,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using LetMeFix.Domain.Interfaces;
 using System.Security.Cryptography;
+using DotNetEnv;
 
 namespace LetMeFix.Infrastructure.Services
 {
     public class JwtService : IJwtService
     {
+        public JwtService()
+        {
+            var basePath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            var envPath = Path.Combine(basePath, "LetMeFixWeb", ".env");
+            Env.Load(envPath);
+        }
+
         private readonly IConfiguration _configuration;
         private readonly UserManager<AppUser> _userManager;
 
@@ -26,7 +34,8 @@ namespace LetMeFix.Infrastructure.Services
         }
         public async Task<string> GenerateTokenAsync(AppUser user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var keyPath = Env.GetString("JWT_KEY").Trim();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyPath));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
