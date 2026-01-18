@@ -9,6 +9,8 @@ namespace LetMeFix.Domain.Entities
     public class Contracts : WorkBase
     {
         public string ClientId { get; set; }
+        public string JobId { get; set; }
+        public string? OfferId { get; set; }
 
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }

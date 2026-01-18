@@ -9,7 +9,7 @@ namespace LetMeFix.Domain.Entities
 {
     public class Review : BaseEntity
     {
-        public string JobId { get; set; }
+        public string ContractId { get; set; }
         public string CustomerId { get; set; }
         public string ProviderId { get; set; }
 
