@@ -32,11 +32,19 @@ namespace LetMeFix.API.Controllers
             return Ok(value);
         }
 
+        //[HttpPost("createOffer")]
+        //public async Task<IActionResult> CreateOffer(Offers offer)
+        //{
+        //    offer.Id = Guid.NewGuid().ToString();
+        //    await _repository.AddAsync(offer);
+        //    return Ok(offer);
+        //}
+
         [HttpPost("createOffer")]
         public async Task<IActionResult> CreateOffer(Offers offer)
         {
             offer.Id = Guid.NewGuid().ToString();
-            await _repository.AddAsync(offer);
+            await _offer.CreateOfferAsync(offer);
             return Ok(offer);
         }
 

@@ -33,20 +33,15 @@ namespace LetMeFix.Persistence.Services
             return await _repository.FindAsync(request, filter);
         }
 
-        public async Task<bool> CreateOfferAsync(string jobId, string customerId, decimal price)
+        public async Task<bool> CreateOfferAsync(Offers offer)
         {
-            var job = await _jobGenericRepository.GetByIdAsync(jobId);
+            var job = await _jobGenericRepository.GetByIdAsync(offer.JobId);
 
             if (job == null || !job.IsActive)
                 throw new Exception("Bu iş artık aktif değil");
 
-            var offer = new Offers
-            {
-                JobId = jobId,
-                CustomerId = customerId,
-                Price = price,
-                JobVersion = job.Version
-            };
+            if (job.Version != offer.JobVersion)
+                throw new Exception("İş durumu değişmiş. Sayfayı yenileyin.");
 
             await _repository.AddAsync(offer);
             return true;
