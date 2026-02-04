@@ -12,6 +12,7 @@ namespace LetMeFix.Domain.Entities
         public string ContractId { get; set; }
         public string CustomerId { get; set; }
         public string ProviderId { get; set; }
+        public string JobId { get; set; }
 
         [Range(1,5)]
         public decimal Rate { get; set; }

@@ -11,5 +11,6 @@ namespace LetMeFix.Application.Interfaces
     {
         Task<PagedResult<Offers>> GetOffersByJobIdAsync(PagedRequest request, string jobId);
         Task<PagedResult<Offers>> GetOffersByCustomerIPerJobId(PagedRequest request, string jobId, string customerId);
+        Task<bool> CreateOfferAsync(string jobId, string customerId, decimal price);
     }
 }

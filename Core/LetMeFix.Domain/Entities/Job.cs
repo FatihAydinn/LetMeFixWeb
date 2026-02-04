@@ -15,6 +15,9 @@ namespace LetMeFix.Domain.Entities
         public List<string>? ReviewIds { get; set; }
         public List<string>? OfferIds { get; set; }
 
+        public bool IsActive { get; set; } = true;
+        public int Version { get; set; } = 1;
+
         //admin
         public string? DeleteReason { get; set; }
     }

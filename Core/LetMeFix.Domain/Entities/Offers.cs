@@ -17,6 +17,7 @@ namespace LetMeFix.Domain.Entities
         public string? TimeType { get; set; }
         public int? EstimatedDuration { get; set; }
         public bool IsAccepted { get; set; }
+        public int JobVersion { get; set; }
 
         public string? Country { get; set; }
         public string? City { get; set; }
