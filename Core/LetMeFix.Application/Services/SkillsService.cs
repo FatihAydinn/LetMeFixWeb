@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZstdSharp.Unsafe;
 
-namespace LetMeFix.Persistence.Services
+namespace LetMeFix.Application.Services
 {
     public class SkillsService : ISkillsService
     {

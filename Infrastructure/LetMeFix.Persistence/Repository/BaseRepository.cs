@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LetMeFix.Application.Interfaces
+namespace LetMeFix.Persistence.Repository
 {
     public class BaseRepository<T> : IGenericRepository<T> where T : BaseEntity
     {

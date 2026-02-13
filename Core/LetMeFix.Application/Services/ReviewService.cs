@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LetMeFix.Persistence.Services
+namespace LetMeFix.Application.Services
 {
     //public class ReviewService : IGenericRepository<Review>
     public class ReviewService : IReviewService

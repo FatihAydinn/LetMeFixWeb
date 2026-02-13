@@ -13,7 +13,7 @@ using LetMeFix.Domain.Interfaces;
 using System.Security.Cryptography;
 using DotNetEnv;
 
-namespace LetMeFix.Infrastructure.Services
+namespace LetMeFix.Application.Services
 {
     public class JwtService : IJwtService
     {

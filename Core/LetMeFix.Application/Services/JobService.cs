@@ -14,8 +14,9 @@ using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Application.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using LetMeFix.Application.Services;
 
-namespace LetMeFix.Infrastructure.Services
+namespace LetMeFix.Application.Services
 {
     public class JobService : IJobService
     {
