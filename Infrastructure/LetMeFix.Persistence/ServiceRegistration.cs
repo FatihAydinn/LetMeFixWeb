@@ -1,13 +1,12 @@
 ﻿using LetMeFix.Domain.Interfaces;
 using LetMeFix.Domain.Entities;
-using LetMeFix.Infrastructure.Services;
+using LetMeFix.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LetMeFix.Persistence.Services;
 using LetMeFix.Application.Interfaces;
 using LetMeFix.Persistence.Repository;
 

@@ -18,11 +18,13 @@ using MongoDB.Driver;
 using Serilog;
 using System.Text;
 using DotNetEnv;
-
+using LetMeFix.Application.Services;
+using LetMeFix.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistanceServices();
+builder.Services.AddApplicationServices();
 
 // Add services to the container.
 //builder.Services.AddControllers();
