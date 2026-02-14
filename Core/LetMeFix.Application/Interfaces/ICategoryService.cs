@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface ICategoryService
+    public interface ICategoryService : IBaseService<Category>
     {
         Task CreateCategoryStage(Category entity);
         Task<Dictionary<string, string>> GetPreviousCategory(string id);

@@ -1,4 +1,4 @@
-﻿using LetMeFix.Infrastructure.Services;
+﻿using LetMeFix.Application.Services;
 using LetMeFix.Domain.Entities;
 using MongoDB.Driver;
 using System;
@@ -7,14 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LetMeFix.Domain.Interfaces;
-using LetMeFix.Persistence.Services;
 using static MongoDB.Driver.WriteConcern;
 using SharpCompress.Common;
 using Microsoft.Identity.Client;
 using Microsoft.AspNetCore.Mvc;
 using LetMeFix.Application.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using LetMeFix.Application.Services;
 
 namespace LetMeFix.Application.Services
 {

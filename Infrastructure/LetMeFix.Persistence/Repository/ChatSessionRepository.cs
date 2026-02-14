@@ -1,6 +1,6 @@
 ﻿using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
-using LetMeFix.Persistence.Services;
+using LetMeFix.Application.Services;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;

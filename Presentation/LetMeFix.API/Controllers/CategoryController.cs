@@ -2,7 +2,6 @@
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Infrastructure.Services;
-using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -14,12 +13,10 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly IGenericRepository<Category> _repository;
         private readonly ICategoryService _categorService;
 
-        public CategoryController(IGenericRepository<Category> repository, ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService)
         {
-            _repository = repository;
             _categorService = categoryService;
         }
 
@@ -27,14 +24,14 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> ListAllCategoryStages([FromQuery] PagedRequest request)
         {
             var filter = Builders<Category>.Filter.Where(x => true);
-            var values = await _repository.GetPagedWithFilterAsync(request, filter);
+            var values = await _categorService.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
         [HttpGet("getCategoryStagebyId")]
         public async Task<IActionResult> GetCategoryStagebyId(string id)
         {
-            var value = await _repository.GetByIdAsync(id);
+            var value = await _categorService.GetByIdAsync(id);
             return Ok(value);
         }
 
@@ -48,14 +45,14 @@ namespace LetMeFix.API.Controllers
         [HttpPut("updateCategoryStage")]
         public async Task<IActionResult> UpdateCategoryStage([FromBody] Category entity)
         {
-            await _repository.UpdateAsync(entity);
+            await _categorService.UpdateAsync(entity);
             return Ok(entity);
         }
 
         [HttpDelete("deleteCategoryStage")]
         public async Task<IActionResult> DeleteCategoryStage(string id)
         {
-            await _repository.DeleteAsync(id);
+            await _categorService.DeleteAsync(id);
             return Ok("success");
         }
 

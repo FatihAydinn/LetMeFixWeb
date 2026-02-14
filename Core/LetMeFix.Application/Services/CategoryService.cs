@@ -11,14 +11,12 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : BaseService<Category>, ICategoryService
     {
-        private readonly IGenericRepository<Category> _repository;
         private readonly IGenericRepository<Languages> _language;
 
-        public CategoryService(IGenericRepository<Category> repository, IGenericRepository<Languages> language)
+        public CategoryService(IGenericRepository<Category> repository, IGenericRepository<Languages> language) : base(repository) 
         {
-            _repository = repository;
             _language = language;
         }
 
@@ -63,5 +61,6 @@ namespace LetMeFix.Application.Services
             if (prev != null) fullPath = prev.FullPaths;
             return fullPath;
         }
+
     }
 }

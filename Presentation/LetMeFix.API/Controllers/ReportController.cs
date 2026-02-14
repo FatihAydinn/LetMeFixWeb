@@ -1,5 +1,4 @@
 ﻿using LetMeFix.Domain.Entities;
-using LetMeFix.Persistence.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
