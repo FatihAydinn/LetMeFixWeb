@@ -11,12 +11,10 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class ContractService : IContractService
+    public class ContractService : BaseService<Contracts>, IContractService
     {
-        private readonly IGenericRepository<Contracts> _repository;
-        public ContractService(IGenericRepository<Contracts> repository)
+        public ContractService(IGenericRepository<Contracts> repository) : base(repository)
         {
-            _repository = repository;
         }
 
         public async Task GiveATip(string id, decimal tip)

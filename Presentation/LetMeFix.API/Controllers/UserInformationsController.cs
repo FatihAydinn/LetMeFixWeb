@@ -12,26 +12,24 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class UserInformationsController : ControllerBase
     {
-        private readonly IGenericRepository<UserInformations> _genericRepository;
         private readonly IUserInformationService _userService;
-        public UserInformationsController(IUserInformationService userService, IGenericRepository<UserInformations> genericRepository)
+        public UserInformationsController(IUserInformationService userService)
         {
             _userService = userService;
-            _genericRepository = genericRepository;
         }
 
         //admin
         [HttpGet("getAllUsers")]
         public async Task<IActionResult> GetAllUsers([FromQuery] PagedRequest request)
         {
-            var result = await _genericRepository.GetAllAsync(request);
+            var result = await _userService.GetAllAsync(request);
             return Ok(result);
         }
 
         [HttpGet("getUserById")]
         public async Task<IActionResult> GetUserById (string id)
         {
-            var userval = await _genericRepository.GetByIdAsync(id);
+            var userval = await _userService.GetByIdAsync(id);
             return Ok(userval);
         }
 
@@ -39,14 +37,14 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateNewUser([FromBody] UserInformations user)
         {
             //user.Id = Guid.NewGuid().ToString();
-            await _genericRepository.AddAsync(user);
+            await _userService.AddAsync(user);
             return Ok(user);
         }
         
         [HttpPut("updateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] UserInformations user)
         {
-            await _genericRepository.UpdateAsync(user);
+            await _userService.UpdateAsync(user);
             return Ok(user);
         }
 

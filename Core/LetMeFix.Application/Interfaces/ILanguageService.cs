@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IReportService : IBaseService<Reports>
+    public interface ILanguageService : IBaseService<Languages>
     {
-        Task AddResultToReport(string id, string reason);
-        Task<PagedResult<Reports>> GetReportsByUser(PagedRequest request, string userId);
     }
 }

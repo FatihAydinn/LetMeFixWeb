@@ -1,20 +1,17 @@
 ﻿using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZstdSharp.Unsafe;
 
 namespace LetMeFix.Application.Services
 {
-    public class SkillsService : BaseService<Skills>, ISkillsService
+    public class LanguageService : BaseService<Languages>, ILanguageService
     {
-        public SkillsService(IGenericRepository<Skills> repository) : base(repository)
+        public LanguageService(IGenericRepository<Languages> repository) : base(repository)
         { }
     }
 }

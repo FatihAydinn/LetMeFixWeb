@@ -16,11 +16,9 @@ namespace LetMeFix.API.Controllers
     public class JobController : ControllerBase
     {
         private readonly IJobService _jobService;
-        private readonly IGenericRepository<Job> _genericRepository;
-        public JobController(IJobService jobService, IGenericRepository<Job> genericRepository)
+        public JobController(IJobService jobService)
         {
             _jobService = jobService;
-            _genericRepository = genericRepository;
         }
 
         [HttpGet("GetAll")]
@@ -35,28 +33,28 @@ namespace LetMeFix.API.Controllers
         [HttpGet("GetById")]
         public async Task<IActionResult> GetJobsById(string id)
         {
-            var job = await _genericRepository.GetByIdAsync(id);
+            var job = await _jobService.GetByIdAsync(id);
             return Ok(job);
         }
 
         [HttpPost("AddJob")]
         public async Task<IActionResult> PostJobs([FromBody] Job job) {
             job.Id = Guid.NewGuid().ToString();
-            await _genericRepository.AddAsync(job);
+            await _jobService.AddAsync(job);
             return Ok();
         }
 
         [HttpPut("UpdateJob")]
         public async Task<IActionResult> UpdateJob(Job job)
         {
-            await _genericRepository.UpdateAsync(job);
+            await _jobService.UpdateAsync(job);
             return Ok();
         }
 
         [HttpDelete("DeleteJob")]
         public async Task DeleteJob(string id)
         {
-            await _genericRepository.DeleteAsync(id);
+            await _jobService.DeleteAsync(id);
         }
 
         [HttpGet("ListJobsPerUser")]

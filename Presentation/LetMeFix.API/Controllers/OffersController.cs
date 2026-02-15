@@ -10,24 +10,22 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class OffersController : ControllerBase
     {
-        private readonly IGenericRepository<Offers> _repository;
         private readonly IOfferService _offer;
-        public OffersController(IGenericRepository<Offers> repository, IOfferService offer)
+        public OffersController(IOfferService offer)
         {
-            _repository = repository;
             _offer = offer;
         }
 
         [HttpGet("getAllOffers")]
         public async Task<PagedResult<Offers>> GetAllOffers([FromQuery] PagedRequest request)
         {            
-            return await _repository.GetAllAsync(request);
+            return await _offer.GetAllAsync(request);
         }
 
         [HttpGet("getOfferById")]
         public async Task<IActionResult> GetOfferById(string id)
         {
-            var value = await _repository.GetByIdAsync(id);
+            var value = await _offer.GetByIdAsync(id);
             return Ok(value);
         }
 
@@ -50,14 +48,14 @@ namespace LetMeFix.API.Controllers
         [HttpPut("updateOffer")]
         public async Task<IActionResult> UpdateOffer(Offers offer)
         {
-            await _repository.UpdateAsync(offer);
+            await _offer.UpdateAsync(offer);
             return Ok(offer);
         }
 
         [HttpDelete("deleteOffer")]
         public async Task<IActionResult> DeleteOffer(string id)
         {
-            await _repository.DeleteAsync(id);
+            await _offer.DeleteAsync(id);
             return Ok("success");
         }
 

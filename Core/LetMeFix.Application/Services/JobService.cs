@@ -16,16 +16,14 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LetMeFix.Application.Services
 {
-    public class JobService : IJobService
+    public class JobService : BaseService<Job>, IJobService
     {
-        private readonly IGenericRepository<Job> _repository;
         private readonly IGenericRepository<Category> _categoryService;
         ContractService _contractStages;
         JobService _job;
 
-        public JobService(IGenericRepository<Job> repository, IGenericRepository<Category> categoryService)
+        public JobService(IGenericRepository<Job> repository, IGenericRepository<Category> categoryService) : base(repository)
         {
-            _repository = repository;
             _categoryService = categoryService;
         }
 

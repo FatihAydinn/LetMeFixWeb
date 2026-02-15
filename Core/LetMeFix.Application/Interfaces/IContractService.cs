@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IContractService
+    public interface IContractService : IBaseService<Contracts>
     {
         Task<PagedResult<Contracts>> GetContractsByProviderId(PagedRequest request, string userId);
         Task<PagedResult<Contracts>> GetContractsByClientId(PagedRequest request, string userId);

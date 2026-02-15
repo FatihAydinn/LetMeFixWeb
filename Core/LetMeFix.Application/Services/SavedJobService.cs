@@ -10,18 +10,15 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class SavedJobService : ISavedJobService
+    public class SavedJobService : BaseService<SavedJobs>, ISavedJobService
     {
-        private readonly IGenericRepository<SavedJobs> _genericRepository;
-        public SavedJobService(IGenericRepository<SavedJobs> genericRepository)
-        {
-            _genericRepository = genericRepository;
-        }
+        public SavedJobService(IGenericRepository<SavedJobs> repository) : base(repository)
+        { }
 
         public Task<PagedResult<SavedJobs>> GetSavedJobsByUserId(PagedRequest request, string userId)
         {
             var filter = Builders<SavedJobs>.Filter.Where(x => x.UserId == userId);
-            var value = _genericRepository.GetPagedWithFilterAsync(request, filter);
+            var value = _repository.GetPagedWithFilterAsync(request, filter);
             return value;
         }
     }

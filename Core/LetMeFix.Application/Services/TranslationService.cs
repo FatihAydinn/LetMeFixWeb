@@ -12,9 +12,9 @@ using ZstdSharp.Unsafe;
 
 namespace LetMeFix.Application.Services
 {
-    public class SkillsService : BaseService<Skills>, ISkillsService
+    public class TranslationService : BaseService<Translations>, ITranslationService
     {
-        public SkillsService(IGenericRepository<Skills> repository) : base(repository)
+        public TranslationService(IGenericRepository<Translations> repository) : base(repository)
         { }
     }
 }

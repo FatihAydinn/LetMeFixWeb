@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,10 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class TranslationController : ControllerBase
     {
-        private readonly IGenericRepository<Translations> _service;
-
-        public TranslationController(IGenericRepository<Translations> service)
+        private readonly ITranslationService _translationService;
+        public TranslationController(ITranslationService translationService)
         {
-            _service = service;
+            _translationService = translationService;
         }
 
         [HttpGet("getTranslationsByLanguage")]
@@ -22,7 +22,7 @@ namespace LetMeFix.API.Controllers
         {
             langId = langId.ToLower();
             var filter = Builders<Translations>.Filter.Where(x => x.LanguageId == langId);
-            var values = await _service.GetPagedWithFilterAsync(request, filter);
+            var values = await _translationService.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
@@ -30,21 +30,21 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateTranslation([FromBody] Translations translations)
         {
             translations.Id = Guid.NewGuid().ToString();
-            await _service.AddAsync(translations);
+            await _translationService.AddAsync(translations);
             return Ok(translations);
         }
 
         [HttpPut("updateTranslation")]
         public async Task<IActionResult> UpdateTranslation([FromBody] Translations translations)
         {
-            await _service.UpdateAsync(translations);
+            await _translationService.UpdateAsync(translations);
             return Ok(translations);
         }
 
         [HttpDelete("deleteTranslation")]
         public async Task<IActionResult> DeleteTranslation(string id)
         {
-            await _service.DeleteAsync(id);
+            await _translationService.DeleteAsync(id);
             return Ok("success");
         }
 
@@ -52,7 +52,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> SearchTranslation([FromQuery] PagedRequest request, string search)
         {
             var fieldName = new List<string> { "Key", "Content" };
-            var value = await _service.SearchFilter(request, search, fieldName);
+            var value = await _translationService.SearchFilter(request, search, fieldName);
             return Ok(value);
         }
     }

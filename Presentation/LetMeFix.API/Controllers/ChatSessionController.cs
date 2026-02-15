@@ -13,12 +13,10 @@ namespace LetMeFix.API.Controllers
     public class ChatSessionController : ControllerBase
     {
         private readonly IChatSessionService _service;
-        private readonly IGenericRepository<ChatSession> _genericRepository;
         private readonly IMapper _mapper;
 
-        public ChatSessionController(IChatSessionService service, IGenericRepository<ChatSession> genericRepository, IMapper mapper)
+        public ChatSessionController(IChatSessionService service, IMapper mapper)
         {
-            _genericRepository = genericRepository;
             _service = service;
             _mapper = mapper;
         }
@@ -40,20 +38,20 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getChatbyId")]
         public async Task<IActionResult> GetChatById(string id)
         {
-            return Ok(await _genericRepository.GetByIdAsync(id));
+            return Ok(await _service.GetByIdAsync(id));
         }
 
         [HttpPut("updateChat")]
         public async Task<IActionResult> UpdateChat([FromBody] ChatSession session)
         {
-            await _genericRepository.UpdateAsync(session);
+            await _service.UpdateAsync(session);
             return Ok(session);
         }
 
         [HttpDelete("deleteChat")]
         public async Task<IActionResult> DeleteChat(string id)
         {
-            await _genericRepository.DeleteAsync(id);
+            await _service.DeleteAsync(id);
             return Ok("success");
         }
 

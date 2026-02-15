@@ -16,6 +16,17 @@ namespace LetMeFix.Application
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IChatSessionService, ChatSessionService>();
+            services.AddScoped<IContractService, ContractService>();
+            services.AddScoped<IJobService, JobService>();
+            services.AddScoped<IOfferService, OfferService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<ISavedJobService, SavedJobService>();
+            services.AddScoped<ISkillsService, SkillsService>();
+            services.AddScoped<IUserInformationService, UserInformationService>();
+            services.AddScoped<ITranslationService, TranslationService>();
+            services.AddScoped<ILanguageService, LanguageService>();
         }
     }
 }

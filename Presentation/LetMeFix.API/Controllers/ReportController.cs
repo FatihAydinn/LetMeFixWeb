@@ -11,12 +11,10 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        readonly private IGenericRepository<Reports> _service;
         readonly private IReportService _reportService;
 
-        public ReportController(IGenericRepository<Reports> service, IReportService reportService)
+        public ReportController(IReportService reportService)
         {
-            _service = service;
             _reportService = reportService;
         }
 
@@ -24,14 +22,14 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetAllReports([FromQuery] PagedRequest request)
         {
             var filter = Builders<Reports>.Filter.Where(x => true);
-            var value = await _service.GetPagedWithFilterAsync(request, filter);
+            var value = await _reportService.GetPagedWithFilterAsync(request, filter);
             return Ok(value);
         }
 
         [HttpGet("getReportbyId")]
         public async Task<IActionResult> GetReportById(string id)
         {
-            var value = await _service.GetByIdAsync(id);
+            var value = await _reportService.GetByIdAsync(id);
             return Ok(value);
         }
 
@@ -39,7 +37,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetAllReportsByStatus([FromQuery] PagedRequest request, ReportStatus statusCode)
         {
             var filter = Builders<Reports>.Filter.Eq(x => x.ReportStatus, statusCode);
-            var value = await _service.GetPagedWithFilterAsync(request, filter);
+            var value = await _reportService.GetPagedWithFilterAsync(request, filter);
             return Ok(value);
         }
 
@@ -53,21 +51,21 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateReport(Reports report)
         {
             report.Id = Guid.NewGuid().ToString();
-            await _service.AddAsync(report);
+            await _reportService.AddAsync(report);
             return Ok(report);
         }
 
         [HttpPut("updateReport")]
         public async Task<IActionResult> UpdateReport(Reports report)
         {            
-            await _service.UpdateAsync(report);
+            await _reportService.UpdateAsync(report);
             return Ok(report);
         }
 
         [HttpDelete("deleteReport")]
         public async Task<IActionResult> DeleteReport(string id)
         {
-            await _service.DeleteAsync(id);
+            await _reportService.DeleteAsync(id);
             return Ok("deleted");
         }
 

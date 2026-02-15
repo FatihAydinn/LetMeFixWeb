@@ -11,15 +11,10 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    //public class ReviewService : IGenericRepository<Review>
-    public class ReviewService : IReviewService
+    public class ReviewService : BaseService<Review>, IReviewService
     {
-        private readonly IGenericRepository<Review> _repository;
-
-        public ReviewService(IGenericRepository<Review> repository) 
-        {
-            _repository = repository;
-        }
+        public ReviewService(IGenericRepository<Review> repository) : base(repository) 
+        { }
 
         public async Task<PagedResult<Review>> GetReviewsByJobId(PagedRequest request, string id)
         {

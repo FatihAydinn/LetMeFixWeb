@@ -12,26 +12,24 @@ namespace LetMeFix.API.Controllers
     public class ContractsController : ControllerBase
     {
         private readonly IContractService _contracts;
-        private readonly IGenericRepository<Contracts> _repository;
 
-        public ContractsController(IContractService contracts, IGenericRepository<Contracts> repository)
+        public ContractsController(IContractService contracts)
         {
             _contracts = contracts;
-            _repository = repository;
         }
 
         [HttpGet("getAllContracts")]
         public async Task<IActionResult> GetAllContracts([FromQuery] PagedRequest request)
         {
             var filter = Builders<Contracts>.Filter.Where(x => true);
-            var values = await _repository.GetPagedWithFilterAsync(request, filter);
+            var values = await _contracts.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
         [HttpGet("getContractbyId")]
         public async Task<IActionResult> GetContractById(string id)
         {
-            var value = await _repository.GetByIdAsync(id);
+            var value = await _contracts.GetByIdAsync(id);
             return Ok(value);
         }
 
@@ -39,21 +37,21 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateContract([FromBody] Contracts model)
         {
             model.Id = Guid.NewGuid().ToString();
-            await _repository.AddAsync(model);
+            await _contracts.AddAsync(model);
             return Ok("success!");
         }
 
         [HttpPut("updateContract")]
         public async Task<IActionResult> UpdateContract([FromBody] Contracts model)
         {
-            await _repository.UpdateAsync(model);
+            await _contracts.UpdateAsync(model);
             return Ok("success");
         }
 
         [HttpDelete("deleteContract")]
         public async Task<IActionResult> DeleteContract(string id)
         {
-            await _repository.DeleteAsync(id);
+            await _contracts.DeleteAsync(id);
             return Ok("success");
         }
 
@@ -75,7 +73,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetContractsByProviderId([FromQuery] PagedRequest request, string userId)
         {
             var filter = Builders<Contracts>.Filter.Eq(x => x.ProviderId, userId);
-            var result = await _repository.GetPagedWithFilterAsync(request, filter);
+            var result = await _contracts.GetPagedWithFilterAsync(request, filter);
             return Ok(result);
         }
 
@@ -83,7 +81,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> GetContractsByClientId([FromQuery] PagedRequest request, string userId)
         {
             var filter = Builders<Contracts>.Filter.Eq(x => x.ClientId, userId);
-            var result = await _repository.GetPagedWithFilterAsync(request, filter);
+            var result = await _contracts.GetPagedWithFilterAsync(request, filter);
             return Ok(result);
         }
 
@@ -99,7 +97,7 @@ namespace LetMeFix.API.Controllers
                          userfilter,
                          Builders<Contracts>.Filter.Eq(x => x.Status, enumStatus)
             );
-            var result = await _repository.GetPagedWithFilterAsync(request, filter);
+            var result = await _contracts.GetPagedWithFilterAsync(request, filter);
             return Ok(result);
         }
     }

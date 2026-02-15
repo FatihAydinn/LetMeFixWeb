@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.Interfaces;
+using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,9 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class LanguagesController : ControllerBase
     {
-        private readonly IGenericRepository<Languages> _languageService;
+        private readonly ILanguageService _languageService;
 
-        public LanguagesController(IGenericRepository<Languages> languageService)
+        public LanguagesController(ILanguageService languageService)
         {
             _languageService = languageService;
         }

@@ -12,25 +12,22 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class ReportService : IReportService
+    public class ReportService : BaseService<Reports>, IReportService
     {
-        private readonly IGenericRepository<Reports> _generic;
-        public ReportService(IGenericRepository<Reports> generic)
-        { 
-            _generic = generic;
-        }
+        public ReportService(IGenericRepository<Reports> repository) : base(repository) 
+        {  }
 
         public async Task AddResultToReport(string id, string reason)
         {
             var filter = Builders<Reports>.Filter.Eq(x => x.Id, id);
             var update = Builders<Reports>.Update.Set(x => x.Reason, reason).Set(x => x.UpdateDate, DateTime.Now).Set(x => x.ReportStatus, ReportStatus.Concluded);
-            await _generic.UpdateWithFilter(filter, update);
+            await _repository.UpdateWithFilter(filter, update);
         }
 
         public async Task<PagedResult<Reports>> GetReportsByUser(PagedRequest request, string userId)
         {
             var filter = Builders<Reports>.Filter.Where(x => x.UserId == userId || x.ReportedUserId == userId);
-            return await _generic.GetPagedWithFilterAsync(request, filter);
+            return await _repository.GetPagedWithFilterAsync(request, filter);
         }
     }
 }

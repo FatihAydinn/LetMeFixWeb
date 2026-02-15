@@ -11,11 +11,9 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly IGenericRepository<Review> _repository;
         private readonly IReviewService _reviewRepository;
-        public ReviewController(IGenericRepository<Review> repository, IReviewService reviewRepository)
+        public ReviewController(IReviewService reviewRepository)
         {
-            _repository = repository;
             _reviewRepository = reviewRepository;
         }
 
@@ -24,7 +22,7 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> getAllReviews([FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Where(x => true);
-            var values = await _repository.GetPagedWithFilterAsync(request, filter);
+            var values = await _reviewRepository.GetPagedWithFilterAsync(request, filter);
             return Ok(values);
         }
 
@@ -45,7 +43,7 @@ namespace LetMeFix.API.Controllers
         [HttpGet("getReviewById")]
         public async Task<IActionResult> GetReviewById(string reviewId)
         {
-            var value = await _repository.GetByIdAsync(reviewId);
+            var value = await _reviewRepository.GetByIdAsync(reviewId);
             return Ok(value);
         }
 
@@ -53,21 +51,21 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateReview([FromBody] Review review)
         {
             review.Id = Guid.NewGuid().ToString();
-            await _repository.AddAsync(review);
+            await _reviewRepository.AddAsync(review);
             return Ok(review);
         }
 
         [HttpPut("updateReview")]
         public async Task<IActionResult> UpdateReview([FromBody] Review review)
         {
-            await _repository.UpdateAsync(review);
+            await _reviewRepository.UpdateAsync(review);
             return Ok(review);
         }
 
         [HttpDelete("deleteReview")]
         public async Task<IActionResult> DeleteReview(string reviewId)
         {
-            await _repository.DeleteAsync(reviewId);
+            await _reviewRepository.DeleteAsync(reviewId);
             return Ok("success");
         }
     }

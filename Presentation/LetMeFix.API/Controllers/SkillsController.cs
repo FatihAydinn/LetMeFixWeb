@@ -11,18 +11,16 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class SkillsController : ControllerBase
     {
-        private readonly IGenericRepository<Skills> _skillsRepository;
         private readonly ISkillsService _skillsService;
-        public SkillsController(IGenericRepository<Skills> skillsRepository, ISkillsService skillsService)
+        public SkillsController(ISkillsService skillsService)
         {
-            _skillsRepository = skillsRepository;
             _skillsService = skillsService;
         }
 
         [HttpGet("getAllSkills")]
         public async Task<IActionResult> GetAllSkills([FromQuery] PagedRequest request)
         {
-            var values = await _skillsRepository.GetAllAsync(request);
+            var values = await _skillsService.GetAllAsync(request);
             return Ok(values);
         }
 
@@ -30,28 +28,28 @@ namespace LetMeFix.API.Controllers
         public async Task<IActionResult> CreateSkill([FromBody] Skills model)
         {
             model.Id = Guid.NewGuid().ToString();
-            await _skillsRepository.AddAsync(model);
+            await _skillsService.AddAsync(model);
             return Ok(model);
         }
 
         [HttpPut("updateSkill")]
         public async Task<IActionResult> UpdateSkill([FromBody] Skills skill)
         {
-            await _skillsRepository.UpdateAsync(skill);
+            await _skillsService.UpdateAsync(skill);
             return Ok(skill);
         }
 
         [HttpGet("getSkillById")]
         public async Task<IActionResult> GetSkillById(string id)
         {
-            var content = await _skillsRepository.GetByIdAsync(id);
+            var content = await _skillsService.GetByIdAsync(id);
             return Ok(content);
         }
 
         [HttpDelete("deleteSkillById")]
         public async Task<IActionResult> DeleteSkill(string id)
         {
-            await _skillsRepository.DeleteAsync(id);
+            await _skillsService.DeleteAsync(id);
             return Ok("Successfully deleted!");
         }
 
@@ -59,14 +57,14 @@ namespace LetMeFix.API.Controllers
         public async Task<PagedResult<Skills>> SearchSkills([FromQuery] PagedRequest request, string value)
         {
             var searchValues = new List<string> { "SkillTitle" };
-            return await _skillsRepository.SearchFilter(request, value, searchValues);
+            return await _skillsService.SearchFilter(request, value, searchValues);
         }
 
         [HttpGet("getSkillsbyCategory")]
         public async Task<IActionResult> GetSkillsbyCategory([FromQuery] PagedRequest request, string category)
         {
             var searchValues = new List<string> { "RelatedCategories" };
-            var values = await _skillsRepository.SearchFilter(request, category, searchValues);
+            var values = await _skillsService.SearchFilter(request, category, searchValues);
             return Ok(values);
         }
     }

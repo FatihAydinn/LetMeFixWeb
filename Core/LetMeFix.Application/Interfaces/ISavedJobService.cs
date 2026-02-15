@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface ISavedJobService
+    public interface ISavedJobService : IBaseService<SavedJobs>
     {
         Task<PagedResult<SavedJobs>> GetSavedJobsByUserId(PagedRequest request, string userId);
     }

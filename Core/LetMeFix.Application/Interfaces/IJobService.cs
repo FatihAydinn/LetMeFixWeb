@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IJobService
+    public interface IJobService : IBaseService<Job>
     {
         Task<PagedResult<Job>> ListJobsPerUser(string userId);
         Task<PagedResult<Job>> ListJobsPerCategory(string categoryId, PagedRequest request);

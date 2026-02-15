@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IChatSessionService
+    public interface IChatSessionService : IBaseService<ChatSession>
     {
         Task<ChatSession> CreateChatRoom(ChatSessionDTO dto);
         Task<PagedResult<ChatSession>> GetChatsByUserId(PagedRequest request, string userid);

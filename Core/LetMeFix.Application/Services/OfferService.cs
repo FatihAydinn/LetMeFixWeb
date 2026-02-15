@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class OfferService : IOfferService
+    public class OfferService : BaseService<Offers>, IOfferService
     {
-        private readonly IGenericRepository<Offers> _repository;
         private readonly IGenericRepository<Job> _jobGenericRepository;
-        public OfferService(IGenericRepository<Offers> repository, IGenericRepository<Job> jobGenericRepository)
+        public OfferService(IGenericRepository<Offers> repository, IGenericRepository<Job> jobGenericRepository) : base(repository)
         {
-            _repository = repository;
             _jobGenericRepository = jobGenericRepository;
         }
 

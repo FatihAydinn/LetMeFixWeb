@@ -13,13 +13,11 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class UserInformationService : IUserInformationService
+    public class UserInformationService : BaseService<UserInformations>, IUserInformationService
     {
-        private readonly IGenericRepository<UserInformations> _collection;
-        public UserInformationService(IGenericRepository<UserInformations> collection)
-        {
-            _collection = collection;
-        }
+        public UserInformationService(IGenericRepository<UserInformations> repository) : base(repository)
+        { }
+
         public async Task UpdateSocials(UserInformationSocialsDTO entity)
         {
             var filter = Builders<UserInformations>.Filter.Where(x => x.Id == entity.UserId);
@@ -32,7 +30,7 @@ namespace LetMeFix.Application.Services
                 .Set(x => x.Twitter, entity.Twitter)
                 .Set(x => x.UpdateDate, DateTime.Now);
 
-            await _collection.UpdateWithFilter(filter, update);
+            await _repository.UpdateWithFilter(filter, update);
         }
 
         public async Task UpdateAddress(UserinformationAddressDTO entity)
@@ -45,7 +43,7 @@ namespace LetMeFix.Application.Services
                 .Set(x => x.Neighborhood, entity.Neighborhood)
                 .Set(x => x.Address, entity.Address)
                 .Set(x => x.UpdateDate, DateTime.Now);
-            await _collection.UpdateWithFilter(filter, update);
+            await _repository.UpdateWithFilter(filter, update);
         }
 
         public async Task UpdateSummary(UserInformationSummaryDTO entity)
@@ -60,7 +58,7 @@ namespace LetMeFix.Application.Services
                 .Set(x => x.Profession, entity.Profession)
                 .Set(x => x.UpdateDate, DateTime.Now);
 
-            await _collection.UpdateWithFilter(filter, update);
+            await _repository.UpdateWithFilter(filter, update);
         }
     }
 }

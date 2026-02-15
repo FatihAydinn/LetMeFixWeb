@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface ISkillsService
+    public interface ISkillsService : IBaseService<Skills>
     {
+        Task<PagedResult<Skills>> SearchFilter(PagedRequest request, string search, List<string> fieldNames);
     }
 }

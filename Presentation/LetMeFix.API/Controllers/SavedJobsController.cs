@@ -10,19 +10,17 @@ namespace LetMeFix.API.Controllers
     [ApiController]
     public class SavedJobsController : ControllerBase
     {
-        private readonly IGenericRepository<SavedJobs> _genericRepository;
         private readonly ISavedJobService _savedJobs;
 
-        public SavedJobsController(IGenericRepository<SavedJobs> genericRepository, ISavedJobService savedJobs)
+        public SavedJobsController(ISavedJobService savedJobs)
         {
-            _genericRepository = genericRepository;
             _savedJobs = savedJobs;
         }
 
         [HttpPost("saveAJob")]
         public async Task<IActionResult> SaveAJob(SavedJobs job)
         {
-            await _genericRepository.AddAsync(job);
+            await _savedJobs.AddAsync(job);
             return Ok(job);
         }
 
@@ -34,7 +32,7 @@ namespace LetMeFix.API.Controllers
 
         [HttpDelete("deleteSavedJob")]
         public async Task<IActionResult> DeleteSavedJob(string jobId) {
-            await _genericRepository.DeleteAsync(jobId);
+            await _savedJobs.DeleteAsync(jobId);
             return Ok("success");
         }
     }

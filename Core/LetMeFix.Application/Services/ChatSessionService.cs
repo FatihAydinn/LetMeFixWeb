@@ -13,14 +13,12 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class ChatSessionService : IChatSessionService
+    public class ChatSessionService : BaseService<ChatSession>, IChatSessionService
     {
-        private readonly IGenericRepository<ChatSession> _repository;
         private readonly IMapper _mapper;
 
-        public ChatSessionService(IGenericRepository<ChatSession> repository, IMapper mapper)
+        public ChatSessionService(IGenericRepository<ChatSession> repository, IMapper mapper) : base (repository) 
         {
-            _repository = repository;
             _mapper = mapper;
         }
 
