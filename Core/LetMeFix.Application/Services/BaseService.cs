@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using Azure.Core;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +16,22 @@ using System.Threading.Tasks;
 namespace LetMeFix.Application.Services
 {
     //!!
-    public class BaseService<T> : IBaseService<T> where T : BaseEntity
+    public class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto> 
+        where TEntity : class
+        where TDto : class
     {
-        protected readonly IGenericRepository<T> _repository;
-        public BaseService(IGenericRepository<T> repository)
+        protected readonly IGenericRepository<TEntity> _repository;
+        protected readonly IMapper _mapper;
+
+        public BaseService(IGenericRepository<TEntity> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task AddAsync(T entity)
+        public async Task AddAsync(TDto dto)
         {
+            var entity = _mapper.Map<TEntity>(dto);
             await _repository.AddAsync(entity);
         }
 
@@ -32,37 +40,67 @@ namespace LetMeFix.Application.Services
             await _repository.DeleteAsync(id);
         }
 
-        public async Task<PagedResult<T>> GetAllAsync(PagedRequest request)
+        public async Task<PagedResult<TDto>> GetAllAsync(PagedRequest request)
         {
-            return await _repository.GetAllAsync(request);
+            var pagedEntities = await _repository.GetAllAsync(request);
+            return new PagedResult<TDto>
+            {
+                Items = _mapper.Map<List<TDto>>(pagedEntities.Items),
+                TotalCount = pagedEntities.TotalCount,
+                Page = pagedEntities.Page,
+                PageSize = pagedEntities.PageSize
+            };
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<TDto> GetByIdAsync(string id)
         {
-            return await _repository.GetByIdAsync(id);
+            var entity = await _repository.GetByIdAsync(id);
+            return _mapper.Map<TDto>(entity);
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(TDto dto)
         {
+            var entity = _mapper.Map<TEntity>(dto);
             await _repository.UpdateAsync(entity);
         }
 
-        public async Task<PagedResult<T>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<T> filter)
+        public async Task<PagedResult<TDto>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<TEntity> filter)
         {
-            return await _repository.GetPagedWithFilterAsync(request, filter);
+            var pagedEntities = await _repository.GetPagedWithFilterAsync(request, filter);
+            return new PagedResult<TDto>
+            {
+                Items = _mapper.Map<List<TDto>>(pagedEntities.Items),
+                TotalCount = pagedEntities.TotalCount,
+                Page = pagedEntities.Page,
+                PageSize = pagedEntities.PageSize
+            };
         }
 
-        public virtual async Task<PagedResult<T>> SearchFilter(PagedRequest request, string search, List<string> fieldNames)
+        public virtual async Task<PagedResult<TDto>> SearchFilter(PagedRequest request, string search, List<string> fieldNames)
         {
-            return await _repository.SearchFilter(request, search, fieldNames);
+            var pagedEntities = await _repository.SearchFilter(request, search, fieldNames);
+            return new PagedResult<TDto>
+            {
+                Items = _mapper.Map<List<TDto>>(pagedEntities.Items),
+                TotalCount = pagedEntities.TotalCount,
+                Page = pagedEntities.Page,
+                PageSize = pagedEntities.PageSize
+            };
         }
 
-        public virtual async Task<PagedResult<T>> FindAsync(PagedRequest request, FilterDefinition<T> filter)
+        public virtual async Task<PagedResult<TDto>> FindAsync(PagedRequest request, FilterDefinition<TEntity> filter)
         {
-            return await _repository.FindAsync(request, filter);
+            var pagedEntities = await _repository.FindAsync(request, filter);
+            return new PagedResult<TDto>
+            {
+                Items = _mapper.Map<List<TDto>>(pagedEntities.Items),
+                TotalCount = pagedEntities.TotalCount,
+                Page = pagedEntities.Page,
+                PageSize = pagedEntities.PageSize
+            };
         }
 
-        public virtual async Task UpdateWithFilter(FilterDefinition<T> filter, UpdateDefinition<T> update)
+        public virtual async Task UpdateWithFilter(FilterDefinition<TEntity> filter, UpdateDefinition<TEntity> update)
         {
             await _repository.UpdateWithFilter(filter, update);
         }

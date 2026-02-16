@@ -1,4 +1,7 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using Humanizer;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +14,19 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class CategoryService : BaseService<Category>, ICategoryService
+    public class CategoryService : BaseService<Category, CategoryDTO>, ICategoryService
     {
         private readonly IGenericRepository<Languages> _language;
+        private readonly IMapper _mapper;
 
-        public CategoryService(IGenericRepository<Category> repository, IGenericRepository<Languages> language) : base(repository) 
+        public CategoryService(IGenericRepository<Category> repository, IGenericRepository<Languages> language, IMapper mapper) : base(repository, mapper) 
         {
             _language = language;
         }
 
-        public async Task CreateCategoryStage(Category entity)
+        public async Task CreateCategoryStage(CategoryDTO dto)
         {
+            var entity = _mapper.Map<Category>(dto);
             if (entity.PreviousParent == null) entity.FullPaths = entity.Names;
             else
             {
@@ -35,12 +40,19 @@ namespace LetMeFix.Application.Services
             await _repository.AddAsync(entity);
         }
 
-        public async Task<PagedResult<Category>> GetCategoriesPages(FilterDefinition<Category> filter, PagedRequest request)
+        public async Task<PagedResult<CategoryDTO>> GetCategoriesPages(FilterDefinition<Category> filter, PagedRequest request)
         {
-            return await _repository.GetPagedWithFilterAsync(request, filter);
+            var result = await _repository.GetPagedWithFilterAsync(request, filter);
+            return new PagedResult<CategoryDTO>
+            {
+                Items = _mapper.Map<List<CategoryDTO>>(result.Items),
+                TotalCount = result.TotalCount,
+                Page = result.Page,
+                PageSize = result.PageSize
+            };
         }
 
-        public async Task<PagedResult<Category>> SearchCategory(string value, PagedRequest request)
+        public async Task<PagedResult<CategoryDTO>> SearchCategory(string value, PagedRequest request)
         {
             PagedRequest request2 = new PagedRequest();
             request2.Page = 1;
@@ -51,7 +63,16 @@ namespace LetMeFix.Application.Services
             {
                 fields.Add($"Names.{lang.LanguageCode}");
             }
-            return await _repository.SearchFilter(request, value, fields);
+
+            var entityResult = await _repository.SearchFilter(request, value, fields);
+
+            return new PagedResult<CategoryDTO>
+            {
+                Items = _mapper.Map<List<CategoryDTO>>(entityResult.Items),
+                TotalCount = entityResult.TotalCount,
+                Page = entityResult.Page,
+                PageSize = entityResult.PageSize
+            };
         }
 
         public async Task<Dictionary<string, string>> GetPreviousCategory(string id)

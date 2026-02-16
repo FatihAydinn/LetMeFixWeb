@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.DTOs
 {
-    public class CategoryDTO /*: EntityBase*/
-    {
-        public string? Id { get; set; }
-        public string Name { get; set; }
-        public string ParentId { get; set; }
-        public int Priorty { get; set; }
-        public bool IsActive { get; set; }
-    }
+    public record CategoryDTO(
+            string Id,
+            Dictionary<string, string> Names,
+            string? PreviousParent,
+            Dictionary<string, string>? FullPaths,
+            int Priority,
+            DateTime? CreateDate,
+            DateTime? UpdateDate
+    );
 }

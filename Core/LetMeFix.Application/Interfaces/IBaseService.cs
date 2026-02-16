@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IBaseService<T> where T : class
+    public interface IBaseService<TEntity, TDto> 
+        where TEntity : class
+        where TDto : class
     {
-        Task<PagedResult<T>> GetAllAsync(PagedRequest request);
-        Task<T> GetByIdAsync(string id);
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
+        Task<PagedResult<TDto>> GetAllAsync(PagedRequest request);
+        Task<TDto> GetByIdAsync(string id);
+        Task AddAsync(TDto entity);
+        Task UpdateAsync(TDto entity);
         Task DeleteAsync(string id);
-        Task<PagedResult<T>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<T> filter);
+        Task<PagedResult<TDto>> GetPagedWithFilterAsync(PagedRequest request, FilterDefinition<TEntity> filter);
     }
 }

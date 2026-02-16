@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LetMeFix.Domain.Entities;
-using LetMeFix.Application.DTOs;
+using static LetMeFix.Application.DTOs.CategoryDTO;
 
 namespace LetMeFix.Application.Mappings
 {
@@ -28,6 +29,9 @@ namespace LetMeFix.Application.Mappings
             CreateMap<ChatSessionDTO, ChatSession>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.MessageContent, opt => opt.MapFrom(src => new List<MessageContent>()));
+
+            CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<ChatSession, ChatSessionDTO>().ReverseMap();
         }
     }
 }

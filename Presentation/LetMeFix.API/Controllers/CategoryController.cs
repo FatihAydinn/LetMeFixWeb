@@ -1,10 +1,14 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using Humanizer;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using SharpCompress.Common;
 using System.Globalization;
 
 namespace LetMeFix.API.Controllers
@@ -14,49 +18,52 @@ namespace LetMeFix.API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categorService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categorService = categoryService;
+            _mapper = mapper;
         }
 
-        [HttpGet("listAllCategoryStages")]
+        [HttpGet("list-all")]
         public async Task<IActionResult> ListAllCategoryStages([FromQuery] PagedRequest request)
         {
             var filter = Builders<Category>.Filter.Where(x => true);
             var values = await _categorService.GetPagedWithFilterAsync(request, filter);
+
             return Ok(values);
         }
 
-        [HttpGet("getCategoryStagebyId")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetCategoryStagebyId(string id)
         {
             var value = await _categorService.GetByIdAsync(id);
             return Ok(value);
         }
 
-        [HttpPost("createCategoryStage")]
-        public async Task<IActionResult> CreateCategoryStage([FromBody] Category entity)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateCategoryStage([FromBody] CategoryDTO dto)
         { //TR, EN
-            await _categorService.CreateCategoryStage(entity);
-            return Ok(entity);
+            await _categorService.CreateCategoryStage(dto);
+            return Ok(dto);
         }
 
-        [HttpPut("updateCategoryStage")]
-        public async Task<IActionResult> UpdateCategoryStage([FromBody] Category entity)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateCategoryStage([FromBody] CategoryDTO dto)
         {
-            await _categorService.UpdateAsync(entity);
-            return Ok(entity);
+            await _categorService.UpdateAsync(dto);
+            return Ok(dto);
         }
 
-        [HttpDelete("deleteCategoryStage")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteCategoryStage(string id)
         {
             await _categorService.DeleteAsync(id);
             return Ok("success");
         }
 
-        [HttpGet("searchCategory")]
+        [HttpGet("search")]
         public async Task<IActionResult> SearchCategory(string search, [FromQuery] PagedRequest request)
         {
             var value = await _categorService.SearchCategory(search, request);

@@ -7,20 +7,15 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.DTOs
 {
-    public class ChatSessionDTO
-    {
-        public string? Id { get; set; }
-        public DateTime? CreateDate { get; set; }
-        public DateTime? UpdateDate { get; set; }
-
-        public string? OfferId { get; set; }
-        public string JobId { get; set; }
-
-        public string ProviderId { get; set; }
-        public string CustomerId { get; set; }
-
-        public bool IsChatClosed { get; set; } = false;
-
-        public List<MessageContent>? MessageContent { get; set; }
-    }
+    public record ChatSessionDTO(
+            string? Id,
+            DateTime? CreateDate,
+            DateTime? UpdateDate,
+            string? OfferId,
+            string JobId,
+            string ProviderId,
+            string CustomerId,
+            bool IsChatClosed,
+            List<MessageContent>? MessageContent 
+    );
 }
