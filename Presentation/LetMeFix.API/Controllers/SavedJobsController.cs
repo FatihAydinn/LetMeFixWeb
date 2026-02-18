@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -18,19 +19,19 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPost("saveAJob")]
-        public async Task<IActionResult> SaveAJob(SavedJobs job)
+        public async Task<IActionResult> SaveAJob(SavedJobsDTO job)
         {
             await _savedJobs.AddAsync(job);
             return Ok(job);
         }
 
-        [HttpGet("getSavedJobsByUserId")]
-        public async Task<PagedResult<SavedJobs>> GetSavedJobsByUserId(PagedRequest request, string userId) {
+        [HttpGet("get-byUserId")]
+        public async Task<PagedResult<SavedJobsDTO>> GetSavedJobsByUserId(PagedRequest request, string userId) {
             var value = await _savedJobs.GetSavedJobsByUserId(request, userId);
             return value;
         }
 
-        [HttpDelete("deleteSavedJob")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteSavedJob(string jobId) {
             await _savedJobs.DeleteAsync(jobId);
             return Ok("success");

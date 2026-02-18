@@ -7,6 +7,7 @@ using LetMeFix.Infrastructure.Services;
 using MongoDB.Driver;
 using LetMeFix.Application.Interfaces;
 using LetMeFix.Application.Validations;
+using LetMeFix.Application.DTOs;
 
 namespace LetMeFix.API.Controllers
 {
@@ -21,7 +22,7 @@ namespace LetMeFix.API.Controllers
             _jobService = jobService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetJobs([FromQuery] PagedRequest request)
         {
             var filter = Builders<Job>.Filter.Where(x => true);
@@ -30,28 +31,28 @@ namespace LetMeFix.API.Controllers
             return Ok(jobs);
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetJobsById(string id)
         {
             var job = await _jobService.GetByIdAsync(id);
             return Ok(job);
         }
 
-        [HttpPost("AddJob")]
-        public async Task<IActionResult> PostJobs([FromBody] Job job) {
+        [HttpPost("create")]
+        public async Task<IActionResult> PostJobs([FromBody] JobDTO job) {
             job.Id = Guid.NewGuid().ToString();
             await _jobService.AddAsync(job);
             return Ok();
         }
 
-        [HttpPut("UpdateJob")]
-        public async Task<IActionResult> UpdateJob(Job job)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateJob(JobDTO job)
         {
             await _jobService.UpdateAsync(job);
             return Ok();
         }
 
-        [HttpDelete("DeleteJob")]
+        [HttpDelete("delete")]
         public async Task DeleteJob(string id)
         {
             await _jobService.DeleteAsync(id);
@@ -84,7 +85,7 @@ namespace LetMeFix.API.Controllers
             return Ok(value);
         }
 
-        [HttpGet("searchJob")]
+        [HttpGet("search")]
         public async Task<IActionResult> SearchJob(string search, [FromQuery] PagedRequest request)
         {
             var value = await _jobService.SearchJob(search, request);

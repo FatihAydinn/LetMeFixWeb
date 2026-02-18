@@ -42,7 +42,7 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPut("updateChat")]
-        public async Task<IActionResult> UpdateChat([FromBody] ChatSession session)
+        public async Task<IActionResult> UpdateChat([FromBody] ChatSessionDTO session)
         {
             await _service.UpdateAsync(session);
             return Ok(session);

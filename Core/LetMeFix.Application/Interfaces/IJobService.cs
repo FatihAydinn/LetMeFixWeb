@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IJobService : IBaseService<Job>
+    public interface IJobService : IBaseService<Job, JobDTO>
     {
         Task<PagedResult<Job>> ListJobsPerUser(string userId);
         Task<PagedResult<Job>> ListJobsPerCategory(string categoryId, PagedRequest request);

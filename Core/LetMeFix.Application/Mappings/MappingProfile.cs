@@ -31,7 +31,16 @@ namespace LetMeFix.Application.Mappings
                 .ForMember(dest => dest.MessageContent, opt => opt.MapFrom(src => new List<MessageContent>()));
 
             CreateMap<Category, CategoryDTO>().ReverseMap();
-            CreateMap<ChatSession, ChatSessionDTO>().ReverseMap();
+            //CreateMap<ChatSession, ChatSessionDTO>().ReverseMap();
+            CreateMap<Contracts, ContractsDTO>().ReverseMap();
+            CreateMap<Job, JobDTO>().ReverseMap();
+            CreateMap<Languages, LanguagesDTO>().ReverseMap();
+            CreateMap<Offers, OffersDTO>().ReverseMap();
+            CreateMap<Reports, ReportsDTO>().ReverseMap();
+            CreateMap<Review, ReviewDTO>().ReverseMap();
+            CreateMap<SavedJobs, SavedJobsDTO>().ReverseMap();
+            CreateMap<Skills, SkillsDTO>().ReverseMap();
+            CreateMap<Translations, TranslationsDTO>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -17,35 +18,35 @@ namespace LetMeFix.API.Controllers
             _languageService = languageService;
         }
 
-        [HttpGet("getAllLanguages")]
-        public async Task<PagedResult<Languages>> GetAllLanguages([FromQuery]PagedRequest request)
+        [HttpGet("get-all")]
+        public async Task<PagedResult<LanguagesDTO>> GetAllLanguages([FromQuery] PagedRequest request)
         {
             return await _languageService.GetAllAsync(request);
         }
 
-        [HttpGet("getLanguagesById")]
+        [HttpGet("get-ById")]
         public async Task<IActionResult> GetLanguagesById(string id)
         {
             var content = await _languageService.GetByIdAsync(id);
             return Ok(content);
         }
 
-        [HttpPost("createLanguage")]
-        public async Task<IActionResult> CreateLanguage([FromBody] Languages lang)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateLanguage([FromBody] LanguagesDTO lang)
         {
-            lang.Id = Guid.NewGuid().ToString();
-            await _languageService.AddAsync(lang);
-            return Ok(lang);
+            var newLang = lang with { Id = Guid.NewGuid().ToString() };
+            await _languageService.AddAsync(newLang);
+            return Ok(newLang);
         }
 
-        [HttpPut("updateLanguage")]
-        public async Task<IActionResult> UpdateLanguage([FromBody] Languages lang)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateLanguage([FromBody] LanguagesDTO lang)
         {
             await _languageService.UpdateAsync(lang);
             return Ok(lang);
         }
 
-        [HttpDelete("deleteLanguage")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteLanguage(string id)
         {
             await _languageService.DeleteAsync(id);

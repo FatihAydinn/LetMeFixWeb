@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +18,7 @@ namespace LetMeFix.API.Controllers
             _translationService = translationService;
         }
 
-        [HttpGet("getTranslationsByLanguage")]
+        [HttpGet("get-byLanguage")]
         public async Task<IActionResult> GetTranslationsByLanguage([FromQuery] PagedRequest request, string langId)
         {
             langId = langId.ToLower();
@@ -26,29 +27,29 @@ namespace LetMeFix.API.Controllers
             return Ok(values);
         }
 
-        [HttpPost("createTrasnlation")]
-        public async Task<IActionResult> CreateTranslation([FromBody] Translations translations)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateTranslation([FromBody] TranslationsDTO translations)
         {
-            translations.Id = Guid.NewGuid().ToString();
-            await _translationService.AddAsync(translations);
-            return Ok(translations);
+            var newTranslations = translations with { Id = Guid.NewGuid().ToString() };
+            await _translationService.AddAsync(newTranslations);
+            return Ok(newTranslations);
         }
 
-        [HttpPut("updateTranslation")]
-        public async Task<IActionResult> UpdateTranslation([FromBody] Translations translations)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateTranslation([FromBody] TranslationsDTO translations)
         {
             await _translationService.UpdateAsync(translations);
             return Ok(translations);
         }
 
-        [HttpDelete("deleteTranslation")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteTranslation(string id)
         {
             await _translationService.DeleteAsync(id);
             return Ok("success");
         }
 
-        [HttpGet("searchTranslation")]
+        [HttpGet("search")]
         public async Task<IActionResult> SearchTranslation([FromQuery] PagedRequest request, string search)
         {
             var fieldName = new List<string> { "Key", "Content" };

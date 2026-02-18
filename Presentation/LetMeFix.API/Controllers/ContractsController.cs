@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +19,7 @@ namespace LetMeFix.API.Controllers
             _contracts = contracts;
         }
 
-        [HttpGet("getAllContracts")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAllContracts([FromQuery] PagedRequest request)
         {
             var filter = Builders<Contracts>.Filter.Where(x => true);
@@ -26,29 +27,29 @@ namespace LetMeFix.API.Controllers
             return Ok(values);
         }
 
-        [HttpGet("getContractbyId")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetContractById(string id)
         {
             var value = await _contracts.GetByIdAsync(id);
             return Ok(value);
         }
 
-        [HttpPost("createContract")]
-        public async Task<IActionResult> CreateContract([FromBody] Contracts model)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateContract([FromBody] ContractsDTO model)
         {
             model.Id = Guid.NewGuid().ToString();
             await _contracts.AddAsync(model);
             return Ok("success!");
         }
 
-        [HttpPut("updateContract")]
-        public async Task<IActionResult> UpdateContract([FromBody] Contracts model)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateContract([FromBody] ContractsDTO model)
         {
             await _contracts.UpdateAsync(model);
             return Ok("success");
         }
 
-        [HttpDelete("deleteContract")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteContract(string id)
         {
             await _contracts.DeleteAsync(id);
@@ -62,14 +63,14 @@ namespace LetMeFix.API.Controllers
             return Ok(tip);
         }
 
-        [HttpPut("changeStatus")]
+        [HttpPut("change-status")]
         public async Task<IActionResult> ChangeStatus(string id, int status)
         {
             await _contracts.ChangeStatus(id, status);
             return Ok("success");
         }
 
-        [HttpGet("getContractsByProviderId")]
+        [HttpGet("get-byProviderId")]
         public async Task<IActionResult> GetContractsByProviderId([FromQuery] PagedRequest request, string userId)
         {
             var filter = Builders<Contracts>.Filter.Eq(x => x.ProviderId, userId);
@@ -77,7 +78,7 @@ namespace LetMeFix.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getContractsByClientId")]
+        [HttpGet("get-byClientId")]
         public async Task<IActionResult> GetContractsByClientId([FromQuery] PagedRequest request, string userId)
         {
             var filter = Builders<Contracts>.Filter.Eq(x => x.ClientId, userId);
@@ -85,7 +86,7 @@ namespace LetMeFix.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getContractByStatusAndUserId")]
+        [HttpGet("get-byStatusAndUserId")]
         public async Task<IActionResult> GetContractByStatusAndUserId([FromQuery] PagedRequest request, string userId, int status)
         {
             var enumStatus = (JobStatus)status;

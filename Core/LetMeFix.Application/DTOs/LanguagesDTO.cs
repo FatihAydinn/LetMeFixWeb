@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LetMeFix.Application.DTOs
+{
+    public record LanguagesDTO(
+            string? Id,
+            DateTime? CreateDate,
+            DateTime? UpdateDate,
+            string Language,
+            string LanguageCode,
+            string CountryEmoji
+    );
+}

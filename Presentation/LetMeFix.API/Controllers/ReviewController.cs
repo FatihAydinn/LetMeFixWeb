@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +19,7 @@ namespace LetMeFix.API.Controllers
         }
 
         //admin
-        [HttpGet("getAllReviews")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> getAllReviews([FromQuery] PagedRequest request)
         {
             var filter = Builders<Review>.Filter.Where(x => true);
@@ -26,43 +27,43 @@ namespace LetMeFix.API.Controllers
             return Ok(values);
         }
 
-        [HttpGet("getReviewsByUserId")]
+        [HttpGet("get-byUserId")]
         public async Task<IActionResult> GetReviewsByUserId([FromQuery] PagedRequest request, string userId)
         {
             var values = await _reviewRepository.GetReviewsByUserId(request, userId);
             return Ok(values);
         }
 
-        [HttpGet("getReviewsByJobId")]
+        [HttpGet("get-byJobId")]
         public async Task<IActionResult> GetReviewsByJobId([FromQuery] PagedRequest request, string jobId)
         {
             var values = await _reviewRepository.GetReviewsByJobId(request, jobId);
             return Ok(values);
         }
 
-        [HttpGet("getReviewById")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetReviewById(string reviewId)
         {
             var value = await _reviewRepository.GetByIdAsync(reviewId);
             return Ok(value);
         }
 
-        [HttpPost("createReview")]
-        public async Task<IActionResult> CreateReview([FromBody] Review review)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateReview([FromBody] ReviewDTO review)
         {
-            review.Id = Guid.NewGuid().ToString();
-            await _reviewRepository.AddAsync(review);
-            return Ok(review);
+            var newReview = review with { Id = Guid.NewGuid().ToString() };
+            await _reviewRepository.AddAsync(newReview);
+            return Ok(newReview);
         }
 
-        [HttpPut("updateReview")]
-        public async Task<IActionResult> UpdateReview([FromBody] Review review)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateReview([FromBody] ReviewDTO review)
         {
             await _reviewRepository.UpdateAsync(review);
             return Ok(review);
         }
 
-        [HttpDelete("deleteReview")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteReview(string reviewId)
         {
             await _reviewRepository.DeleteAsync(reviewId);

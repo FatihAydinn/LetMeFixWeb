@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface ILanguageService : IBaseService<Languages>
+    public interface ILanguageService : IBaseService<Languages, LanguagesDTO>
     {
     }
 }

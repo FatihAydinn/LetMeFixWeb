@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -16,13 +17,13 @@ namespace LetMeFix.API.Controllers
             _offer = offer;
         }
 
-        [HttpGet("getAllOffers")]
-        public async Task<PagedResult<Offers>> GetAllOffers([FromQuery] PagedRequest request)
+        [HttpGet("get-all")]
+        public async Task<PagedResult<OffersDTO>> GetAllOffers([FromQuery] PagedRequest request)
         {            
             return await _offer.GetAllAsync(request);
         }
 
-        [HttpGet("getOfferById")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetOfferById(string id)
         {
             var value = await _offer.GetByIdAsync(id);
@@ -37,29 +38,29 @@ namespace LetMeFix.API.Controllers
         //    return Ok(offer);
         //}
 
-        [HttpPost("createOffer")]
-        public async Task<IActionResult> CreateOffer(Offers offer)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateOffer(OffersDTO offer)
         {
-            offer.Id = Guid.NewGuid().ToString();
-            await _offer.CreateOfferAsync(offer);
-            return Ok(offer);
+            var newOffer = offer with { Id = Guid.NewGuid().ToString() };
+            await _offer.CreateOfferAsync(newOffer);
+            return Ok(newOffer);
         }
 
-        [HttpPut("updateOffer")]
-        public async Task<IActionResult> UpdateOffer(Offers offer)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateOffer(OffersDTO offer)
         {
             await _offer.UpdateAsync(offer);
             return Ok(offer);
         }
 
-        [HttpDelete("deleteOffer")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteOffer(string id)
         {
             await _offer.DeleteAsync(id);
             return Ok("success");
         }
 
-        [HttpGet("getOffersByJob")]
+        [HttpGet("get-byJobId")]
         public async Task<IActionResult> GetOffersByJob([FromQuery] PagedRequest request, string jobId)
         {
             var values = await _offer.GetOffersByJobIdAsync(request, jobId);

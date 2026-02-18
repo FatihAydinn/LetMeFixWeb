@@ -1,4 +1,5 @@
-﻿using LetMeFix.Domain.Entities;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface ITranslationService : IBaseService<Translations>
+    public interface ITranslationService : IBaseService<Translations, TranslationsDTO>
     {
-        Task<PagedResult<Translations>> SearchFilter(PagedRequest request, string search, List<string> fieldNames);
+        Task<PagedResult<TranslationsDTO>> SearchFilter(PagedRequest request, string search, List<string> fieldNames);
     }
 }

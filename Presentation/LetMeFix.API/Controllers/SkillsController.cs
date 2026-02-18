@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -17,50 +18,50 @@ namespace LetMeFix.API.Controllers
             _skillsService = skillsService;
         }
 
-        [HttpGet("getAllSkills")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAllSkills([FromQuery] PagedRequest request)
         {
             var values = await _skillsService.GetAllAsync(request);
             return Ok(values);
         }
 
-        [HttpPost("createSkill")]
-        public async Task<IActionResult> CreateSkill([FromBody] Skills model)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateSkill([FromBody] SkillsDTO skills)
         {
-            model.Id = Guid.NewGuid().ToString();
-            await _skillsService.AddAsync(model);
-            return Ok(model);
+            var newSkills = skills with { Id = Guid.NewGuid().ToString() };
+            await _skillsService.AddAsync(newSkills);
+            return Ok(newSkills);
         }
 
-        [HttpPut("updateSkill")]
-        public async Task<IActionResult> UpdateSkill([FromBody] Skills skill)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateSkill([FromBody] SkillsDTO skill)
         {
             await _skillsService.UpdateAsync(skill);
             return Ok(skill);
         }
 
-        [HttpGet("getSkillById")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetSkillById(string id)
         {
             var content = await _skillsService.GetByIdAsync(id);
             return Ok(content);
         }
 
-        [HttpDelete("deleteSkillById")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteSkill(string id)
         {
             await _skillsService.DeleteAsync(id);
             return Ok("Successfully deleted!");
         }
 
-        [HttpGet("searchSkill")]
-        public async Task<PagedResult<Skills>> SearchSkills([FromQuery] PagedRequest request, string value)
+        [HttpGet("search")]
+        public async Task<PagedResult<SkillsDTO>> SearchSkills([FromQuery] PagedRequest request, string value)
         {
             var searchValues = new List<string> { "SkillTitle" };
             return await _skillsService.SearchFilter(request, value, searchValues);
         }
 
-        [HttpGet("getSkillsbyCategory")]
+        [HttpGet("get-byCategory")]
         public async Task<IActionResult> GetSkillsbyCategory([FromQuery] PagedRequest request, string category)
         {
             var searchValues = new List<string> { "RelatedCategories" };

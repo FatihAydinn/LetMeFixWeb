@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using LetMeFix.Domain.Interfaces;
 using LetMeFix.Application.Interfaces;
+using LetMeFix.Application.DTOs;
 
 namespace LetMeFix.API.Controllers
 {
@@ -18,7 +19,7 @@ namespace LetMeFix.API.Controllers
             _reportService = reportService;
         }
 
-        [HttpGet("listAllReports")]
+        [HttpGet("list-all")]
         public async Task<IActionResult> GetAllReports([FromQuery] PagedRequest request)
         {
             var filter = Builders<Reports>.Filter.Where(x => true);
@@ -26,14 +27,14 @@ namespace LetMeFix.API.Controllers
             return Ok(value);
         }
 
-        [HttpGet("getReportbyId")]
+        [HttpGet("get-byId")]
         public async Task<IActionResult> GetReportById(string id)
         {
             var value = await _reportService.GetByIdAsync(id);
             return Ok(value);
         }
 
-        [HttpGet("listReportsByStatus")]
+        [HttpGet("list-byStatus")]
         public async Task<IActionResult> GetAllReportsByStatus([FromQuery] PagedRequest request, ReportStatus statusCode)
         {
             var filter = Builders<Reports>.Filter.Eq(x => x.ReportStatus, statusCode);
@@ -41,35 +42,35 @@ namespace LetMeFix.API.Controllers
             return Ok(value);
         }
 
-        [HttpGet("listReportsByUser")]
+        [HttpGet("list-byUser")]
         public async Task<PagedResult<Reports>> GetReportsByUser([FromQuery] PagedRequest request, string userId)
         {
             return await _reportService.GetReportsByUser(request, userId);
         }
 
-        [HttpPost ("createReport")]
-        public async Task<IActionResult> CreateReport(Reports report)
+        [HttpPost ("create")]
+        public async Task<IActionResult> CreateReport(ReportsDTO report)
         {
-            report.Id = Guid.NewGuid().ToString();
-            await _reportService.AddAsync(report);
-            return Ok(report);
+            var newReport = report with { Id = Guid.NewGuid().ToString() };
+            await _reportService.AddAsync(newReport);
+            return Ok(newReport);
         }
 
-        [HttpPut("updateReport")]
-        public async Task<IActionResult> UpdateReport(Reports report)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateReport(ReportsDTO report)
         {            
             await _reportService.UpdateAsync(report);
             return Ok(report);
         }
 
-        [HttpDelete("deleteReport")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteReport(string id)
         {
             await _reportService.DeleteAsync(id);
             return Ok("deleted");
         }
 
-        [HttpPut("updateReson")]
+        [HttpPut("update-reason")]
         public async Task<IActionResult> AddResultToReport(string id, string reason)
         {
             await _reportService.AddResultToReport(id, reason);
