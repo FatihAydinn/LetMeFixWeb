@@ -13,7 +13,7 @@ namespace LetMeFix.Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+            services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IChatSessionService, ChatSessionService>();

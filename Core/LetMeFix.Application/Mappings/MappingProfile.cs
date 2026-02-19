@@ -41,6 +41,7 @@ namespace LetMeFix.Application.Mappings
             CreateMap<SavedJobs, SavedJobsDTO>().ReverseMap();
             CreateMap<Skills, SkillsDTO>().ReverseMap();
             CreateMap<Translations, TranslationsDTO>().ReverseMap();
+            CreateMap<UserInformations, UserInformationsDTO>().ReverseMap();
         }
     }
 }

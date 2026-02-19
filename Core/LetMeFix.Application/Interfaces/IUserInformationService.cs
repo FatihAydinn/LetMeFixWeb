@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Interfaces
 {
-    public interface IUserInformationService : IBaseService<UserInformations>
+    public interface IUserInformationService : IBaseService<UserInformations, UserInformationsDTO>
     {
         Task UpdateAddress(UserinformationAddressDTO entity);
         Task UpdateSocials(UserInformationSocialsDTO entity);

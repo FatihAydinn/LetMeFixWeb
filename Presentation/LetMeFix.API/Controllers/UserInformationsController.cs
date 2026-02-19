@@ -34,15 +34,15 @@ namespace LetMeFix.API.Controllers
         }
 
         [HttpPost("createUser")]
-        public async Task<IActionResult> CreateNewUser([FromBody] UserInformations user)
+        public async Task<IActionResult> CreateNewUser([FromBody] UserInformationsDTO user)
         {
-            //user.Id = Guid.NewGuid().ToString();
-            await _userService.AddAsync(user);
-            return Ok(user);
+            var newUser = user with { Id = Guid.NewGuid().ToString() };
+            await _userService.AddAsync(newUser);
+            return Ok(newUser);
         }
         
         [HttpPut("updateUser")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserInformations user)
+        public async Task<IActionResult> UpdateUser([FromBody] UserInformationsDTO user)
         {
             await _userService.UpdateAsync(user);
             return Ok(user);

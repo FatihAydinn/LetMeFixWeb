@@ -1,4 +1,5 @@
-﻿using LetMeFix.Application.DTOs;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
 using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
@@ -13,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class UserInformationService : BaseService<UserInformations>, IUserInformationService
+    public class UserInformationService : BaseService<UserInformations, UserInformationsDTO>, IUserInformationService
     {
-        public UserInformationService(IGenericRepository<UserInformations> repository) : base(repository)
+        public UserInformationService(IGenericRepository<UserInformations> repository, IMapper mapper) : base(repository, mapper)
         { }
 
         public async Task UpdateSocials(UserInformationSocialsDTO entity)
