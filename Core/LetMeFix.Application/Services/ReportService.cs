@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class ReportService : BaseService<Reports>, IReportService
+    public class ReportService : BaseService<Reports, ReportsDTO>, IReportService
     {
-        public ReportService(IGenericRepository<Reports> repository) : base(repository) 
+        public ReportService(IGenericRepository<Reports> repository, IMapper mapper) : base(repository, mapper)
         {  }
 
         public async Task AddResultToReport(string id, string reason)

@@ -1,4 +1,7 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using Humanizer;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using MongoDB.Driver;
@@ -10,29 +13,46 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class OfferService : BaseService<Offers>, IOfferService
+    public class OfferService : BaseService<Offers, OffersDTO>, IOfferService
     {
         private readonly IGenericRepository<Job> _jobGenericRepository;
-        public OfferService(IGenericRepository<Offers> repository, IGenericRepository<Job> jobGenericRepository) : base(repository)
+        public OfferService(IGenericRepository<Offers> repository, IGenericRepository<Job> jobGenericRepository, IMapper mapper) : base(repository, mapper)
         {
             _jobGenericRepository = jobGenericRepository;
         }
 
-        public async Task<PagedResult<Offers>> GetOffersByJobIdAsync(PagedRequest request, string jobId)
+        public async Task<PagedResult<OffersDTO>> GetOffersByJobIdAsync(PagedRequest request, string jobId)
         {
             var filter = Builders<Offers>.Filter.Where(x => x.JobId == jobId).ToString();
-            return await _repository.FindAsync(request, filter);
+            var result = await _repository.GetPagedWithFilterAsync(request, filter);
+
+            return new PagedResult<OffersDTO>
+            {
+                Items = _mapper.Map<List<OffersDTO>>(result.Items),
+                TotalCount = result.TotalCount,
+                Page = result.Page,
+                PageSize = result.PageSize
+            };
         }
 
-        public async Task<PagedResult<Offers>> GetOffersByCustomerIPerJobId(PagedRequest request, string jobId, string customerId)
+        public async Task<PagedResult<OffersDTO>> GetOffersByCustomerIPerJobId(PagedRequest request, string jobId, string customerId)
         {
             var filter = Builders<Offers>.Filter.Where(x => x.JobId == jobId && x.CustomerId == customerId);
-            return await _repository.FindAsync(request, filter);
+            var result = await _repository.GetPagedWithFilterAsync(request, filter);
+
+            return new PagedResult<OffersDTO>
+            {
+                Items = _mapper.Map<List<OffersDTO>>(result.Items),
+                TotalCount = result.TotalCount,
+                Page = result.Page,
+                PageSize = result.PageSize
+            };
         }
 
-        public async Task<bool> CreateOfferAsync(Offers offer)
+        public async Task<bool> CreateOfferAsync(OffersDTO offer)
         {
             var job = await _jobGenericRepository.GetByIdAsync(offer.JobId);
+            var entity = _mapper.Map<Offers>(offer);
 
             if (job == null || !job.IsActive)
                 throw new Exception("Bu iş artık aktif değil");
@@ -40,7 +60,7 @@ namespace LetMeFix.Application.Services
             if (job.Version != offer.JobVersion)
                 throw new Exception("İş durumu değişmiş. Sayfayı yenileyin.");
 
-            await _repository.AddAsync(offer);
+            await _repository.AddAsync(entity);
             return true;
 
         }

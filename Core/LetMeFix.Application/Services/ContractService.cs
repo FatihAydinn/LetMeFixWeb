@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using MongoDB.Driver;
@@ -11,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class ContractService : BaseService<Contracts>, IContractService
+    public class ContractService : BaseService<Contracts, ContractsDTO>, IContractService
     {
-        public ContractService(IGenericRepository<Contracts> repository) : base(repository)
+        public ContractService(IGenericRepository<Contracts> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 

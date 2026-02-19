@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +14,9 @@ using ZstdSharp.Unsafe;
 
 namespace LetMeFix.Application.Services
 {
-    public class TranslationService : BaseService<Translations>, ITranslationService
+    public class TranslationService : BaseService<Translations, TranslationsDTO>, ITranslationService
     {
-        public TranslationService(IGenericRepository<Translations> repository) : base(repository)
+        public TranslationService(IGenericRepository<Translations> repository, IMapper mapper) : base(repository, mapper)
         { }
     }
 }

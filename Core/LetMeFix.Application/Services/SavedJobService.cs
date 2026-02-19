@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using MongoDB.Driver;
@@ -10,16 +12,23 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class SavedJobService : BaseService<SavedJobs>, ISavedJobService
+    public class SavedJobService : BaseService<SavedJobs, SavedJobsDTO>, ISavedJobService
     {
-        public SavedJobService(IGenericRepository<SavedJobs> repository) : base(repository)
+        public SavedJobService(IGenericRepository<SavedJobs> repository, IMapper mapper) : base(repository, mapper)
         { }
 
-        public Task<PagedResult<SavedJobs>> GetSavedJobsByUserId(PagedRequest request, string userId)
+        public async Task<PagedResult<SavedJobsDTO>> GetSavedJobsByUserId(PagedRequest request, string userId)
         {
             var filter = Builders<SavedJobs>.Filter.Where(x => x.UserId == userId);
-            var value = _repository.GetPagedWithFilterAsync(request, filter);
-            return value;
+            var value = await _repository.GetPagedWithFilterAsync(request, filter);
+
+            return new PagedResult<SavedJobsDTO>
+            {
+                Items = _mapper.Map<List<SavedJobsDTO>>(value.Items),
+                TotalCount = value.TotalCount,
+                PageSize = value.PageSize,
+                Page = value.Page
+            };
         }
     }
 }

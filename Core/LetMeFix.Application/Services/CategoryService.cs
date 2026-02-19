@@ -17,7 +17,6 @@ namespace LetMeFix.Application.Services
     public class CategoryService : BaseService<Category, CategoryDTO>, ICategoryService
     {
         private readonly IGenericRepository<Languages> _language;
-        private readonly IMapper _mapper;
 
         public CategoryService(IGenericRepository<Category> repository, IGenericRepository<Languages> language, IMapper mapper) : base(repository, mapper) 
         {

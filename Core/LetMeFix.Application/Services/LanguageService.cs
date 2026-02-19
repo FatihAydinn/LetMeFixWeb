@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using System;
@@ -9,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Services
 {
-    public class LanguageService : BaseService<Languages>, ILanguageService
+    public class LanguageService : BaseService<Languages, LanguagesDTO>, ILanguageService
     {
-        public LanguageService(IGenericRepository<Languages> repository) : base(repository)
+        public LanguageService(IGenericRepository<Languages> repository, IMapper mapper) : base(repository, mapper)
         { }
     }
 }

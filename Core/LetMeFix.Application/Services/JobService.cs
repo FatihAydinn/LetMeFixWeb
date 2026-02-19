@@ -1,28 +1,30 @@
-﻿using LetMeFix.Application.Services;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
+using LetMeFix.Application.Services;
 using LetMeFix.Domain.Entities;
+using LetMeFix.Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using MongoDB.Driver;
+using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LetMeFix.Domain.Interfaces;
-using static MongoDB.Driver.WriteConcern;
-using SharpCompress.Common;
-using Microsoft.Identity.Client;
-using Microsoft.AspNetCore.Mvc;
-using LetMeFix.Application.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static MongoDB.Driver.WriteConcern;
 
 namespace LetMeFix.Application.Services
 {
-    public class JobService : BaseService<Job>, IJobService
+    public class JobService : BaseService<Job, JobDTO>, IJobService
     {
         private readonly IGenericRepository<Category> _categoryService;
         ContractService _contractStages;
         JobService _job;
 
-        public JobService(IGenericRepository<Job> repository, IGenericRepository<Category> categoryService) : base(repository)
+        public JobService(IGenericRepository<Job> repository, IGenericRepository<Category> categoryService, IMapper mapper) : base(repository, mapper)
         {
             _categoryService = categoryService;
         }

@@ -1,4 +1,6 @@
-﻿using LetMeFix.Application.Interfaces;
+﻿using AutoMapper;
+using LetMeFix.Application.DTOs;
+using LetMeFix.Application.Interfaces;
 using LetMeFix.Domain.Entities;
 using LetMeFix.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +14,9 @@ using ZstdSharp.Unsafe;
 
 namespace LetMeFix.Application.Services
 {
-    public class SkillsService : BaseService<Skills>, ISkillsService
+    public class SkillsService : BaseService<Skills, SkillsDTO>, ISkillsService
     {
-        public SkillsService(IGenericRepository<Skills> repository) : base(repository)
+        public SkillsService(IGenericRepository<Skills> repository, IMapper mapper) : base(repository, mapper)
         { }
     }
 }
