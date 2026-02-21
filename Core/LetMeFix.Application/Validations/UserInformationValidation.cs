@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LetMeFix.Application.DTOs;
 using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Validations
 {
-    public class UserInformationValidation : AbstractValidator<UserInformations>
+    public class UserInformationValidation : AbstractValidator<UserInformationsDTO>
     {
         public UserInformationValidation() {
             RuleFor(x => x.BirthDate).NotEmpty().Must(age => age <= DateTime.Today.AddYears(-18)).WithMessage("The user must be over 18!");

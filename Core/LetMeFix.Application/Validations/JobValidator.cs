@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LetMeFix.Application.DTOs;
 using LetMeFix.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LetMeFix.Application.Validations
 {
-    public class JobValidator : AbstractValidator<Job>
+    public class JobValidator : AbstractValidator<JobDTO>
     {
         public JobValidator() {
             RuleFor(x => x.AvailableDays).NotEmpty().WithMessage("You must select at least one day!");

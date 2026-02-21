@@ -46,7 +46,7 @@ namespace LetMeFix.Application.Services
             return values; 
         }
 
-        public async Task<PagedResult<Job>> ListJobsPerUser(PagedRequest request, string userId)
+        public async Task<PagedResult<Job>> ListJobsPerUser(string userId, PagedRequest request)
         {
             var filter = Builders<Job>.Filter.Eq(x => x.ProviderId, userId);
             return await _repository.FindAsync(request, filter);
@@ -80,16 +80,6 @@ namespace LetMeFix.Application.Services
 
             await _repository.UpdateAsync(job);
             await _contractStages.ChangeStatus(jobId, 4);
-        }
-
-        public Task<PagedResult<Job>> FindAsync(FilterDefinition<Job> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<PagedResult<Job>> ListJobsPerUser(string userId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

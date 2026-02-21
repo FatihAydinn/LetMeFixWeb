@@ -14,24 +14,17 @@ namespace LetMeFix.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<RegisterDTO, AppUser>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.Lastname));
+            CreateMap<RegisterDTO, AppUser>();
 
             CreateMap<UserInformations, UserInformationSocialsDTO>().ForAllMembers(x => x.Condition((src, dest, srcMember) => srcMember != null));
-
             CreateMap<UserInformations, UserinformationAddressDTO>().ForAllMembers(x => x.Condition((src, dest, srcMember) => srcMember != null));
-
             CreateMap<UserInformations, UserInformationSummaryDTO>().ForAllMembers(x => x.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<ChatSessionDTO, ChatSession>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.MessageContent, opt => opt.MapFrom(src => new List<MessageContent>()));
+            CreateMap<ChatSession, ChatSessionDTO>().ReverseMap();
+            CreateMap<MessageContent, MessageContentDTO>().ReverseMap();
+            CreateMap<PreviousMessages, PreviousMessagesDTO>().ReverseMap();
 
             CreateMap<Category, CategoryDTO>().ReverseMap();
-            //CreateMap<ChatSession, ChatSessionDTO>().ReverseMap();
             CreateMap<Contracts, ContractsDTO>().ReverseMap();
             CreateMap<Job, JobDTO>().ReverseMap();
             CreateMap<Languages, LanguagesDTO>().ReverseMap();

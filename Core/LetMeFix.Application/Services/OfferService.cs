@@ -51,15 +51,7 @@ namespace LetMeFix.Application.Services
 
         public async Task<bool> CreateOfferAsync(OffersDTO offer)
         {
-            var job = await _jobGenericRepository.GetByIdAsync(offer.JobId);
             var entity = _mapper.Map<Offers>(offer);
-
-            if (job == null || !job.IsActive)
-                throw new Exception("Bu iş artık aktif değil");
-
-            if (job.Version != offer.JobVersion)
-                throw new Exception("İş durumu değişmiş. Sayfayı yenileyin.");
-
             await _repository.AddAsync(entity);
             return true;
 

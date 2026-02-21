@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 namespace LetMeFix.Application.DTOs
 {
     public record ChatSessionDTO(
-            string? Id,
-            DateTime? CreateDate,
-            DateTime? UpdateDate,
-            string? OfferId,
-            string JobId,
-            string ProviderId,
-            string CustomerId,
-            bool IsChatClosed,
-            List<MessageContent>? MessageContent 
+        string? Id,
+        string? OfferId,
+        string JobId,
+        string ProviderId,
+        string CustomerId,
+        bool IsChatClosed,
+        List<MessageContentDTO>? MessageContent 
     );
 }

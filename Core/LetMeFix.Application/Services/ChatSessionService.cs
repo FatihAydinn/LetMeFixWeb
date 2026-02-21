@@ -24,13 +24,7 @@ namespace LetMeFix.Application.Services
 
         public async Task<ChatSession> CreateChatRoom(ChatSessionDTO dto)
         {
-            MessageContent msgc = new MessageContent();
             var chatSession = _mapper.Map<ChatSession>(dto);
-            chatSession.Id = Guid.NewGuid().ToString();
-            chatSession.MessageContent = dto.MessageContent;
-            chatSession.MessageContent[0].MessageId = Guid.NewGuid().ToString();
-            chatSession.MessageContent[0].ChatSessionId = chatSession.Id;
-            chatSession.MessageContent[0].PreviousMessages = [];
             await _repository.AddAsync(chatSession);
             return chatSession;
         }
